@@ -10,7 +10,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>aries-user</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
+
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -32,6 +34,19 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+
+
+
+        <!-- aries start -->
+        <dependency>
+            <groupId>cn.com.bianlz</groupId>
+            <artifactId>aries-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.com.bianlz</groupId>
+            <artifactId>aries-user-api</artifactId>
+        </dependency>
+        <!-- aries end -->
     </dependencies>
     <build>
         <finalName>aries_user</finalName>

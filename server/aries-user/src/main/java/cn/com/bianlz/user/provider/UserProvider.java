@@ -1,0 +1,32 @@
+package cn.com.bianlz.user.provider;
+
+import cn.com.bianlz.user.api.user.User;
+import cn.com.bianlz.common.enums.Status;
+/**
+ * Created by bianlanzhou on 17/9/1.
+ * Description
+ */
+public class UserProvider {
+    public String get(User user){
+        StringBuilder sb = new StringBuilder();
+        sb.append(" select * from user ");
+        sb.append(" where 1=1 ");
+        if(user!=null){
+            if(user.getId()!=null){
+                sb.append(" and id = ").append(user.getId());
+            }
+            if(user.getUsername()!=null){
+                sb.append(" and username ='").append(user.getUsername()).append("'");
+            }
+            if(user.getPassword()!=null){
+                sb.append(" and password = '").append(user.getPassword()).append("'");
+            }
+            if(user.getStatus()!=null){
+                sb.append(" and status = ").append(user.getStatus());
+            }else{
+                sb.append(" and status = ").append(Status.VALID);
+            }
+        }
+        return sb.toString();
+    }
+}
