@@ -24,7 +24,7 @@ public class UserProvider {
             if(user.getStatus()!=null){
                 sb.append(" and status = ").append(user.getStatus());
             }else{
-                sb.append(" and status = ").append(Status.VALID);
+                sb.append(" and status = ").append(Status.VALID.getCode());
             }
         }
         return sb.toString();

@@ -1,26 +1,24 @@
-package cn.com.bianlz.user.facade;
+package cn.com.bianlz.web.controller.login;
 
-import cn.com.bianlz.user.service.LoginService;
+import cn.com.bianlz.common.vo.Result;
+import cn.com.bianlz.web.client.LoginServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import cn.com.bianlz.common.vo.Result;
 
 import java.util.Map;
 
 /**
- * Created by bianlanzhou on 17/9/1.
+ * Created by bianlanzhou on 17/9/8.
  * Description
  */
-@RestController
-@RequestMapping("/auth")
-public class AuthFacade {
+@RestController("/auth")
+public class LoginController {
     @Autowired
-    private LoginService loginService;
+    private LoginServiceClient loginServiceClient;
     @PostMapping(value="/login")
     public Result login(@RequestBody Map<String,String> param){
-        return loginService.login(param.get("username"),param.get("password"));
+        return loginServiceClient.login(param);
     }
 }

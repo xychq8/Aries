@@ -49,7 +49,7 @@
         <!-- aries end -->
     </dependencies>
     <build>
-        <finalName>aries_user</finalName>
+        <finalName>aries-user</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
