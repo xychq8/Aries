@@ -19,7 +19,7 @@ public class MenuProvider {
         if(parentId!=null){
             sb.append(" and parent_id = ").append(parentId);
         }
-        sb.append(" b.level = ").append(level);
+        sb.append(" and b.level = ").append(level);
         sb.append(" and b.status = a.status = ").append(Status.VALID.getCode());
         return sb.toString();
     }
