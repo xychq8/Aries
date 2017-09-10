@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
             result.setMessage(UserProtocolCode.LOGIN_USER_NOT_FOUND.getMessage());
             return false;
         }
-        user = list.get(0);
+        user.setRoleId(list.get(0).getRoleId());
         try {
             password = MD5Utils.getMD5(password);
         } catch (Exception e) {

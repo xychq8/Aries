@@ -1,5 +1,6 @@
 package cn.com.bianlz.web.controller.login;
 
+import cn.com.bianlz.common.utils.MD5Utils;
 import cn.com.bianlz.common.vo.Result;
 import cn.com.bianlz.web.client.LoginServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 /**
