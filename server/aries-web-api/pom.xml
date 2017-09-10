@@ -75,7 +75,7 @@
                     <target>${project.build.directory}</target>
                     <daemons>
                         <daemon>
-                            <id>aries_user</id>
+                            <id>aries-web-api</id>
                             <mainClass>cn.com.bianlz.web.App</mainClass>
                             <platforms>
                                 <platform>jsw</platform>
