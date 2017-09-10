@@ -5,5 +5,5 @@ package cn.com.bianlz.user.common;
  * Description
  */
 public class RedisKeys {
-    public static final String TOKEN = "user.token";
+    public static final String TOKEN = "user.token.";
 }
