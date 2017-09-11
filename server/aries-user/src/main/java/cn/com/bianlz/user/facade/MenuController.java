@@ -9,6 +9,7 @@ import cn.com.bianlz.user.common.UserProtocolCode;
 import cn.com.bianlz.user.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -22,14 +23,15 @@ import java.util.Map;
 @RestController
 public class MenuController {
     @Autowired
-    private RedisTemplate redisTemplate;
+    private StringRedisTemplate template;
     @Autowired
     private MenuService menuService;
     @GetMapping("/menu/token/{token}")
     public Result getMenu(@PathVariable("token") String token){
         Result<List<Menu>> result = new Result<List<Menu>>();
         result.setCode(UserProtocolCode.SUCCESS.getCode());
-        Object userObj = redisTemplate.opsForValue().get(RedisKeys.TOKEN+token);
+
+        Object userObj = template.opsForValue().get(RedisKeys.TOKEN+token);
         if(userObj == null ){
             return result;
         }
