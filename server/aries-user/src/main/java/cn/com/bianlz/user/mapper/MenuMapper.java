@@ -25,5 +25,18 @@ public interface MenuMapper {
             @Result(property = "status",column = "status"),
             @Result(property = "createDate",column = "create_date")
     })
-    List<Menu> getMenuByRoleId(Long roleId,Integer level,Long parentId);
+    List<Menu> getMenuByRoleId(Long roleId);
+
+    @SelectProvider(type = MenuProvider.class,method = "getSubMenu")
+    @Results({
+            @Result(property = "id",column = "id"),
+            @Result(property = "name",column = "name"),
+            @Result(property = "code",column = "code"),
+            @Result(property = "parentId",column = "parent_id"),
+            @Result(property = "path",column = "path"),
+            @Result(property = "level",column = "level"),
+            @Result(property = "status",column = "status"),
+            @Result(property = "createDate",column = "create_date")
+    })
+    List<Menu> getSubMenu(Long parentId,Integer level);
 }

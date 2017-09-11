@@ -2,14 +2,10 @@
 	<!--sidebar-menu-->
 <div id="sidebar">
   <ul id="menubar">
-    <li class="submenu active"> <a href="#"><i class="icon icon-th-list"></i> <span>Forms</span> <span class="label label-important">3</span></a>
-      <ul>
-        <li><a href="form-common.html">Basic Form</a></li>
-        <li><a href="form-validation.html">Form with Validation</a></li>
-        <li><a href="form-wizard.html">Form with Wizard</a></li>
-      </ul>
-    </li>    
+    <li v-for="level_1 in menus" class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>{{level_1.name}}</span> <span class="label label-important">3</span></a>
+    </li>  
   </ul>
+
 </div>
 <!--sidebar-menu-->
 </template>
@@ -19,21 +15,24 @@ export default {
   name: 'smenu',
   data () {
     return {
-    	msg:''
+    	menus:[]
     };
   },mounted:function(){
-      getMenu(this.$store.state.token).then(data => {
-            if(data.code == 'U10000'){
-                
-            }else{
-                
-            }
-          });
-  },
-  methods: {
-        load:function(menus){
-            
-        }
+      getMenu(this.$store.state.token).then(resp => {
+          if(resp.code == 'U10000'){
+              if(resp.data){
+                this.loadMenu(resp.data);
+              }
+          }else{
+              
+          }
+        });
+  },methods: {
+      loadMenu:function(menus){
+        this.menus = menus;
+        
+      }
+      
   }
 }
 </script>

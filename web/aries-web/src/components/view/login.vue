@@ -53,15 +53,15 @@ export default {
   methods:{
     handleLogin:function(){
         var loginParams = { username : this.user.username, password : this.user.password};
-        login(loginParams).then(data => {
-            if(data.code == 'U10000'){
-                this.$store.commit(types.LOGIN,data.data.token)
+        login(loginParams).then(resp => {
+            if(resp.code == 'U10000'){
+                this.$store.commit(types.LOGIN,resp.data.token)
                 this.$router.push({
                     path: 'dashboard'
                 });
             }else{
-                if(data.message){
-                    alert(data.message)  
+                if(resp.message){
+                    alert(resp.message)  
                 }
             }
       });

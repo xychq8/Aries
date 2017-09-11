@@ -17,9 +17,9 @@ public class MenuServiceImpl implements MenuService {
     private MenuMapper menuMapper;
     @Override
     public List<Menu> getByRoleId(Long roleId) {
-        List<Menu> list = menuMapper.getMenuByRoleId(roleId,1,null);
+        List<Menu> list = menuMapper.getMenuByRoleId(roleId);
         for(Menu menu : list){
-            List<Menu> subMenus = menuMapper.getMenuByRoleId(roleId,2,menu.getId());
+            List<Menu> subMenus = menuMapper.getSubMenu(menu.getId(),2);
             menu.setSubMenu(subMenus);
         }
         return list;

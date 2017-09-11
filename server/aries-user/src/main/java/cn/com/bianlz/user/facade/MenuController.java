@@ -30,7 +30,6 @@ public class MenuController {
     public Result getMenu(@PathVariable("token") String token){
         Result<List<Menu>> result = new Result<List<Menu>>();
         result.setCode(UserProtocolCode.SUCCESS.getCode());
-
         Object userObj = template.opsForValue().get(RedisKeys.TOKEN+token);
         if(userObj == null ){
             return result;
