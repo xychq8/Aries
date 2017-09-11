@@ -3,10 +3,7 @@ package cn.com.bianlz.web.client;
 import cn.com.bianlz.common.vo.Result;
 import cn.com.bianlz.web.common.ServiceHelper;
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -16,6 +13,6 @@ import java.util.Map;
  */
 @FeignClient(name = ServiceHelper.SERVICE_LOGIN)
 public interface MenuServiceClient {
-    @GetMapping("/menu/token/{token}")
+    @RequestMapping(value="/menu/token/{token}",method = RequestMethod.GET)
     public Result getMenu(@PathVariable("token") String token);
 }
