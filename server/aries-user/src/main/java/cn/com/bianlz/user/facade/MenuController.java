@@ -26,7 +26,7 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
     @GetMapping("/menu/token/{token}")
-    public Result getMenu(@PathVariable String token){
+    public Result getMenu(@PathVariable("token") String token){
         Result<List<Menu>> result = new Result<List<Menu>>();
         result.setCode(UserProtocolCode.SUCCESS.getCode());
         Object userObj = redisTemplate.opsForValue().get(RedisKeys.TOKEN+token);
@@ -41,4 +41,6 @@ public class MenuController {
         result.setData(menus);
         return result;
     }
+
+
 }

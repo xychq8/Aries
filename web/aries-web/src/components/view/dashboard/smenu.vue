@@ -33,15 +33,15 @@
 <!--sidebar-menu-->
 </template>
 <script>
-import {getMenu} from "../../api/api";
+import {getMenu} from "../../../api/api";
 export default {
   name: 'smenu',
   data () {
     return {
     	msg:''
     };
-  },mounted:function(){    
-      getMenu(loginParams).then(data => {
+  },mounted:function(){
+      getMenu(this.$store.state.token).then(data => {
             if(data.code == 'U10000'){
                 console.log(data)
             }else{
