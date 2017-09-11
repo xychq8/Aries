@@ -28,6 +28,7 @@ public class CorsFilter extends OncePerRequestFilter{
         // Access-Control-Allow-Methods: 授权请求的方法（GET, POST, PUT, DELETE，OPTIONS等)
         httpServletResponse.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
         httpServletResponse.addHeader("Access-Control-Allow-Headers", "Content-Type");
+        httpServletResponse.addHeader("Access-Control-Allow-Headers", "token");
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 }

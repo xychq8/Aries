@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.*;
  */
 @FeignClient(name = ServiceHelper.SERVICE_LOGIN)
 public interface MenuServiceClient {
-    @RequestMapping(value="/menu",method = RequestMethod.GET)
-    public Result getMenu(@RequestParam("token") String token);
+    @RequestMapping(value="/user/menu/token/{token}",method = RequestMethod.GET)
+    public Result getMenu(@PathVariable("token") String token);
 }

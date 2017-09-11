@@ -25,8 +25,9 @@ new Vue({
 
 
 axios.interceptors.request.use(function (config) {    // 这里的config包含每次请求的内容
-    if (store.getters.getToken) {
-        config.headers.Authorization = `Token ${store.getters.getToken}`;
+    console.log("main token:"+store.state.token)
+    if (localStorage.token) {
+        config.headers.token = localStorage.token;
     }
     return config;
 }, function (err) {
