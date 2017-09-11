@@ -17,5 +17,5 @@ import java.util.Map;
 @FeignClient(name = ServiceHelper.SERVICE_LOGIN)
 public interface MenuServiceClient {
     @GetMapping("/menu/token/{token}")
-    public Result getMenu(@PathVariable String token);
+    public Result getMenu(@PathVariable("token") String token);
 }
