@@ -35,9 +35,6 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
-
-
-
         <!-- aries start -->
         <dependency>
             <groupId>cn.com.bianlz</groupId>
