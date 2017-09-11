@@ -16,7 +16,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/auth")
-public class AuthFacade {
+public class AuthController {
     @Autowired
     private LoginService loginService;
     @PostMapping(value="/login")

@@ -1,6 +1,7 @@
 package cn.com.bianlz.user.service;
 
 import cn.com.bianlz.common.utils.CodecUtils;
+import cn.com.bianlz.common.utils.GsonUtils;
 import cn.com.bianlz.common.vo.Result;
 import cn.com.bianlz.user.api.menu.Menu;
 import cn.com.bianlz.user.api.user.User;
@@ -43,7 +44,7 @@ public class LoginServiceImpl implements LoginService {
         //gen token
         String token = CodecUtils.base64(username);
         //timeout 30min
-        template.opsForValue().set(RedisKeys.TOKEN+token,user.getId()+"",30, TimeUnit.SECONDS);
+        template.opsForValue().set(RedisKeys.TOKEN+token,GsonUtils.getInstances().toJson(user),30, TimeUnit.SECONDS);
         data.put("token",token);
         data.put("username",username);
         data.put("menu",menus);

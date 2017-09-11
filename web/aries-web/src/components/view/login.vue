@@ -39,6 +39,7 @@
 </template>
 <script>
 import {login} from "../../api/api";
+import * as types from "@/store/type"
 export default {
   name: 'login',
   data () {
@@ -53,14 +54,16 @@ export default {
     handleLogin:function(){
         var loginParams = { username : this.user.username, password : this.user.password};
         login(loginParams).then(data => {
-          if(data.code == 'U10000'){
-            alert(data);
-            this.$router.push({path: 'dashboard'});
-          }else{
-            if(data.message){
-              alert(data.message)  
+            if(data.code == 'U10000'){
+                this.$store.commit(types.LOGIN,data.data.token)
+                this.$router.push({
+                    path: 'dashboard'
+                });
+            }else{
+                if(data.message){
+                    alert(data.message)  
+                }
             }
-          }
       });
         
     }
