@@ -1,13 +1,13 @@
 <template>
-	<!--sidebar-menu-->
-<div id="sidebar">
-  <ul id="menubar">
-    <li v-for="level_1 in menus" class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>{{level_1.name}}</span> <span class="label label-important">3</span></a>
-    </li>  
+<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
+  <ul>
+    <li v-for="m1 in menus" class="submenu"> <a href="#"><i class="icon icon-info-sign"></i> <span>{{m1.name}}</span> </a>
+      <ul>
+        <li v-for="m2 in m1.subMenu" ><a href="#">{{m2.name}}</a></li>
+      </ul>
+    </li> 
   </ul>
-
 </div>
-<!--sidebar-menu-->
 </template>
 <script>
 import {getMenu} from "../../../api/api";
@@ -15,24 +15,74 @@ export default {
   name: 'smenu',
   data () {
     return {
-    	menus:[]
+      menus:[]
     };
-  },mounted:function(){
+  },
+  mounted:function(){
       getMenu(this.$store.state.token).then(resp => {
           if(resp.code == 'U10000'){
               if(resp.data){
-                this.loadMenu(resp.data);
-              }
+                this.loadMenu(resp.data,this);
+                }
           }else{
               
           }
-        });
-  },methods: {
+        });      
+  },
+  updated:function(){
+    this.bindMenuClick();
+  },
+  methods: {
       loadMenu:function(menus){
         this.menus = menus;
-        
-      }
-      
+      },bindMenuClick:function(event){
+            // === Sidebar navigation === //
+            $('.submenu > a').click(function(e)
+            { 
+              e.preventDefault();
+              var submenu = $(this).siblings('ul');
+              var li = $(this).parents('li');
+              var submenus = $('#sidebar li.submenu ul');
+              var submenus_parents = $('#sidebar li.submenu');
+              if(li.hasClass('open')){
+                if(($(window).width() > 768) || ($(window).width() < 479)) {
+                  submenu.slideUp();
+                } else {
+                  submenu.fadeOut(250);
+                }
+                li.removeClass('open');
+                li.removeClass('active');
+              }else{
+                if(($(window).width() > 768) || ($(window).width() < 479)) {
+                  submenus.slideUp();     
+                  submenu.slideDown();
+                } else {
+                  submenus.fadeOut(250);      
+                  submenu.fadeIn(250);
+                }
+                submenus_parents.removeClass('open');   
+                li.addClass('open');  
+                li.addClass('active');  
+              }
+            });
+            
+            var ul = $('#sidebar > ul');
+            
+            $('#sidebar > a').click(function(e)
+            {
+              e.preventDefault();
+              var sidebar = $('#sidebar');
+              if(sidebar.hasClass('open'))
+              {
+                sidebar.removeClass('open');
+                ul.slideUp(250);
+              } else 
+              {
+                sidebar.addClass('open');
+                ul.slideDown(250);
+              }
+            });
+      }  
   }
 }
 </script>

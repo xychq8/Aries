@@ -56,12 +56,12 @@ hr{ border-top-color:#dadada;}
 }
 #header h1 {
 	background: url("/static/img/logo2.png") no-repeat scroll 0 0 transparent;
-	height: 31px;
-	left: 20px;
+	height: 41px;
+	left: 10px;
 	line-height: 600px;
 	overflow: hidden;
 	position: relative;
-	top: 26px;
+	top: 31px;
 	width: 191px;
 }
 #header h1 a {
@@ -215,7 +215,7 @@ hr{ border-top-color:#dadada;}
 	border-top: 1px solid #37414b; border-bottom: 1px solid #1f262d;
 }
 #sidebar > ul > li.active {
-    background-color: #27a9e3; border-bottom: 1px solid #27a9e3;  border-top: 1px solid #27a9e3;
+    background-color: #27a9e3; border-bottom: 0px solid #27a9e3;  border-top: 1px solid #27a9e3;
 }
 #sidebar > ul > li.active a{ color:#fff; text-decoration:none;}
 
