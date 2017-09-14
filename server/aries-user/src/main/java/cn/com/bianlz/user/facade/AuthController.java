@@ -29,7 +29,7 @@ public class AuthController {
     }
 
     @GetMapping(value="/token/{token}")
-    public Result getUserByToken(@PathVariable("token") String token){
+    public Result<User> getUserByToken(@PathVariable("token") String token){
         Result result = new Result();
         result.setCode(UserProtocolCode.SUCCESS.getCode());
         result.setMessage(UserProtocolCode.SUCCESS.getMessage());

@@ -9,5 +9,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Authorizition {
-    boolean auth() default false;
+    boolean auth() default true;
 }
