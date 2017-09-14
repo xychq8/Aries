@@ -21,24 +21,20 @@ import java.util.Map;
  * Description
  */
 @RestController
+@RequestMapping("/menu")
 public class MenuController {
     @Autowired
     private StringRedisTemplate template;
     @Autowired
     private MenuService menuService;
-    @GetMapping("/menu/token/{token}")
-    public Result getMenu(@PathVariable("token") String token){
+    @GetMapping("/rid/(rid)")
+    public Result getMenu(@PathVariable("rid") Long rid){
         Result<List<Menu>> result = new Result<List<Menu>>();
         result.setCode(UserProtocolCode.SUCCESS.getCode());
-        Object userObj = template.opsForValue().get(RedisKeys.TOKEN+token);
-        if(userObj == null ){
+        if(rid==null){
             return result;
         }
-        User user = GsonUtils.getInstances().fromJson(User.class,userObj.toString());
-        if(user.getRoleId()==null){
-            return result;
-        }
-        List<Menu> menus = menuService.getByRoleId(user.getRoleId());
+        List<Menu> menus = menuService.getByRoleId(rid);
         result.setData(menus);
         return result;
     }

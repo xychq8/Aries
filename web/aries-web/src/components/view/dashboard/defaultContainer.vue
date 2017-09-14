@@ -1,19 +1,14 @@
 <template>
   <!--main-container-part-->
-  <div id="content">
-    <!--breadcrumbs-->
-    <div id="content-header">
-      <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
-    </div>
-    <!--End-breadcrumbs-->
-    <router-view></router-view>
+  <div id="defaultContainer" class="container-fluid">
+    
   </div>
   <!--end-main-container-part-->
 </template>
 <script>
 
 export default {
-  name: 'container',
+  name: 'defaultContainer',
   data () {
     return {
       msg:''
@@ -24,5 +19,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  #defaultContainer {
+    padding-bottom:100%
+  }
 </style>

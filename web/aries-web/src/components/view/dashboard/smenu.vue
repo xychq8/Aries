@@ -3,7 +3,7 @@
   <ul>
     <li v-for="m1 in menus" class="submenu"> <a href="#"><i class="icon icon-info-sign"></i> <span>{{m1.name}}</span> </a>
       <ul>
-        <li v-for="m2 in m1.subMenu" ><a href="#">{{m2.name}}</a></li>
+        <li v-for="m2 in m1.subMenu" ><a v-on:click="jump(m2.path)" >{{m2.name}}</a></li>
       </ul>
     </li> 
   </ul>
@@ -23,7 +23,7 @@ export default {
           if(resp.code == 'U10000'){
               if(resp.data){
                 this.loadMenu(resp.data,this);
-                }
+              }
           }else{
               
           }
@@ -35,10 +35,10 @@ export default {
   methods: {
       loadMenu:function(menus){
         this.menus = menus;
-      },bindMenuClick:function(event){
+      },
+      bindMenuClick:function(event){
             // === Sidebar navigation === //
-            $('.submenu > a').click(function(e)
-            { 
+            $('.submenu > a').click(function(e){ 
               e.preventDefault();
               var submenu = $(this).siblings('ul');
               var li = $(this).parents('li');
@@ -65,24 +65,22 @@ export default {
                 li.addClass('active');  
               }
             });
-            
-            var ul = $('#sidebar > ul');
-            
-            $('#sidebar > a').click(function(e)
-            {
+            var ul = $('#sidebar > ul');            
+            $('#sidebar > a').click(function(e){
               e.preventDefault();
               var sidebar = $('#sidebar');
-              if(sidebar.hasClass('open'))
-              {
+              if(sidebar.hasClass('open')){
                 sidebar.removeClass('open');
                 ul.slideUp(250);
-              } else 
-              {
+              }else{
                 sidebar.addClass('open');
                 ul.slideDown(250);
               }
             });
-      }  
+      },
+      jump:function(_path){
+        this.$router.push({path: _path});
+      } 
   }
 }
 </script>
