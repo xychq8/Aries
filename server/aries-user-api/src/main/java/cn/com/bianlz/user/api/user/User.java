@@ -9,6 +9,7 @@ import java.util.Date;
 public class User {
     private Long id;
     private String username;
+    private String name;
     private String password;
     private Integer status;
     private Date createDate;
@@ -30,6 +31,14 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {

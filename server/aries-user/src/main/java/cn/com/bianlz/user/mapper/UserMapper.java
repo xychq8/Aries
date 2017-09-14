@@ -19,6 +19,7 @@ public interface UserMapper {
     @Results({
             @Result(property = "id",column = "id"),
             @Result(property = "username",column = "username"),
+            @Result(property = "name",column = "name"),
             @Result(property = "password",column = "password"),
             @Result(property = "status",column = "status"),
             @Result(property = "createDate",column = "create_date"),
@@ -32,7 +33,7 @@ public interface UserMapper {
     @Results({
             @Result(property = "id",column = "id"),
             @Result(property = "username",column = "username"),
-            @Result(property = "password",column = "password"),
+            @Result(property = "name",column = "name"),
             @Result(property = "status",column = "status"),
             @Result(property = "createDate",column = "create_date"),
             @Result(property = "email",column = "email"),
