@@ -7,11 +7,13 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by bianlanzhou on 17/9/4.
  * Description
  */
 public interface RoleMapper {
-
+    @SelectProvider(type = RoleProvider.class,method = "getSubRoleId")
+    public Set<Long> getSubRoleId(Long roleId);
 }

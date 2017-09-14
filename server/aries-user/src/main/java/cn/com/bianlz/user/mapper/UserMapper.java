@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by bianlanzhou on 17/9/1.
@@ -26,4 +27,19 @@ public interface UserMapper {
             @Result(property = "roleId",column = "role_id")
     })
     List<User> get(User user);
+
+    @SelectProvider(type = UserProvider.class,method = "getByRoleIds")
+    @Results({
+            @Result(property = "id",column = "id"),
+            @Result(property = "username",column = "username"),
+            @Result(property = "password",column = "password"),
+            @Result(property = "status",column = "status"),
+            @Result(property = "createDate",column = "create_date"),
+            @Result(property = "email",column = "email"),
+            @Result(property = "phone",column = "phone"),
+            @Result(property = "roleId",column = "role_id")
+    })
+    List<User> getByRoleIds(String roleIds);
+
+
 }

@@ -41,4 +41,5 @@ public class AuthController {
         result.setData(user);
         return result;
     }
+
 }

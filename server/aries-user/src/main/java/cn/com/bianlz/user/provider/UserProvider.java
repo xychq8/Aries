@@ -2,6 +2,9 @@ package cn.com.bianlz.user.provider;
 
 import cn.com.bianlz.user.api.user.User;
 import cn.com.bianlz.common.enums.Status;
+
+import java.util.Set;
+
 /**
  * Created by bianlanzhou on 17/9/1.
  * Description
@@ -27,6 +30,18 @@ public class UserProvider {
                 sb.append(" and status = ").append(Status.VALID.getCode());
             }
         }
+        return sb.toString();
+    }
+    public String getByRoleIds(String roleIds){
+
+        if(roleIds==null||"".equals(roleIds)){
+            roleIds = "-100";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("select * from user ");
+        sb.append(" where role_id in (");
+        sb.append(roleIds).append(")");
+        sb.append(" and status = ").append(Status.VALID.getCode());
         return sb.toString();
     }
 }

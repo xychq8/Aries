@@ -12,6 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by bianlanzhou on 17/9/1.
@@ -58,4 +59,17 @@ public class UserServiceImpl implements UserService {
         }
         return true;
     }
+
+    @Override
+    public List<User> getUserByRoleIds(Set<Long> roleIds) {
+        String roleIdsStr = "-100";
+        if(roleIds!=null&&roleIds.size()>0){
+            for(Long roleId:roleIds){
+                roleIdsStr = roleIdsStr + "," + roleId;
+            }
+        }
+        return userMapper.getByRoleIds(roleIdsStr);
+    }
+
+
 }
