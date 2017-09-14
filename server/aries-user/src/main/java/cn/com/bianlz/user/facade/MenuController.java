@@ -27,7 +27,7 @@ public class MenuController {
     private StringRedisTemplate template;
     @Autowired
     private MenuService menuService;
-    @GetMapping("/rid/(rid)")
+    @GetMapping("/rid/{rid}")
     public Result getMenu(@PathVariable("rid") Long rid){
         Result<List<Menu>> result = new Result<List<Menu>>();
         result.setCode(UserProtocolCode.SUCCESS.getCode());
