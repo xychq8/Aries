@@ -14,6 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @FeignClient(name = ServiceHelper.USER_SERVICE)
 public interface UserServiceClient {
-    @RequestMapping(value="/list/roleId/{roleId}",method = RequestMethod.GET)
+    @RequestMapping(value="/user/list/roleId/{roleId}",method = RequestMethod.GET)
     public Result getUserByRoleId(@PathVariable("roleId") Long roleId);
 }

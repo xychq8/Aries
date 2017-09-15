@@ -38,7 +38,7 @@
     </div>
 </template>
 <script>
-import {login} from "../../api/api";
+import {login} from "@/api/api";
 import * as types from "@/store/type"
 export default {
   name: 'login',
@@ -64,8 +64,7 @@ export default {
                     alert(resp.message)  
                 }
             }
-      });
-        
+      });  
     }
   }
 }
