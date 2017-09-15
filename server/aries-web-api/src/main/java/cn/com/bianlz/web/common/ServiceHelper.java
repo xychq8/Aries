@@ -5,5 +5,5 @@ package cn.com.bianlz.web.common;
  * Description
  */
 public class ServiceHelper {
-    public static final String SERVICE_LOGIN = "USER-SERVICE";
+    public static final String USER_SERVICE = "USER-SERVICE";
 }

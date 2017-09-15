@@ -12,7 +12,7 @@ import java.util.Map;
  * Created by bianlanzhou on 17/9/8.
  * Description
  */
-@FeignClient(name = ServiceHelper.SERVICE_LOGIN)
+@FeignClient(name = ServiceHelper.USER_SERVICE)
 public interface LoginServiceClient {
     @PostMapping("/user/auth/login")
     public Result login(@RequestBody Map<String,String> param);
