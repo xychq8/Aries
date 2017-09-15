@@ -5,7 +5,7 @@ package cn.com.bianlz.web.common;
  * Description
  */
 public enum WebApiProtocolCode {
-    SUCCESS("w10000","成功"),
+    SUCCESS("W10000","成功"),
     AUTH_FAIL("W10001","你没有权限操作!"),
     REDIRECT("W10002","跳转");
     private String code;

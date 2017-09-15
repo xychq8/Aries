@@ -24,13 +24,14 @@ public class MenuController {
     private MenuServiceClient menuServiceClient;
     @GetMapping("/menu")
     public Result getMenu(HttpServletRequest request){
+        Result result = new Result();
+        result.setCode(WebApiProtocolCode.SUCCESS.getCode());
+        result.setMessage(WebApiProtocolCode.SUCCESS.getMessage());
         User user = (User)request.getSession().getAttribute("user");
         if(user==null||user.getRoleId()==null){
-            Result result = new Result();
-            result.setCode(WebApiProtocolCode.SUCCESS.getCode());
-            result.setMessage(WebApiProtocolCode.SUCCESS.getMessage());
             return result;
         }
-        return menuServiceClient.getMenu(user.getRoleId());
+        result.setData(menuServiceClient.getMenu(user.getRoleId()).getData());
+        return result;
     }
 }

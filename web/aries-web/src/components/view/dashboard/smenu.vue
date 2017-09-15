@@ -20,7 +20,7 @@ export default {
   },
   mounted:function(){
       getMenu(this.$store.state.token).then(resp => {
-          if(resp.code == 'U10000'){
+          if(resp.code == 'W10000'){
               if(resp.data){
                 this.loadMenu(resp.data,this);
               }

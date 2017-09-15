@@ -20,7 +20,7 @@
           <el-pagination
             :page-size="10"
             layout="total, prev, pager, next"
-            :total="{{dLength}}">
+            :total="dLength">
           </el-pagination>
         </div>
       </div>
@@ -40,7 +40,7 @@
     },
     mounted:function(){
       getUser().then(resp => {
-            if(resp.code == 'U10000'&&resp.data){
+            if(resp.code == 'W10000'&&resp.data){
               this.tableData = resp.data;
               this.dLength = resp.data.length
             }else{

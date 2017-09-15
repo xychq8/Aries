@@ -3,6 +3,7 @@ package cn.com.bianlz.web.controller.login;
 import cn.com.bianlz.common.utils.MD5Utils;
 import cn.com.bianlz.common.vo.Result;
 import cn.com.bianlz.web.client.LoginServiceClient;
+import cn.com.bianlz.web.common.WebApiProtocolCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,10 @@ public class LoginController {
     private LoginServiceClient loginServiceClient;
     @PostMapping(value="/login")
     public Result login(@RequestBody Map<String,String> param){
-        return loginServiceClient.login(param);
+        Result result = new Result();
+        result.setCode(WebApiProtocolCode.SUCCESS.getCode());
+        result.setMessage(WebApiProtocolCode.SUCCESS.getMessage());
+        result.setData(loginServiceClient.login(param).getData());
+        return result;
     }
 }

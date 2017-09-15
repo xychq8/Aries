@@ -22,13 +22,15 @@ public class UserController {
     private UserServiceClient userServiceClient;
     @GetMapping("/user")
     public Result getMenu(HttpServletRequest request){
+        Result result = new Result();
+        result.setCode(WebApiProtocolCode.SUCCESS.getCode());
+        result.setMessage(WebApiProtocolCode.SUCCESS.getMessage());
         User user = (User)request.getSession().getAttribute("user");
         if(user==null||user.getRoleId()==null){
-            Result result = new Result();
-            result.setCode(WebApiProtocolCode.SUCCESS.getCode());
-            result.setMessage(WebApiProtocolCode.SUCCESS.getMessage());
+
             return result;
         }
-        return userServiceClient.getUserByRoleId(user.getRoleId());
+        result.setData(userServiceClient.getUserByRoleId(user.getRoleId()).getData());
+        return result;
     }
 }
