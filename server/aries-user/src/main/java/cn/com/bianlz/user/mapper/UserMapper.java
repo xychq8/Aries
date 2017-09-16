@@ -2,10 +2,7 @@ package cn.com.bianlz.user.mapper;
 
 import cn.com.bianlz.user.api.user.User;
 import cn.com.bianlz.user.provider.UserProvider;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Set;
@@ -43,4 +40,6 @@ public interface UserMapper {
     List<User> getByRoleIds(String roleIds);
 
 
+    @UpdateProvider(type = UserProvider.class,method = "updateUser")
+    Integer updateUser(User user);
 }

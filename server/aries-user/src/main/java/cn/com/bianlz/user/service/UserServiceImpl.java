@@ -71,5 +71,13 @@ public class UserServiceImpl implements UserService {
         return userMapper.getByRoleIds(roleIdsStr);
     }
 
+    @Override
+    public Integer updateUser(User user) {
+        if(user.getId()==null||user.getId()<=0){
+            return userMapper.updateUser(user);
+        }
+        return 0;
+    }
+
 
 }

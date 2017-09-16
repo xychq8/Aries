@@ -42,4 +42,12 @@ public class AuthController {
         return result;
     }
 
+    @PostMapping
+    public Result changePassword(){
+        Result result = new Result();
+        result.setCode(UserProtocolCode.SUCCESS.getCode());
+        result.setMessage(UserProtocolCode.SUCCESS.getMessage());
+        return result;
+    }
+
 }

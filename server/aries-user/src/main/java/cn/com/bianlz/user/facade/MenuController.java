@@ -38,6 +38,4 @@ public class MenuController {
         result.setData(menus);
         return result;
     }
-
-
 }

@@ -6,9 +6,7 @@ import cn.com.bianlz.user.common.UserProtocolCode;
 import cn.com.bianlz.user.service.RoleService;
 import cn.com.bianlz.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
@@ -32,6 +30,19 @@ public class UserController {
         if(roleIds!=null&&roleIds.size()>0){
             List<User> list = userService.getUserByRoleIds(roleIds);
             result.setData(list);
+        }
+        return result;
+    }
+
+    @PostMapping("/update")
+    public Result updateUser(@RequestBody User user){
+        Result result = new Result();
+        result.setCode(UserProtocolCode.SUCCESS.getCode());
+        result.setMessage(UserProtocolCode.SUCCESS.getMessage());
+        Integer ref = userService.updateUser(user);
+        if(ref<=0){
+            result.setCode(UserProtocolCode.UPDATE_FAIL.getCode());
+            result.setMessage(UserProtocolCode.UPDATE_FAIL.getMessage());
         }
         return result;
     }

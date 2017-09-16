@@ -44,4 +44,49 @@ public class UserProvider {
         sb.append(" and status = ").append(Status.VALID.getCode());
         return sb.toString();
     }
+
+    public String updateUser(User user){
+        boolean flag = false;
+        StringBuilder sb = new StringBuilder();
+        sb.append(" update user set ");
+        if(user.getUsername()!=null){
+            if(flag){
+                sb.append(",");
+            }
+            sb.append(" username = '").append(user.getUsername()).append("'");
+            flag = true;
+        }
+        if(user.getPassword()!=null){
+            if(flag){
+                sb.append(",");
+            }
+            sb.append(" password = '").append(user.getPassword()).append("'");
+            flag = true;
+        }
+        if(user.getEmail()!=null){
+            if(flag){
+                sb.append(",");
+            }
+            sb.append(" email = '").append(user.getEmail()).append("'");
+            flag = true;
+        }
+        if(user.getName()!=null){
+            if(flag){
+                sb.append(",");
+            }
+            sb.append(" name = '").append(user.getName()).append("'");
+            flag = true;
+        }
+        if(user.getPhone()!=null){
+            if(flag){
+                sb.append(",");
+            }
+            sb.append(" phone = '").append(user.getPhone()).append("'");
+            flag = true;
+        }
+        sb.append(" where id=").append(user.getId());
+        return sb.toString();
+    }
+
+
 }

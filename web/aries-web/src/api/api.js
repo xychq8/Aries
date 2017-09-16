@@ -8,3 +8,5 @@ export let login = params => { return axios.post(host_addr + `/login`, params).t
 export let getMenu = id => { return axios.get(host_addr + `/menu`).then(res => res.data).catch(function(thrown){alert('服务繁忙!')});};
 
 export let getUser = id => { return axios.get(host_addr + `/user`).then(res => res.data).catch(function(thrown){alert('服务繁忙!')});};
+
+export let updateUser = param => { return axios.post(host_addr + `/user/update`,param).then(res => res.data).catch(function(thrown){alert('服务繁忙!')});};

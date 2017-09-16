@@ -15,4 +15,5 @@ public interface UserService {
     List<User> getUser(User user);
     boolean checkUser(Result<Map<String,Object>> result,User user);
     List<User> getUserByRoleIds(Set<Long> roleIds);
+    public Integer updateUser(User user);
 }
