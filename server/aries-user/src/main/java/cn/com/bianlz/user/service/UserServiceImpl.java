@@ -74,9 +74,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer updateUser(User user) {
         if(user.getId()==null||user.getId()<=0){
-            return userMapper.updateUser(user);
+            return 0;
         }
-        return 0;
+        if(user.getPassword()!=null){
+            try {
+                user.setPassword(MD5Utils.getMD5(user.getPassword()));
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+        return userMapper.updateUser(user);
     }
 
 

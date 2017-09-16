@@ -4,7 +4,7 @@
     <el-dialog title="修改密码" :visible.sync="dialogTableVisible" >
       <el-form >
         <el-form-item label="新密码" :label-width="formLabelWidth">
-          <el-input auto-complete="off" size="large" :rows="1" type="password" ></el-input>
+          <el-input auto-complete="off" size="large" :rows="1" type="password" v-model="password" ></el-input>
         </el-form-item>
         <el-form-item label="确认密码" :label-width="formLabelWidth">
           <el-input auto-complete="off" size="large" :rows="1" type="password" ></el-input>
@@ -12,7 +12,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogTableVisible = false">取 消</el-button>
-        <el-button type="primary" @click="updateUser">确 定</el-button>
+        <el-button type="primary" @click="updatePassword">确 定</el-button>
       </div>
     </el-dialog>
     <hr>
@@ -33,7 +33,7 @@
               label="操作"
               width="100">
               <template scope="scope">
-                <el-button @click="handleDetail(id)" type="text" size="small">修改密码</el-button>
+                <el-button @click.native.prevent="handleDetail(scope.row.id)" type="text" size="small">修改密码</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -51,7 +51,7 @@
   <!--end-main-container-part-->
 </template>
 <script>
-  import {getUser} from "@/api/api";
+  import {getUser,updateUser} from "@/api/api";
   export default {
     name: 'dashboard',
     data () {
@@ -60,7 +60,8 @@
         dLength:0,
         dialogTableVisible:false,
         formLabelWidth:'150px',
-        currentId:''
+        currentId:'',
+        password:''
       };
     },
     mounted:function(){
@@ -78,10 +79,16 @@
     methods:{
       handleDetail:function(id){
         this.dialogTableVisible = true
-        currentId = this.id;
+        this.currentId = id;
       },
       updatePassword:function(){
-        ialogTableVisible = false;
+        this.dialogTableVisible = false;
+        var param = {'password':this.password,'id':this.currentId}        
+        updateUser(param).then(resp => {
+            alert('1111')
+        });  
+
+
       }
     }
   }
