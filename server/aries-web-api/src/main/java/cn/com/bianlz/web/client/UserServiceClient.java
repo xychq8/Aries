@@ -33,6 +33,6 @@ public interface UserServiceClient {
     @RequestMapping(value="/user/update")
     public Result updateUser(@RequestBody User user);
 
-    @RequestMapping(value = "/user/role/sub",method = RequestMethod.GET)
-    public Result<List<Role>> getSubRole(@RequestBody Long id);
+    @RequestMapping(value = "/user/role/sub/{roleId}",method = RequestMethod.GET)
+    public Result<List<Role>> getSubRole(@PathVariable("roleId") Long id);
 }

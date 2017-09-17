@@ -6,10 +6,7 @@ import cn.com.bianlz.user.api.user.User;
 import cn.com.bianlz.user.common.UserProtocolCode;
 import cn.com.bianlz.user.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -23,8 +20,8 @@ import java.util.List;
 public class RoleController {
     @Autowired
     private RoleService roleService;
-    @GetMapping("/sub")
-    public Result getSubRole(@RequestBody Long id){
+    @GetMapping("/sub/{roleId}")
+    public Result getSubRole(@PathVariable("roleId") Long id){
         Result result = new Result();
         result.setCode(UserProtocolCode.SUCCESS.getCode());
         result.setMessage(UserProtocolCode.SUCCESS.getMessage());

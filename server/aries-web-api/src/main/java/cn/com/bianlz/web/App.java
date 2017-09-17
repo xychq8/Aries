@@ -37,7 +37,7 @@ public class App {
         @Autowired
         private AuthInterceptor authInterceptor;
         public void addInterceptors(InterceptorRegistry registry) {
-            registry.addInterceptor(authInterceptor).addPathPatterns("/*");
+            registry.addInterceptor(authInterceptor).addPathPatterns("/**");
         }
     }
 

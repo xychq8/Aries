@@ -11,4 +11,4 @@ export let getUser = id => { return axios.get(host_addr + `/user`).then(res => r
 
 export let updateUser = param => { return axios.post(host_addr + `/user/update`,param).then(res => res.data).catch(function(thrown){alert('服务繁忙!')});};
 
-export let getRoles = () => { return axios.get(host_addr + `/role/sub`).then(res => res.data).catch(function(thrown){alert('服务繁忙!')});};
+export let getRoles = id => { return axios.get(host_addr + `/role/sub`).then(res => res.data).catch(function(thrown){alert('服务繁忙!')});};

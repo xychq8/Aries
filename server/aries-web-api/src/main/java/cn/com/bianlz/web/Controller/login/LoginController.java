@@ -17,7 +17,7 @@ import java.util.Map;
  * Created by bianlanzhou on 17/9/8.
  * Description
  */
-@RestController("/auth")
+@RestController
 public class LoginController {
     @Autowired
     private UserServiceClient userServiceClient;
