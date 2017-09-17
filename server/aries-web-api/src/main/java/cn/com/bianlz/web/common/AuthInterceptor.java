@@ -4,7 +4,7 @@ import cn.com.bianlz.common.utils.GsonUtils;
 import cn.com.bianlz.common.vo.Result;
 import cn.com.bianlz.user.api.user.User;
 import cn.com.bianlz.web.HttpCodeUtils;
-import cn.com.bianlz.web.client.LoginServiceClient;
+import cn.com.bianlz.web.client.UserServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -21,7 +21,7 @@ import java.io.IOException;
 @Component
 public class AuthInterceptor extends HandlerInterceptorAdapter {
     @Autowired
-    private LoginServiceClient loginServiceClient;
+    private UserServiceClient userServiceClient;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (handler instanceof HandlerMethod){
@@ -30,7 +30,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
             User user = null;
             String token = request.getHeader("token");
             if(token!=null){
-                Result<User> result = loginServiceClient.getUserByToken(token);
+                Result<User> result = userServiceClient.getUserByToken(token);
                 user = result.getData();
             }
             if(auth!=null&&auth.auth()){
