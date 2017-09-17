@@ -6,9 +6,14 @@
       <div class="span12">
         <div class="widget-box">
           <el-table :data="tableData" border style="width: 100%">
+            <el-table-column label="序号" width="180">
+                <template scope="scope">
+                    <a href="javascript:;">{{scope.row.id}}</a>
+                </template>
+            </el-table-column>
             <el-table-column prop="name" label="名称" width="180">
             </el-table-column>
-            <el-table-column prop="createDate" label="邮箱" width="180">
+            <el-table-column prop="createDate" label="创建时间" >
             </el-table-column>
             <el-table-column
               fixed="right"
@@ -37,7 +42,8 @@ export default {
     name: 'roleManager',
     data () {
       return {
-        tableData: []
+        tableData: [],
+        dLength:0
       };
     },
     mounted:function(){
