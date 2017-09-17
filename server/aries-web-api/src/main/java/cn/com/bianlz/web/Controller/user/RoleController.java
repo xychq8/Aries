@@ -4,6 +4,7 @@ import cn.com.bianlz.common.vo.Result;
 import cn.com.bianlz.user.api.user.Role;
 import cn.com.bianlz.user.api.user.User;
 import cn.com.bianlz.web.client.UserServiceClient;
+import cn.com.bianlz.web.common.Authorizition;
 import cn.com.bianlz.web.common.WebApiProtocolCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/role")
+@Authorizition
 public class RoleController {
     @Autowired
     private UserServiceClient userServiceClient;
