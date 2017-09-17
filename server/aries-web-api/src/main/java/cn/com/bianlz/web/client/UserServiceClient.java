@@ -1,13 +1,14 @@
 package cn.com.bianlz.web.client;
 
 import cn.com.bianlz.common.vo.Result;
+import cn.com.bianlz.user.api.user.Role;
 import cn.com.bianlz.user.api.user.User;
 import cn.com.bianlz.web.common.ServiceHelper;
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -16,9 +17,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @FeignClient(name = ServiceHelper.USER_SERVICE)
 public interface UserServiceClient {
+
+    @PostMapping("/user/auth/login")
+    public Result login(@RequestBody Map<String,String> param);
+
+    @RequestMapping(value="/user/auth/token/{token}",method = RequestMethod.GET)
+    public Result<User> getUserByToken(@PathVariable("token") String token);
+
+    @RequestMapping(value="/user/menu/rid/{rid}",method = RequestMethod.GET)
+    public Result getMenu(@PathVariable("rid") Long rid);
+
     @RequestMapping(value="/user/list/roleId/{roleId}",method = RequestMethod.GET)
     public Result getUserByRoleId(@PathVariable("roleId") Long roleId);
 
     @RequestMapping(value="/user/update")
     public Result updateUser(@RequestBody User user);
+
+    @RequestMapping(value = "/user/role/sub",method = RequestMethod.GET)
+    public Result<List<Role>> getSubRole(@RequestBody Long id);
 }

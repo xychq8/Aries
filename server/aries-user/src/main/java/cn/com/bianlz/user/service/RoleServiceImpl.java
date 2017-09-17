@@ -1,5 +1,6 @@
 package cn.com.bianlz.user.service;
 
+import cn.com.bianlz.user.api.user.Role;
 import cn.com.bianlz.user.mapper.RoleMapper;
 import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,16 @@ public class RoleServiceImpl implements RoleService{
             set.addAll(temp);
         }
         return set;
+    }
+
+    @Override
+    public List<Role> getSubRole(Long id) {
+        Set<Long> roleIds = getSubRoleId(id);
+        List<Role> roles = new ArrayList<Role>();
+        for(Long roleId : roleIds){
+            roles.addAll(roleMapper.getRole(id));
+        }
+        return roles;
     }
 
     private Set<Long> getSubRoleId(Set<Long> roleSet,Set<Long> totalRoleList){

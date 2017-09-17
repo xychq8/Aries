@@ -1,7 +1,7 @@
 package cn.com.bianlz.web.controller.menu;
 
 import cn.com.bianlz.common.vo.Result;
-import cn.com.bianlz.web.client.MenuServiceClient;
+import cn.com.bianlz.web.client.UserServiceClient;
 import cn.com.bianlz.web.common.Authorizition;
 import cn.com.bianlz.web.common.WebApiProtocolCode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 public class MenuController {
 
     @Autowired
-    private MenuServiceClient menuServiceClient;
+    private UserServiceClient userServiceClient;
     @GetMapping("/menu")
     public Result getMenu(HttpServletRequest request){
         Result result = new Result();
@@ -31,7 +31,7 @@ public class MenuController {
         if(user==null||user.getRoleId()==null){
             return result;
         }
-        result.setData(menuServiceClient.getMenu(user.getRoleId()).getData());
+        result.setData(userServiceClient.getMenu(user.getRoleId()).getData());
         return result;
     }
 }

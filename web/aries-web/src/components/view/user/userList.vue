@@ -33,7 +33,7 @@
               label="操作"
               width="100">
               <template scope="scope">
-                <el-button @click.native.prevent="handleDetail(scope.row.id)" type="text" size="small">修改密码</el-button>
+                <el-button @click.native.prevent="handleModify(scope.row.id)" type="text" size="small">修改密码</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -77,7 +77,7 @@
       });
     },
     methods:{
-      handleDetail:function(id){
+      handleModify:function(id){
         this.dialogTableVisible = true
         this.currentId = id;
       },
@@ -85,7 +85,15 @@
         this.dialogTableVisible = false;
         var param = {'password':this.password,'id':this.currentId}        
         updateUser(param).then(resp => {
-            alert('1111')
+            if(resp&&resp.code&&resp.code=='W10000'){
+                
+            }else{
+              this.$message({
+                  showClose: true,
+                  message: resp.message,
+                  type: 'error'
+                });
+            }
         });  
 
 
