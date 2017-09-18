@@ -15,4 +15,4 @@ export let getRoles = id => { return axios.get(host_addr + `/role/sub`).then(res
 
 export let getUserMenu = id => { return axios.get(host_addr + `/menu/ur/`+ id).then(res => res.data).catch(function(thrown){alert('服务繁忙!')});};
 
-export let saveMenuRole = params => { return axios.post(host_addr + `/api/menu/menuRole`, params).then(res => res.data).catch(function(thrown){alert('服务繁忙!')});};
+export let saveMenuRole = params => { return axios.post(host_addr + `/menu/menuRole`, params).then(res => res.data).catch(function(thrown){alert('服务繁忙!')});};

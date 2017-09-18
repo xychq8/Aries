@@ -30,6 +30,7 @@ public class MenuProvider {
         sb.append(" and level = ").append(level);
         sb.append(" and status = ").append(Status.VALID.getCode());
         sb.append(" and exists (select 1 from menu_role b where a.id=b.menu_id ");
+        sb.append(" and b.status=").append(Status.VALID);
         sb.append(" and b.role_id=").append(roleId).append(")");
         System.out.println(sb.toString());
         return sb.toString();
