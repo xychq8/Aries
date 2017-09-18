@@ -43,11 +43,20 @@ public class MenuProvider {
         return sb.toString();
     }
 
-    public String updateMenuStatus(Long rid,String mid){
+    public String updateMenuStatus(Long rid,String inCase,String notInCase,Integer status){
         StringBuilder sb = new StringBuilder();
         sb.append("update menu_role set status = ").append(Status.VALID.getCode());
         sb.append(" where role_id=").append(rid);
-        sb.append(" and menu_id=").append(mid);
+        if(null!=inCase){
+            sb.append(" and menu_id in (").append(inCase).append(")");
+        }
+        if(null!=notInCase){
+            sb.append(" and menu_id not in (").append(notInCase).append(")");
+        }
+        if(null==inCase&&null==notInCase){
+            sb.append(" and menu_id =-100");
+        }
+
         return sb.toString();
     }
 }

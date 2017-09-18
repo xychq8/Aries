@@ -1,5 +1,6 @@
 package cn.com.bianlz.user.service;
 
+import cn.com.bianlz.common.enums.Status;
 import cn.com.bianlz.user.api.menu.Menu;
 import cn.com.bianlz.user.mapper.MenuMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +43,13 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public Integer saveMenu(Long rid,List<Object> mids) {
         Integer counter = 0;
-        for(Object mid:mids){
-            counter+=menuMapper.updateMenuStatus(rid,mid.toString());
+        String inCase="",notInCase="";
+        for(Object obj:mids){
+            inCase = "," + inCase;
         }
+        notInCase = inCase = inCase.replaceFirst(",","");
+        counter+=menuMapper.updateMenuStatus(rid,inCase,null, Status.VALID.getCode());
+        counter+=menuMapper.updateMenuStatus(rid,null,notInCase,Status.VALID.getCode());
         return counter;
     }
 
