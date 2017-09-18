@@ -62,6 +62,7 @@ export default {
         treeData:[],
         checkData:[],
         dLength:0,
+        currentRoleId:'';
         dialogTableVisible:false,
         defaultProps: {
           children: 'subMenu',
@@ -87,6 +88,7 @@ export default {
     	},
     	handleMenuDetail:function(id){
     		this.dialogTableVisible = true;
+    		this.currentRoleId = id;
     		getUserMenu(id).then(resp=>{
     			if(resp.code == 'W10000'&&resp.data){
     				this.treeData = resp.data.menus;
@@ -97,7 +99,7 @@ export default {
     		})
     	},
     	saveMenuRole:function(){
-    		var param = {'menus':this.$refs.tree.getCheckedKeys()};
+    		var param = {'menus':this.$refs.tree.getCheckedKeys(),'id':this.currentRoleId};
     		saveMenuRole(param).then(resp=>{
     			alert(resp)
     		})

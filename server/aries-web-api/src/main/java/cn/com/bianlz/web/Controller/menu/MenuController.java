@@ -52,8 +52,6 @@ public class MenuController {
         Result<Integer> result = new Result();
         result.setCode(WebApiProtocolCode.SUCCESS.getCode());
         result.setMessage(WebApiProtocolCode.SUCCESS.getMessage());
-        User user = (User)request.getSession().getAttribute("user");
-        param.put("id",user.getId());
         result.setData(userServiceClient.saveMenuRole(param).getData());
         return result;
     }
