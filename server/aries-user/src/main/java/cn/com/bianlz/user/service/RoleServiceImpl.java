@@ -36,7 +36,7 @@ public class RoleServiceImpl implements RoleService{
         Set<Long> roleIds = getSubRoleId(id);
         List<Role> roles = new ArrayList<Role>();
         for(Long roleId : roleIds){
-            roles.addAll(roleMapper.getRole(id));
+            roles.addAll(roleMapper.getRole(roleId));
         }
         return roles;
     }
