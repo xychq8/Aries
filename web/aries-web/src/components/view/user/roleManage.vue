@@ -62,7 +62,7 @@ export default {
         treeData:[],
         checkData:[],
         dLength:0,
-        currentRoleId:'';
+        currentRoleId:'',
         dialogTableVisible:false,
         defaultProps: {
           children: 'subMenu',

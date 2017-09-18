@@ -61,7 +61,11 @@ export default {
                 });
             }else{
                 if(resp.message){
-                    alert(resp.message)  
+                    this.$message({
+                      showClose: true,
+                      message: resp.message,
+                      type: 'error'
+                    });
                 }
             }
       });  
