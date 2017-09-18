@@ -25,7 +25,7 @@ public interface MenuMapper {
             @Result(property = "status",column = "status"),
             @Result(property = "createDate",column = "create_date")
     })
-    List<Menu> getMenuByRoleId(Long roleId);
+    List<Menu> getMenuByRoleId(Long roleId,Integer level);
 
     @SelectProvider(type = MenuProvider.class,method = "getSubMenu")
     @Results({

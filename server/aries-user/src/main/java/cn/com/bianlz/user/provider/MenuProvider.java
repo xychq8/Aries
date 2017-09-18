@@ -7,7 +7,7 @@ import cn.com.bianlz.common.enums.Status;
  * Description
  */
 public class MenuProvider {
-    public String getMenuIdByRoleId(Long id){
+    public String getMenuIdByRoleId(Long id,Integer level){
         StringBuffer sb = new StringBuffer();
         sb.append(" select b.* from menu_role a ,menu b ");
         sb.append(" where a.menu_id = b.id ");
@@ -15,6 +15,9 @@ public class MenuProvider {
             sb.append(" and a.id = ").append(id);
         }else{
             sb.append(" and a.id = -1 ");
+        }
+        if(level!=null&&level>0){
+            sb.append(" and b.level=").append(level);
         }
         sb.append(" and b.status = a.status = ").append(Status.VALID.getCode());
         return sb.toString();

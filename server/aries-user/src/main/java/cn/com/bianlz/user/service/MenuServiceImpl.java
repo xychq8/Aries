@@ -5,7 +5,7 @@ import cn.com.bianlz.user.mapper.MenuMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by bianlanzhou on 17/9/4.
@@ -17,11 +17,25 @@ public class MenuServiceImpl implements MenuService {
     private MenuMapper menuMapper;
     @Override
     public List<Menu> getByRoleId(Long roleId) {
-        List<Menu> list = menuMapper.getMenuByRoleId(roleId);
+        List<Menu> list = menuMapper.getMenuByRoleId(roleId,null);
         for(Menu menu : list){
             List<Menu> subMenus = menuMapper.getSubMenu(menu.getId(),2);
             menu.setSubMenu(subMenus);
         }
         return list;
+    }
+
+    @Override
+    public Map<String, Object> getUserMenu(Long rid, Long uRid) {
+        Set<Long> checkSet = new HashSet<Long>();
+        Map<String,Object> data = new HashMap<String, Object>();
+        List<Menu> menuList = getByRoleId(rid);
+        List<Menu> umList = menuMapper.getMenuByRoleId(uRid,2);
+        for(Menu menu:umList){
+            checkSet.add(menu.getId());
+        }
+        data.put("menus",menuList);
+        data.put("check",checkSet);
+        return data;
     }
 }

@@ -31,11 +31,20 @@ public class MenuController {
     public Result getMenu(@PathVariable("rid") Long rid){
         Result<List<Menu>> result = new Result<List<Menu>>();
         result.setCode(UserProtocolCode.SUCCESS.getCode());
+        result.setMessage(UserProtocolCode.SUCCESS.getMessage());
         if(rid==null){
             return result;
         }
         List<Menu> menus = menuService.getByRoleId(rid);
         result.setData(menus);
+        return result;
+    }
+    @GetMapping("/r/{rid}/ur/{uRid}")
+    public Result<Map<String, Object>> getUserMenu(@PathVariable("rid")Long rid,@PathVariable("uRid")Long uRid){
+        Result<Map<String, Object>> result = new Result<Map<String, Object>>();
+        result.setCode(UserProtocolCode.SUCCESS.getCode());
+        result.setMessage(UserProtocolCode.SUCCESS.getMessage());
+        result.setData(menuService.getUserMenu(rid, uRid));
         return result;
     }
 }
