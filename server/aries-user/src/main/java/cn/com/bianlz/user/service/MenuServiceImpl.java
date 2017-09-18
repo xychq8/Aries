@@ -40,10 +40,10 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public Integer saveMenu(Long rid,List<Long> mids) {
+    public Integer saveMenu(Long rid,List<String> mids) {
         Integer counter = 0;
-        for(Long mid:mids){
-            counter+=menuMapper.updateMenuStatus(rid,mid);
+        for(String mid:mids){
+            counter+=menuMapper.updateMenuStatus(rid,Long.valueOf(mid));
         }
         return counter;
     }

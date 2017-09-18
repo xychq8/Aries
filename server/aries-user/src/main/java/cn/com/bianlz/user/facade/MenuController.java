@@ -58,7 +58,7 @@ public class MenuController {
                 id = Long.valueOf(param.get("id").toString());
             }catch (Exception ex){}
         }
-        List<Long> menuIds = (List)param.get("menus");
+        List<String> menuIds = (List)param.get("menus");
         if(id==null||menuIds==null){
             result.setCode(UserProtocolCode.PARAM_ERROR.getCode());
             result.setMessage(UserProtocolCode.PARAM_ERROR.getMessage());
