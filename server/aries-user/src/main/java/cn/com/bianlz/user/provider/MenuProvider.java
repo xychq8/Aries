@@ -12,9 +12,9 @@ public class MenuProvider {
         sb.append(" select b.* from menu_role a ,menu b ");
         sb.append(" where a.menu_id = b.id ");
         if(id!=null){
-            sb.append(" and a.id = ").append(id);
+            sb.append(" and a.role_id = ").append(id);
         }else{
-            sb.append(" and a.id = -1 ");
+            sb.append(" and a.role_id = -100 ");
         }
         if(level!=null&&level>0){
             sb.append(" and b.level=").append(level);

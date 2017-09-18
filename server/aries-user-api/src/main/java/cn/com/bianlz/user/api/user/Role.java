@@ -10,7 +10,7 @@ public class Role {
     private Long id;
     private String name;
     private Long parentId;
-    private Date createDate;
+    private String createDate;
     private Integer status;
 
     public Long getId() {
@@ -37,11 +37,11 @@ public class Role {
         this.parentId = parentId;
     }
 
-    public Date getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 
