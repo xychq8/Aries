@@ -52,7 +52,12 @@ public class MenuController {
         Result<Integer> result = new Result<Integer>();
         result.setCode(UserProtocolCode.SUCCESS.getCode());
         result.setMessage(UserProtocolCode.SUCCESS.getMessage());
-        Long id = (Long)param.get("id");
+        Long id = null;
+        if(param.get("id")!=null){
+            try {
+                id = Long.valueOf(param.get("id").toString());
+            }catch (Exception ex){}
+        }
         List<Long> menuIds = (List)param.get("menus");
         if(id==null||menuIds==null){
             result.setCode(UserProtocolCode.PARAM_ERROR.getCode());
