@@ -37,6 +37,6 @@ public interface UserServiceClient {
     public Result<List<Role>> getSubRole(@PathVariable("roleId") Long id);
 
 
-    @RequestMapping(value = "/user/r/{rid}/ur/{uRid}",method = RequestMethod.GET)
-    public Result<Map<String,Object>> getUserMenu(@PathVariable("rid")Long rid,@PathVariable("uRid")Long uRid);
+    @RequestMapping(value = "/user/menu/get",method = RequestMethod.GET)
+    public Result<Map<String,Object>> getUserMenu(@RequestParam("rid")Long rid,@RequestParam("uRid")Long uRid);
 }

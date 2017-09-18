@@ -39,8 +39,8 @@ public class MenuController {
         result.setData(menus);
         return result;
     }
-    @GetMapping("/r/{rid}/ur/{uRid}")
-    public Result<Map<String, Object>> getUserMenu(@PathVariable("rid")Long rid,@PathVariable("uRid")Long uRid){
+    @GetMapping("/get")
+    public Result<Map<String, Object>> getUserMenu(@RequestParam("rid")Long rid,@RequestParam("uRid")Long uRid){
         Result<Map<String, Object>> result = new Result<Map<String, Object>>();
         result.setCode(UserProtocolCode.SUCCESS.getCode());
         result.setMessage(UserProtocolCode.SUCCESS.getMessage());

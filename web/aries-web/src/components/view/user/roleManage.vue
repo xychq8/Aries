@@ -2,7 +2,7 @@
   	<!--main-container-part-->
 	<div class="container-fluid">
 		<!-- tree -->
-		<el-dialog title="修改密码" :visible.sync="dialogTableVisible" >
+		<el-dialog title="菜单" :visible.sync="dialogTableVisible" >
 	      	<el-tree
 			  :data="treeData"
 			  show-checkbox
@@ -35,7 +35,7 @@
 	              label="操作"
 	              width="100">
 	              <template scope="scope">
-	                <el-button type="text" size="small @click.native.prevent="handleMenuDetail(scope.row.id)" >查看菜单</el-button>
+	                <el-button type="text" size="small" @click.native.prevent="handleMenuDetail(scope.row.id)" >查看菜单</el-button>
 	              </template>
 	            </el-table-column>
 	          </el-table>
@@ -60,7 +60,12 @@ export default {
         tableData: [],
         treeData:[],
         checkData:[],
-        dLength:0
+        dLength:0,
+        dialogTableVisible:false,
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
       };
     },
     mounted:function(){
@@ -74,13 +79,20 @@ export default {
 	              this.dLength = resp.data.length
 	            }else{
 	                if(resp.message){
-	                    alert(resp.message)  
+	                    alert(resp.message)   
 	                }
 	            }
       		});
     	},
     	handleMenuDetail:function(id){
-    		alert(id);
+    		this.dialogTableVisible = true;
+    		getUserMenu(id).then(resp=>{
+    			if(resp.code == 'W10000'&&resp.data){
+    				console.log(JSON.stringify(resp))
+    			}else{
+
+    			}
+    		})
     	}
     }
  }
