@@ -9,11 +9,12 @@
 			  node-key="id"
 			  :default-expanded-keys="[]"
 			  :default-checked-keys="checkData"
+			  ref="tree"
 			  :props="defaultProps">
 			</el-tree>
 	      <div slot="footer" class="dialog-footer">
 	        <el-button @click="dialogTableVisible = false">取 消</el-button>
-	        <el-button type="primary" @click="dialogTableVisible = false">确 定</el-button>
+	        <el-button type="primary" @click="saveMenu">确 定</el-button>
 	      </div>
 	    </el-dialog>
 	    <hr>
@@ -63,8 +64,8 @@ export default {
         dLength:0,
         dialogTableVisible:false,
         defaultProps: {
-          children: 'children',
-          label: 'label'
+          children: 'subMenu',
+          label: 'name'
         }
       };
     },
@@ -88,11 +89,15 @@ export default {
     		this.dialogTableVisible = true;
     		getUserMenu(id).then(resp=>{
     			if(resp.code == 'W10000'&&resp.data){
-    				console.log(JSON.stringify(resp))
+    				this.treeData = resp.data.menus;
+    				this.checkData = resp.data.check;
     			}else{
 
     			}
     		})
+    	},
+    	saveMenu:function(){
+    		console.log(this.$refs.tree.getCheckedKeys());
     	}
     }
  }

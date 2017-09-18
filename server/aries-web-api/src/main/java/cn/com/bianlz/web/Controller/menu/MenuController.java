@@ -5,9 +5,7 @@ import cn.com.bianlz.web.client.UserServiceClient;
 import cn.com.bianlz.web.common.Authorizition;
 import cn.com.bianlz.web.common.WebApiProtocolCode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import cn.com.bianlz.user.api.user.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +44,15 @@ public class MenuController {
             return result;
         }
         result.setData(userServiceClient.getUserMenu(user.getRoleId(),uRid).getData());
+        return result;
+    }
+
+    @PostMapping("/menu/menuRole")
+    public Result<Integer> saveMenuRole(@RequestBody Map<String,Object> param){
+        Result<Integer> result = new Result();
+        result.setCode(WebApiProtocolCode.SUCCESS.getCode());
+        result.setMessage(WebApiProtocolCode.SUCCESS.getMessage());
+        result.setData(userServiceClient.saveMenuRole(param).getData());
         return result;
     }
 }

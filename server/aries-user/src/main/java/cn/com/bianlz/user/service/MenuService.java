@@ -12,4 +12,5 @@ import java.util.Map;
 public interface MenuService {
     List<Menu> getByRoleId(Long roleId);
     Map<String,Object> getUserMenu(Long rid, Long uRid);
+    Integer saveMenu(Long rid,List<Long> mids);
 }

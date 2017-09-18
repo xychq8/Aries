@@ -23,12 +23,30 @@ public class MenuProvider {
         return sb.toString();
     }
 
-    public String getSubMenu(Long parentId,Integer level){
+    public String getSubMenu(Long parentId,Long roleId,Integer level){
         StringBuffer sb = new StringBuffer();
-        sb.append(" select * from menu where ");
+        sb.append(" select * from menu a where ");
         sb.append(" parent_id = ").append(parentId);
         sb.append(" and level = ").append(level);
         sb.append(" and status = ").append(Status.VALID.getCode());
+        sb.append(" and exists (select 1 from menu_role b where a.id=b.menu_id ");
+        sb.append(" and b.role_id=").append(roleId).append(")");
+        System.out.println(sb.toString());
+        return sb.toString();
+    }
+
+    public String saveMenuRole(Long rid,Long menuId){
+        StringBuilder sb = new StringBuilder();
+        sb.append(" insert into menu_role (menu_id,role_id) values");
+        sb.append(" ( ").append(rid).append(",").append(menuId).append(")");
+        return sb.toString();
+    }
+
+    public String updateMenuStatus(Long rid,Long mid){
+        StringBuilder sb = new StringBuilder();
+        sb.append("update menu_role set status = ").append(Status.VALID.getCode());
+        sb.append(" where role_id=").append(rid);
+        sb.append(" and menu_id=").append(mid);
         return sb.toString();
     }
 }

@@ -39,4 +39,7 @@ public interface UserServiceClient {
 
     @RequestMapping(value = "/user/menu/get",method = RequestMethod.GET)
     public Result<Map<String,Object>> getUserMenu(@RequestParam("rid")Long rid,@RequestParam("uRid")Long uRid);
+
+    @RequestMapping(value = "/user/menu/menuRole",method = RequestMethod.POST)
+    public Result<Integer> saveMenuRole(@RequestBody Map<String,Object> param);
 }

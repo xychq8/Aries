@@ -35,8 +35,8 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public Result updateUser(@RequestBody User user){
-        Result result = new Result();
+    public Result<Integer> updateUser(@RequestBody User user){
+        Result<Integer> result = new Result();
         result.setCode(UserProtocolCode.SUCCESS.getCode());
         result.setMessage(UserProtocolCode.SUCCESS.getMessage());
         Integer ref = userService.updateUser(user);
@@ -44,6 +44,7 @@ public class UserController {
             result.setCode(UserProtocolCode.UPDATE_FAIL.getCode());
             result.setMessage(UserProtocolCode.UPDATE_FAIL.getMessage());
         }
+        result.setData(ref);
         return result;
     }
 }

@@ -6,6 +6,7 @@ import cn.com.bianlz.user.provider.RoleProvider;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.UpdateProvider;
 
 import java.util.List;
 
@@ -38,5 +39,8 @@ public interface MenuMapper {
             @Result(property = "status",column = "status"),
             @Result(property = "createDate",column = "create_date")
     })
-    List<Menu> getSubMenu(Long parentId,Integer level);
+    List<Menu> getSubMenu(Long parentId,Long roleId,Integer level);
+
+    @UpdateProvider(type = MenuProvider.class,method = "updateMenuStatus")
+    Integer updateMenuStatus(Long rid,Long id);
 }

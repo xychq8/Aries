@@ -47,4 +47,22 @@ public class MenuController {
         result.setData(menuService.getUserMenu(rid, uRid));
         return result;
     }
+    @PostMapping("/menuRole")
+    public Result<Integer> saveMenuRole(@RequestBody Map<String,Object> param){
+        Result<Integer> result = new Result<Integer>();
+        result.setCode(UserProtocolCode.SUCCESS.getCode());
+        result.setMessage(UserProtocolCode.SUCCESS.getMessage());
+        Long id = (Long)param.get("id");
+        List<Long> menuIds = (List)param.get("menus");
+        if(id==null||menuIds==null){
+            result.setCode(UserProtocolCode.PARAM_ERROR.getCode());
+            result.setMessage(UserProtocolCode.PARAM_ERROR.getMessage());
+            return result;
+        }
+        Integer ref = menuService.saveMenu(id, menuIds);
+        result.setData(ref);
+        return result;
+    }
+
+
 }
