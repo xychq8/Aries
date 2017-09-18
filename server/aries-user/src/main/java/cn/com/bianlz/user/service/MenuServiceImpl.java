@@ -45,7 +45,7 @@ public class MenuServiceImpl implements MenuService {
         Integer counter = 0;
         String inCase="",notInCase="";
         for(Object obj:mids){
-            inCase = "," + inCase;
+            inCase = inCase+","+obj;
         }
         notInCase = inCase = inCase.replaceFirst(",","");
         counter+=menuMapper.updateMenuStatus(rid,inCase,null, Status.VALID.getCode());
