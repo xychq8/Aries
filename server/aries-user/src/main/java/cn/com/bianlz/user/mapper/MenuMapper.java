@@ -42,5 +42,5 @@ public interface MenuMapper {
     List<Menu> getSubMenu(Long parentId,Long roleId,Integer level);
 
     @UpdateProvider(type = MenuProvider.class,method = "updateMenuStatus")
-    Integer updateMenuStatus(Long rid,Long id);
+    Integer updateMenuStatus(Long rid,String id);
 }

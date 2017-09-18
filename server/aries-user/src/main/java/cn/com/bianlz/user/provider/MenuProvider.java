@@ -43,7 +43,7 @@ public class MenuProvider {
         return sb.toString();
     }
 
-    public String updateMenuStatus(Long rid,Long mid){
+    public String updateMenuStatus(Long rid,String mid){
         StringBuilder sb = new StringBuilder();
         sb.append("update menu_role set status = ").append(Status.VALID.getCode());
         sb.append(" where role_id=").append(rid);
