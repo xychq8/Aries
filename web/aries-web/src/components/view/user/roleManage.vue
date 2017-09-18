@@ -14,7 +14,7 @@
 			</el-tree>
 	      <div slot="footer" class="dialog-footer">
 	        <el-button @click="dialogTableVisible = false">取 消</el-button>
-	        <el-button type="primary" @click="saveMenu">确 定</el-button>
+	        <el-button type="primary" @click="saveMenuRole">确 定</el-button>
 	      </div>
 	    </el-dialog>
 	    <hr>
@@ -53,7 +53,7 @@
 	</div>
 </template>
 <script>
-import {getRoles,getUserMenu} from "@/api/api";
+import {getRoles,getUserMenu,saveMenuRole} from "@/api/api";
 export default {
     name: 'roleManager',
     data () {
@@ -96,8 +96,11 @@ export default {
     			}
     		})
     	},
-    	saveMenu:function(){
-    		console.log(this.$refs.tree.getCheckedKeys());
+    	saveMenuRole:function(){
+    		var param = {'menus':this.$refs.tree.getCheckedKeys()};
+    		saveMenuRole(param).then(resp=>{
+    			alert(resp)
+    		})
     	}
     }
  }

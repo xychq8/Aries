@@ -48,10 +48,12 @@ public class MenuController {
     }
 
     @PostMapping("/menu/menuRole")
-    public Result<Integer> saveMenuRole(@RequestBody Map<String,Object> param){
+    public Result<Integer> saveMenuRole(HttpServletRequest request,@RequestBody Map<String,Object> param){
         Result<Integer> result = new Result();
         result.setCode(WebApiProtocolCode.SUCCESS.getCode());
         result.setMessage(WebApiProtocolCode.SUCCESS.getMessage());
+        User user = (User)request.getSession().getAttribute("user");
+        param.put("id",user.getId());
         result.setData(userServiceClient.saveMenuRole(param).getData());
         return result;
     }
