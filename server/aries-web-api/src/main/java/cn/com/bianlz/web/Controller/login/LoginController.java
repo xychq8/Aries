@@ -2,6 +2,7 @@ package cn.com.bianlz.web.controller.login;
 
 import cn.com.bianlz.common.utils.MD5Utils;
 import cn.com.bianlz.common.vo.Result;
+import cn.com.bianlz.user.api.protocol.UserProtocolCode;
 import cn.com.bianlz.web.client.UserServiceClient;
 import cn.com.bianlz.web.common.WebApiProtocolCode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,18 @@ public class LoginController {
         Result result = new Result();
         result.setCode(WebApiProtocolCode.SUCCESS.getCode());
         result.setMessage(WebApiProtocolCode.SUCCESS.getMessage());
-        result.setData(userServiceClient.login(param).getData());
+        Result userResult = null;
+        try {
+            userResult = userServiceClient.login(param);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        if(userResult==null){
+            result.setCode(WebApiProtocolCode.FAIL.getCode());
+            result.setMessage(WebApiProtocolCode.FAIL.getMessage());
+        }else {
+            result = userResult;
+        }
         return result;
     }
 }

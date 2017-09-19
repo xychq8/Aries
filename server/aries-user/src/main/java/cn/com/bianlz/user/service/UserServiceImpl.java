@@ -3,7 +3,7 @@ package cn.com.bianlz.user.service;
 import cn.com.bianlz.user.api.user.User;
 import cn.com.bianlz.common.utils.MD5Utils;
 import cn.com.bianlz.common.vo.Result;
-import cn.com.bianlz.user.common.UserProtocolCode;
+import cn.com.bianlz.user.api.protocol.UserProtocolCode;
 import cn.com.bianlz.user.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

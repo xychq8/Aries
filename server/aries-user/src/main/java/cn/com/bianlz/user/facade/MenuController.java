@@ -5,7 +5,7 @@ import cn.com.bianlz.common.vo.Result;
 import cn.com.bianlz.user.api.menu.Menu;
 import cn.com.bianlz.user.api.user.User;
 import cn.com.bianlz.user.common.RedisKeys;
-import cn.com.bianlz.user.common.UserProtocolCode;
+import cn.com.bianlz.user.api.protocol.UserProtocolCode;
 import cn.com.bianlz.user.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

@@ -1,13 +1,14 @@
+
 <template>
   <!--main-container-part-->
   <div class="container-fluid">
     <el-dialog title="修改密码" :visible.sync="dialogTableVisible" >
       <el-form >
         <el-form-item label="新密码" :label-width="formLabelWidth">
-          <el-input auto-complete="off" size="large" :rows="1" type="password" v-model="password" ></el-input>
+          <el-input auto-complete="off" size="large" :rows="2" type="password" v-model="password" ></el-input>
         </el-form-item>
         <el-form-item label="确认密码" :label-width="formLabelWidth">
-          <el-input auto-complete="off" size="large" :rows="1" type="password" ></el-input>
+          <el-input auto-complete="off" size="large" :rows="2" type="password" v-model="passwordConfirm" ></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -59,9 +60,10 @@
         tableData: [],
         dLength:0,
         dialogTableVisible:false,
-        formLabelWidth:'150px',
+        formLabelWidth:'100px',
         currentId:'',
-        password:''
+        password:'',
+        passwordConfirm:''
       };
     },
     mounted:function(){
@@ -78,25 +80,29 @@
     },
     methods:{
       handleModify:function(id){
+        this.password = null;
+        this.passwordConfirm = null;
         this.dialogTableVisible = true
         this.currentId = id;
       },
       updatePassword:function(){
-        this.dialogTableVisible = false;
         var param = {'password':this.password,'id':this.currentId}        
         updateUser(param).then(resp => {
             if(resp&&resp.code&&resp.code=='W10000'){
-                
+              this.$message({
+                  showClose: true,
+                  message: resp.message,
+                  type: 'success'
+              });
+              this.dialogTableVisible = false;
             }else{
               this.$message({
                   showClose: true,
                   message: resp.message,
                   type: 'error'
-                });
+              });
             }
         });  
-
-
       }
     }
   }

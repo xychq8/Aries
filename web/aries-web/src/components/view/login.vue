@@ -52,9 +52,25 @@ export default {
   },
   methods:{
     handleLogin:function(){
+        if(!this.user.username){
+            this.$message({
+                      showClose: true,
+                      message: '请填写用户名称!',
+                      type: 'error'
+            });
+            return;
+        }
+        if(!this.user.password){
+            this.$message({
+                      showClose: true,
+                      message: '请填写密码!',
+                      type: 'error'
+            });
+            return;
+        }
         var loginParams = { username : this.user.username, password : this.user.password};
         login(loginParams).then(resp => {
-            if(resp.code == 'W10000'){
+            if(resp&&resp.code&&resp.code == 'W10000'){
                 this.$store.commit(types.LOGIN,resp.data.token)
                 this.$router.push({
                     path: 'dashboard'
@@ -86,11 +102,9 @@ hr{ border-top-color:#dadada;}
 .fl { float:left}
 .fr {float:right}
 .label-important, .badge-important{ background:#f74d4d;}
-
 .bg_lg{ background:#28b779;}
 .bg_ly{ background:#ffb848;}
 .bg_lo{ background:#da542e;}
-
 .login {
     height: 100%;
     background-color:#2E363F;

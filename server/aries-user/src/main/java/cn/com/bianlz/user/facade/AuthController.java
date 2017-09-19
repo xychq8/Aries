@@ -3,7 +3,7 @@ package cn.com.bianlz.user.facade;
 import cn.com.bianlz.common.utils.GsonUtils;
 import cn.com.bianlz.user.api.user.User;
 import cn.com.bianlz.user.common.RedisKeys;
-import cn.com.bianlz.user.common.UserProtocolCode;
+import cn.com.bianlz.user.api.protocol.UserProtocolCode;
 import cn.com.bianlz.user.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import cn.com.bianlz.common.vo.Result;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by bianlanzhou on 17/9/1.
@@ -37,6 +38,7 @@ public class AuthController {
         if(userObj == null ){
             return result;
         }
+        template.opsForValue().set(RedisKeys.TOKEN+token,userObj.toString(),30, TimeUnit.MINUTES);
         User user = GsonUtils.getInstances().fromJson(User.class,userObj.toString());
         result.setData(user);
         return result;

@@ -1,4 +1,4 @@
-package cn.com.bianlz.user.common;
+package cn.com.bianlz.user.api.protocol;
 
 /**
  * Created by bianlanzhou on 17/9/1.
@@ -12,7 +12,7 @@ public enum UserProtocolCode {
     PARAM_ERROR("U10004","参数错误!");
     private String code;
     private String message;
-    UserProtocolCode(String code,String message){
+    UserProtocolCode(String code, String message){
         this.code = code;
         this.message = message;
     }
