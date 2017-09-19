@@ -8,7 +8,7 @@ public enum WebApiProtocolCode {
     SUCCESS("W10000","操作成功!"),
     AUTH_FAIL("W10001","你没有权限操作!"),
     REDIRECT("W10002","跳转!"),
-    FAIL("W10003","失败!");
+    FAIL("W10003","操作失败!");
     private String code;
     private String message;
     WebApiProtocolCode(String code,String message){
