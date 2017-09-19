@@ -5,6 +5,8 @@ import cn.com.bianlz.user.api.menu.Menu;
 import cn.com.bianlz.user.mapper.MenuMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -39,7 +41,7 @@ public class MenuServiceImpl implements MenuService {
         data.put("check",checkSet);
         return data;
     }
-
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Integer saveMenu(Long rid,List<Object> mids) {
         Integer counter = 0;
@@ -49,7 +51,7 @@ public class MenuServiceImpl implements MenuService {
         }
         notInCase = inCase = inCase.replaceFirst(",","");
         counter+=menuMapper.updateMenuStatus(rid,inCase,null, Status.VALID.getCode());
-        counter+=menuMapper.updateMenuStatus(rid,null,notInCase,Status.VALID.getCode());
+        counter+=menuMapper.updateMenuStatus(rid, null, notInCase, Status.INVALID.getCode());
         return counter;
     }
 
