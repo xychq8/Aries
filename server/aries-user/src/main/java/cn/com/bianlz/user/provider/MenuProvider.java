@@ -56,7 +56,6 @@ public class MenuProvider {
         if(null==inCase&&null==notInCase){
             sb.append(" and menu_id =-100");
         }
-        System.out.println("sql:"+sb.toString());
         return sb.toString();
     }
 }
