@@ -45,7 +45,7 @@ public class MenuProvider {
 
     public String updateMenuStatus(Long rid,String inCase,String notInCase,Integer status){
         StringBuilder sb = new StringBuilder();
-        sb.append("update menu_role set status = ").append(Status.VALID.getCode());
+        sb.append("update menu_role set status = ").append(status);
         sb.append(" where role_id=").append(rid);
         if(null!=inCase){
             sb.append(" and menu_id in (").append(inCase).append(")");
