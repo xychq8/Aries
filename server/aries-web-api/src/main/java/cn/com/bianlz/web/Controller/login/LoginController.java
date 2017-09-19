@@ -25,8 +25,6 @@ public class LoginController {
     @PostMapping(value="/login")
     public Result login(@RequestBody Map<String,String> param){
         Result result = new Result();
-        result.setCode(WebApiProtocolCode.SUCCESS.getCode());
-        result.setMessage(WebApiProtocolCode.SUCCESS.getMessage());
         Result userResult = null;
         try {
             userResult = userServiceClient.login(param);
@@ -36,8 +34,13 @@ public class LoginController {
         if(userResult==null){
             result.setCode(WebApiProtocolCode.FAIL.getCode());
             result.setMessage(WebApiProtocolCode.FAIL.getMessage());
-        }else {
-            result = userResult;
+        }
+        result = userResult;
+        if(result.getCode().equals(UserProtocolCode.SUCCESS.getCode())){
+            result.setCode(WebApiProtocolCode.SUCCESS.getCode());
+            result.setMessage(WebApiProtocolCode.SUCCESS.getMessage());
+        }else{
+            result.setCode(WebApiProtocolCode.FAIL.getCode());
         }
         return result;
     }
