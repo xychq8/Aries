@@ -3,7 +3,7 @@
   <div id="content">
     <!--breadcrumbs-->
     <div id="content-header">
-      <div id="breadcrumb"> <a href="#" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
+      <div id="breadcrumb"> <a v-on:click="backToHome" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
     </div>
     <!--End-breadcrumbs-->
     <router-view></router-view>
@@ -18,6 +18,11 @@ export default {
     return {
       msg:''
     };
+  },
+  methods:{
+    backToHome:function(){
+      this.$router.push({path: "/dashboard"});
+    }
   }
 }
 </script>

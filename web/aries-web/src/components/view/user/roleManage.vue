@@ -22,9 +22,9 @@
 	      <div class="span12">
 	        <div class="widget-box">
 	          <el-table :data="tableData" border style="width: 100%">
-	            <el-table-column label="序号" width="180">
+	            <el-table-column label="序号" width="180" >
 	                <template scope="scope">
-	                    <a href="javascript:;">{{scope.row.id}}</a>
+	                    {{scope.$index+1}}
 	                </template>
 	            </el-table-column>
 	            <el-table-column prop="name" label="名称" width="180">
@@ -78,10 +78,16 @@ export default {
     		getRoles().then(resp => {
 	            if(resp.code == 'W10000'&&resp.data){
 	              this.tableData = resp.data;
-	              this.dLength = resp.data.length
+	              if(resp.data){
+	              	this.dLength = resp.data.length
+	              }
 	            }else{
 	                if(resp.message){
-	                    alert(resp.message)   
+	                    this.$message({
+	                  		showClose: true,
+	                  		message: resp.message,
+	                  		type: 'error'
+	              		});  
 	                }
 	            }
       		});
