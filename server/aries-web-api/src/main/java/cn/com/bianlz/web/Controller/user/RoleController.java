@@ -5,6 +5,7 @@ import cn.com.bianlz.user.api.user.Role;
 import cn.com.bianlz.user.api.user.User;
 import cn.com.bianlz.web.client.UserServiceClient;
 import cn.com.bianlz.web.common.Authorizition;
+import cn.com.bianlz.web.common.ResultHelper;
 import cn.com.bianlz.web.common.WebApiProtocolCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,10 +28,12 @@ public class RoleController {
     @GetMapping("/sub")
     public Result getRoles(HttpServletRequest request){
         User user = (User)request.getSession().getAttribute("user");
-        Result<List<Role>> result = new Result<List<Role>>();
-        result.setCode(WebApiProtocolCode.SUCCESS.getCode());
-        result.setMessage(WebApiProtocolCode.SUCCESS.getMessage());
-        result.setData(userServiceClient.getSubRole(user.getRoleId()).getData());
-        return result;
+        Long roleId = -100l;
+        if(user!=null&&user.getRoleId()!=null){
+            roleId = user.getRoleId();
+        }
+        Result<List<Role>> userResult = new Result<List<Role>>();
+        userResult = userServiceClient.getSubRole(roleId);
+        return ResultHelper.getUserResult(userResult);
     }
 }

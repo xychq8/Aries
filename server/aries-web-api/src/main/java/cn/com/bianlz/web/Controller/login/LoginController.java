@@ -4,6 +4,7 @@ import cn.com.bianlz.common.utils.MD5Utils;
 import cn.com.bianlz.common.vo.Result;
 import cn.com.bianlz.user.api.protocol.UserProtocolCode;
 import cn.com.bianlz.web.client.UserServiceClient;
+import cn.com.bianlz.web.common.ResultHelper;
 import cn.com.bianlz.web.common.WebApiProtocolCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,24 +25,12 @@ public class LoginController {
     private UserServiceClient userServiceClient;
     @PostMapping(value="/login")
     public Result login(@RequestBody Map<String,String> param){
-        Result result = new Result();
         Result userResult = null;
         try {
             userResult = userServiceClient.login(param);
         }catch (Exception ex){
             ex.printStackTrace();
         }
-        if(userResult==null){
-            result.setCode(WebApiProtocolCode.FAIL.getCode());
-            result.setMessage(WebApiProtocolCode.FAIL.getMessage());
-        }
-        result = userResult;
-        if(result.getCode().equals(UserProtocolCode.SUCCESS.getCode())){
-            result.setCode(WebApiProtocolCode.SUCCESS.getCode());
-            result.setMessage(WebApiProtocolCode.SUCCESS.getMessage());
-        }else{
-            result.setCode(WebApiProtocolCode.FAIL.getCode());
-        }
-        return result;
+        return ResultHelper.getUserResult(userResult);
     }
 }
