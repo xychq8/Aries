@@ -101,7 +101,20 @@ export default {
     	saveMenuRole:function(){
     		var param = {'menus':this.$refs.tree.getCheckedKeys(),'id':this.currentRoleId};
     		saveMenuRole(param).then(resp=>{
-    			alert(resp)
+    			if(resp.code == 'W10000'&&resp.data){
+    				this.$message({
+	                   	showClose: true,
+	                   	message: resp.message,
+	                  	type: 'success'
+	              	});
+	              	this.dialogTableVisible=false;
+    			}else{
+    				this.$message({
+	                  	showClose: true,
+	                  	message: resp.message,
+	                  	type: 'error'
+	              	});
+    			}
     		})
     	}
     }
