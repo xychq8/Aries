@@ -20,6 +20,7 @@ public class MenuProvider {
             sb.append(" and b.level=").append(level);
         }
         sb.append(" and b.status = a.status = ").append(Status.VALID.getCode());
+        System.out.println("sql"+sb.toString());
         return sb.toString();
     }
 
@@ -32,7 +33,7 @@ public class MenuProvider {
         sb.append(" and exists (select 1 from menu_role b where a.id=b.menu_id ");
         sb.append(" and b.status=").append(Status.VALID.getCode());
         sb.append(" and b.role_id=").append(roleId).append(")");
-
+        System.out.println("sql"+sb.toString());
         return sb.toString();
     }
 
@@ -40,6 +41,7 @@ public class MenuProvider {
         StringBuilder sb = new StringBuilder();
         sb.append(" insert into menu_role (menu_id,role_id) values");
         sb.append(" ( ").append(rid).append(",").append(menuId).append(")");
+        System.out.println("sql"+sb.toString());
         return sb.toString();
     }
 
@@ -56,6 +58,7 @@ public class MenuProvider {
         if(null==inCase&&null==notInCase){
             sb.append(" and menu_id =-100");
         }
+        System.out.println("sql"+sb.toString());
         return sb.toString();
     }
 }
