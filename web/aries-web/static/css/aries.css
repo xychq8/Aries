@@ -2,7 +2,13 @@
 	outline:none !important;
 	-moz-outline: none !important;
 }
-html, body{height:100%}
+
+html, body {width: 100%;height: 100%;margin:0px;}
+body {
+	overflow-x: hidden;
+	margin-top: -10px; font-family: 'Open Sans', sans-serif; font-size:12px; color:#666;
+	background-color:#2E363F;    padding: 0;    margin-top:5%;
+}
 /* Main */
 
 /*Bootstrap-overlay*/
@@ -15,6 +21,7 @@ a{color:#666;}
 a:hover, a:focus {
 	text-decoration: none; color:#28b779;
 }
+
 .dropdown-menu .divider{ margin:4px 0px;}
 .dropdown-menu{ min-width:180px;}
 .dropdown-menu > li > a{ padding:3px 10px; color:#666; font-size:12px;}
@@ -45,27 +52,39 @@ hr{ border-top-color:#dadada;}
 .bg_lv{ background:#603bbc;}
 .bg_lh{ background:#b6b3b3;}
 
+
 /* Header */
 #header {
-	height: 79px;
+	height: 77px;
 	position: relative;
 	width: 100%;
 	z-index: -9;
-	background-color: #1f262d;
-	margin-top:-65px;
 }
 #header h1 {
 	background: url("/static/img/logo2.png") no-repeat scroll 0 0 transparent;
-	height: 41px;
-	left: 10px;
+	height: 31px;
+	left: 20px;
 	line-height: 600px;
 	overflow: hidden;
 	position: relative;
-	top: 31px;
-	width: 191px;
+	top: 26px;
+	width: 181px;
 }
 #header h1 a {
 	display: block;
+}
+#header {
+	background-color: #1f262d;
+   margin-top:10px;
+}
+
+
+/* Search input */
+#search input[type=text], #search button {
+	background-color: #28b779;
+}
+#search input[type=text]:focus {
+	color: #777777;
 }
 /* Search input */
 #search {
@@ -78,6 +97,7 @@ hr{ border-top-color:#dadada;}
 	padding: 4px 10px 5px;
 	border: 0;
 	width: 100px;
+	background-color: #47515b; color: #fff; 
 }
 #search button {
 	border: 0;
@@ -91,24 +111,10 @@ hr{ border-top-color:#dadada;}
 #search button:hover i, #search button:active i {
 	opacity: 1;
 }
-#search input[type=text], #search button {
-	background-color: #28b779;
-}
-#search input[type=text]:focus {
-	color: #777777;
-}
-#search input[type=text], #search button {
-	background-color: #28b779;
-}
-#search input[type=text]:focus {
-	color: #777777;
-}
-#search input[type=text] {
-	background-color: #47515b; color: #fff; 
-}
 #search input[type=text]:focus {
 	color: #2e363f; color: #fff; box-shadow:none;
 }
+
 /* Top user navigation */
 #user-nav {
 	position: absolute;
