@@ -1,4 +1,4 @@
-package cn.com.bianlz.delivery.api.vo;
+package cn.com.bianlz.data.delivery.api.vo;
 
 /**
  * Created by bjbianlanzhou on 2017/10/17.
