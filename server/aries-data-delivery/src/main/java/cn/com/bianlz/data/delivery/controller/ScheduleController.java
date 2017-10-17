@@ -26,13 +26,13 @@ import java.util.Map;
 public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService;
-    @GetMapping(value={"/schedule/{pageNum}/{count}/{sid}","/schedule/{pageNum}/{count}"})
-    public Result get(@PathVariable("pageNum") Integer pageNum,@PathVariable("count") Integer count,@PathVariable(value = "sid",required = false) Long sid){
+    @GetMapping(value={"/schedule/{pageNum}/{count}/{uuid}","/schedule/{pageNum}/{count}"})
+    public Result get(@PathVariable("pageNum") Integer pageNum,@PathVariable("count") Integer count,@PathVariable(value = "uuid",required = false) String uuid){
         Result<Map<String,Object>> result = new Result<Map<String, Object>>();
         Map<String,Object> rtn = new HashMap<String, Object>();
         Schedule schedule = new Schedule();
-        if(sid!=null){
-            schedule.setSid(sid);
+        if(uuid!=null){
+            schedule.setUuid(uuid);
         }
         Page page = PageHelper.offsetPage(((pageNum-1)*count), count,true);
         List<Schedule> data = scheduleService.get(schedule);

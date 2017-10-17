@@ -6,4 +6,5 @@ package cn.com.bianlz.web.common;
  */
 public class ServiceHelper {
     public static final String USER_SERVICE = "USER-SERVICE";
+    public static final String DATA_DELIVERY_SERVICE = "DATA-DELIVERY-SERVICE";
 }
