@@ -61,6 +61,7 @@ export default {
                   submenu.fadeIn(250);
                 }
                 submenus_parents.removeClass('open');   
+                submenus_parents.removeClass('active');   
                 li.addClass('open');  
                 li.addClass('active');  
               }
