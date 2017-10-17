@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bianlz.data.delivery.dao.ScheduleDao">
+    <resultMap id="scheduleMap" type="cn.com.bianlz.data.delivery.api.vo.Schedule">
+        <id column="s_id" jdbcType="BIGINT" property="sid" />
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="uuid" jdbcType="BIGINT" property="uuid" />
+        <result column="cast_speed" jdbcType="INTEGER" property="castSpeed" />
+        <result column="cpm" jdbcType="INTEGER" property="cpm" />
+        <result column="repair" jdbcType="INTEGER" property="repair" />
+        <result column="frequence" jdbcType="VARCHAR" property="frequence" />
+        <result column="hours" jdbcType="VARCHAR" property="hours" />
+        <result column="order_type" jdbcType="VARCHAR" property="orderType" />
+        <result column="idea_type" jdbcType="VARCHAR" property="ideaType" typeHandler="cn.com.bianlz.data.delivery.handler.ScheduleEnumHandler" />
+    </resultMap>
+    <select id="get" resultMap="scheduleMap" >
+          select * from ad_nadp_schedule where 1
+          <if test="sid!=null and sid>0">
+              and s_id = #{sid,jdbcType=BIGINT}
+          </if>
+          <if test="id!=null and id>0">
+              and id = #{id,jdbcType=BIGINT}
+          </if>
+          <if test="uuid!=null and uuid!=''">
+              and uuid = #{uuid,jdbcType=VARCHAR}
+          </if>
+    </select>
+</mapper>

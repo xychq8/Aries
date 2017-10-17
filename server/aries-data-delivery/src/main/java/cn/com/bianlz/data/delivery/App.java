@@ -11,13 +11,14 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * Created by bianlanzhou on 17/10/17.
  * Description
  */
 @SpringBootApplication
-@MapperScan("cn.com.bianlz.data.delivery")
+@MapperScan("cn.com.bianlz.data.delivery.dao")
 @EnableDiscoveryClient
 @EnableTransactionManagement
 public class App {
@@ -29,4 +30,5 @@ public class App {
     public PlatformTransactionManager txManager(DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
+
 }

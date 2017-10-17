@@ -53,7 +53,7 @@ hr{ border-top-color:#dadada;}
 .bg_lh{ background:#b6b3b3;}
 /* loginBox */
 
-#logo, #loginbox {    width: 32%;    margin-left: auto;    margin-right: auto;    position: relative;}
+#logo, #loginbox {    width: 45%;    margin-left: auto;    margin-right: auto; margin-top: 50px;   position: relative;}
 #logo img {  margin: 0 auto;    display: block;}
 #loginbox { overflow: hidden !important;    text-align: left;    position: relative; }
 #loginbox form{ width:100%; background:#2E363F; position:relative; top:0; left:0; }

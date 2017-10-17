@@ -2,3 +2,14 @@ server/aries-data-delivery-api/.idea/
 server/aries-data-delivery-api/aries-data-delivery-api.iml
 *.jar
 server/aries-data-delivery-api/target/
+server/aries-common/.idea
+server/aries-common/target
+server/aries-data-delivery/target
+server/aries-parent/.idea
+server/aries-schedule/.idea
+server/aries-user-api/.idea
+server/aries-user/.idea
+server/aries-user-api/target
+server/aries-user/target
+server/aries-web-api/.idea
+server/aries-web-api/target
