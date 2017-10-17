@@ -41,7 +41,6 @@
             <groupId>cn.com.bianlz</groupId>
             <artifactId>aries-data-delivery-api</artifactId>
         </dependency>
-
         <!--分页插件-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
@@ -49,4 +48,80 @@
             <version>4.1.0</version>
         </dependency>
     </dependencies>
+    <build>
+        <finalName>aries-data-delivery</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <delimiters>
+                        <delimiter>@</delimiter>
+                    </delimiters>
+                    <useDefaultDelimiters>false</useDefaultDelimiters>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+                <version>1.8.1</version>
+                <configuration>
+                    <repositoryLayout>flat</repositoryLayout>
+                    <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+                    <target>${project.build.directory}</target>
+                    <daemons>
+                        <daemon>
+                            <id>aries-data-delivery</id>
+                            <mainClass>cn.com.bianlz.data.delivery.App</mainClass>
+                            <platforms>
+                                <platform>jsw</platform>
+                            </platforms>
+                            <generatorConfigurations>
+                                <generatorConfiguration>
+                                    <generator>jsw</generator>
+                                    <includes>
+                                        <include>linux-x86-64</include>
+                                        <include>macosx-universal-64</include>
+                                    </includes>
+                                    <configuration>
+                                        <property>
+                                            <name>configuration.directory.in.classpath.first</name>
+                                            <value>etc</value>
+                                        </property>
+                                        <property>
+                                            <name>set.default.REPO_DIR</name>
+                                            <value>lib</value>
+                                        </property>
+                                        <property>
+                                            <name>wrapper.logfile</name>
+                                            <value>logs/wrapper.log</value>
+                                        </property>
+                                    </configuration>
+                                </generatorConfiguration>
+                            </generatorConfigurations>
+                            <jvmSettings>
+                                <initialMemorySize>128M</initialMemorySize>
+                                <maxMemorySize>128M</maxMemorySize>
+
+                                <extraArguments>
+                                    <extraArgument>-server</extraArgument>
+                                    <extraArgument>-Dfile.encoding=utf-8</extraArgument>
+                                </extraArguments>
+                            </jvmSettings>
+                        </daemon>
+                    </daemons>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-jsw-scripts</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>generate-daemons</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
