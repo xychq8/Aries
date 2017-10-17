@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bianlz.dao.ScheduleDao">
+  <resultMap id="BaseResultMap" type="cn.com.bianlz.vo.Schedule">
+    <id column="s_id" jdbcType="BIGINT" property="sId" />
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="uuid" jdbcType="BIGINT" property="uuid" />
+    <result column="cast_speed" jdbcType="INTEGER" property="castSpeed" />
+    <result column="cpm" jdbcType="INTEGER" property="cpm" />
+    <result column="repair" jdbcType="INTEGER" property="repair" />
+    <result column="frequence" jdbcType="VARCHAR" property="frequence" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="third_plat" jdbcType="VARCHAR" property="thirdPlat" />
+    <result column="full_amount" jdbcType="VARCHAR" property="fullAmount" />
+    <result column="hours" jdbcType="VARCHAR" property="hours" />
+    <result column="refresh_round" jdbcType="VARCHAR" property="refreshRound" />
+    <result column="order_type" jdbcType="VARCHAR" property="orderType" />
+    <result column="idea_type" jdbcType="VARCHAR" property="ideaType" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="md5" jdbcType="VARCHAR" property="md5" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    s_id, id, uuid, cast_speed, cpm, repair, frequence, source, third_plat, full_amount,
+    hours, refresh_round, order_type, idea_type, create_date, md5
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ad_nadp_schedule
+    where s_id = #{sId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ad_nadp_schedule
+    where s_id = #{sId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByDatestamp" parameterType="java.lang.String">
+    delete from ad_nadp_schedule
+    where date_stamp = #{dateStamp,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.com.bianlz.vo.Schedule">
+    insert into ad_nadp_schedule (s_id, id, uuid, cast_speed,
+      cpm, repair, frequence,
+      source, third_plat, full_amount,
+      hours, refresh_round, order_type,
+      idea_type, create_date,date_stamp
+      )
+    values (#{sId,jdbcType=BIGINT}, #{id,jdbcType=BIGINT}, #{uuid,jdbcType=BIGINT}, #{castSpeed,jdbcType=INTEGER},
+      #{cpm,jdbcType=INTEGER}, #{repair,jdbcType=INTEGER}, #{frequence,jdbcType=VARCHAR},
+      #{source,jdbcType=VARCHAR}, #{thirdPlat,jdbcType=VARCHAR}, #{fullAmount,jdbcType=VARCHAR},
+      #{hours,jdbcType=VARCHAR}, #{refreshRound,jdbcType=VARCHAR}, #{orderType,jdbcType=VARCHAR},
+      #{ideaType,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},#{dateStamp,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.bianlz.vo.Schedule">
+    insert into ad_nadp_schedule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sId != null">
+        s_id,
+      </if>
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="castSpeed != null">
+        cast_speed,
+      </if>
+      <if test="cpm != null">
+        cpm,
+      </if>
+      <if test="repair != null">
+        repair,
+      </if>
+      <if test="frequence != null">
+        frequence,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="thirdPlat != null">
+        third_plat,
+      </if>
+      <if test="fullAmount != null">
+        full_amount,
+      </if>
+      <if test="hours != null">
+        hours,
+      </if>
+      <if test="refreshRound != null">
+        refresh_round,
+      </if>
+      <if test="orderType != null">
+        order_type,
+      </if>
+      <if test="ideaType != null">
+        idea_type,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sId != null">
+        #{sId,jdbcType=BIGINT},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=BIGINT},
+      </if>
+      <if test="castSpeed != null">
+        #{castSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="cpm != null">
+        #{cpm,jdbcType=INTEGER},
+      </if>
+      <if test="repair != null">
+        #{repair,jdbcType=INTEGER},
+      </if>
+      <if test="frequence != null">
+        #{frequence,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdPlat != null">
+        #{thirdPlat,jdbcType=VARCHAR},
+      </if>
+      <if test="fullAmount != null">
+        #{fullAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="hours != null">
+        #{hours,jdbcType=VARCHAR},
+      </if>
+      <if test="refreshRound != null">
+        #{refreshRound,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null">
+        #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="ideaType != null">
+        #{ideaType,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.bianlz.vo.Schedule">
+    update ad_nadp_schedule
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=BIGINT},
+      </if>
+      <if test="castSpeed != null">
+        cast_speed = #{castSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="cpm != null">
+        cpm = #{cpm,jdbcType=INTEGER},
+      </if>
+      <if test="repair != null">
+        repair = #{repair,jdbcType=INTEGER},
+      </if>
+      <if test="frequence != null">
+        frequence = #{frequence,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdPlat != null">
+        third_plat = #{thirdPlat,jdbcType=VARCHAR},
+      </if>
+      <if test="fullAmount != null">
+        full_amount = #{fullAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="hours != null">
+        hours = #{hours,jdbcType=VARCHAR},
+      </if>
+      <if test="refreshRound != null">
+        refresh_round = #{refreshRound,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null">
+        order_type = #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="ideaType != null">
+        idea_type = #{ideaType,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+
+    </set>
+    where s_id = #{sId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.bianlz.vo.Schedule">
+    update ad_nadp_schedule
+    set id = #{id,jdbcType=BIGINT},
+      uuid = #{uuid,jdbcType=BIGINT},
+      cast_speed = #{castSpeed,jdbcType=INTEGER},
+      cpm = #{cpm,jdbcType=INTEGER},
+      repair = #{repair,jdbcType=INTEGER},
+      frequence = #{frequence,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      third_plat = #{thirdPlat,jdbcType=VARCHAR},
+      full_amount = #{fullAmount,jdbcType=VARCHAR},
+      hours = #{hours,jdbcType=VARCHAR},
+      refresh_round = #{refreshRound,jdbcType=VARCHAR},
+      order_type = #{orderType,jdbcType=VARCHAR},
+      idea_type = #{ideaType,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where s_id = #{sId,jdbcType=BIGINT}
+  </update>
+</mapper>

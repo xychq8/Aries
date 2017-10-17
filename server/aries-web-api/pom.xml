@@ -11,7 +11,6 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>aries-web-api</artifactId>
     <packaging>jar</packaging>
-
     <dependencies>
         <!-- spring cloud -->
         <dependency>
@@ -38,7 +37,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-feign</artifactId>
         </dependency>
-
         <!-- aries start -->
         <dependency>
             <groupId>cn.com.bianlz</groupId>
@@ -50,7 +48,6 @@
         </dependency>
         <!-- aries end -->
     </dependencies>
-
     <build>
         <finalName>aries-web-api</finalName>
         <plugins>
@@ -106,7 +103,6 @@
                             <jvmSettings>
                                 <initialMemorySize>128M</initialMemorySize>
                                 <maxMemorySize>128M</maxMemorySize>
-
                                 <extraArguments>
                                     <extraArgument>-server</extraArgument>
                                     <extraArgument>-Dfile.encoding=utf-8</extraArgument>
