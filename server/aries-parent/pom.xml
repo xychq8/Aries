@@ -17,6 +17,7 @@
         <version.spring-boot-mybatis>1.1.1</version.spring-boot-mybatis>
         <version.aries-common>1.0-SNAPSHOT</version.aries-common>
         <version.aries-user-api>1.0-SNAPSHOT</version.aries-user-api>
+        <version.version.aries-data-delivery-api>1.0-SNAPSHOT</version.version.aries-data-delivery-api>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -42,6 +43,11 @@
                 <groupId>cn.com.bianlz</groupId>
                 <artifactId>aries-user-api</artifactId>
                 <version>${version.aries-user-api}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.com.bianlz</groupId>
+                <artifactId>aries-data-delivery-api</artifactId>
+                <version>${version.aries-data-delivery-api}</version>
             </dependency>
             <!-- aries end -->
         </dependencies>

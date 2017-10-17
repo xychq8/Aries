@@ -1,0 +1,4 @@
+server/aries-data-delivery-api/.idea/
+server/aries-data-delivery-api/aries-data-delivery-api.iml
+*.jar
+server/aries-data-delivery-api/target/
