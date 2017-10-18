@@ -25,8 +25,8 @@
           <if test="uuid!=null and uuid!=''">
               and uuid = #{uuid,jdbcType=VARCHAR}
           </if>
-          <if test="dataStamp!=null and dataStamp!=''">
-              and data_stamp = #{dataStamp,jdbcType=VARCHAR}
+          <if test="dateStamp!=null and dateStamp!=''">
+              and date_stamp = #{dateStamp,jdbcType=VARCHAR}
           </if>
     </select>
 </mapper>
