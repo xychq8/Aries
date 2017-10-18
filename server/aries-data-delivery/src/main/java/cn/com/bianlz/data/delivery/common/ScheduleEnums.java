@@ -4,8 +4,8 @@ package cn.com.bianlz.data.delivery.common;
  * Created by bianlanzhou on 17/10/17.
  * Description
  */
-public class ScheduleEnums {
-    public enum IdeaType{
+public class ScheduleEnums{
+    public enum IdeaType implements MybatisStringTypeHandlerEnum{
         PIC_WORD("1","信息流-图文"),
         _3P("2","信息流-3图"),
         BIG_PIC("3","信息流-大图"),
@@ -26,7 +26,7 @@ public class ScheduleEnums {
         ALL_DOWNLOAD_BIG_PIC("18","通投-下载大图"),
         ALL_GIF_BIG("19","通投-GIF大图"),
         ALL_VIDEO("20","通投-视频"),
-        UNKNOW("-10","未知");;
+        UNKNOW("-10","未知");
         private String code;
         private String name;
         IdeaType(String code,String name){
@@ -39,6 +39,36 @@ public class ScheduleEnums {
         }
 
         public String getName() {
+            return name;
+        }
+
+        @Override
+        public String getString() {
+            return name;
+        }
+    }
+
+    public enum OrderType implements MybatisStringTypeHandlerEnum{
+        GD("1","保量"),
+        NGD("2","不保量"),
+        UNKNOW("-10","未知");
+        private String code;
+        private String name;
+        OrderType(String code,String name){
+            this.code = code;
+            this.name = name;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String getString() {
             return name;
         }
     }

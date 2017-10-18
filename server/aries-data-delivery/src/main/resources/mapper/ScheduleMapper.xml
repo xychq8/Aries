@@ -10,7 +10,7 @@
         <result column="repair" jdbcType="INTEGER" property="repair" />
         <result column="frequence" jdbcType="VARCHAR" property="frequence" />
         <result column="hours" jdbcType="VARCHAR" property="hours" />
-        <result column="order_type" jdbcType="VARCHAR" property="orderType" />
+        <result column="order_type" jdbcType="VARCHAR" property="orderType" typeHandler="cn.com.bianlz.data.delivery.handler.ScheduleEnumHandler"/>
         <result column="idea_type" jdbcType="VARCHAR" property="ideaType" typeHandler="cn.com.bianlz.data.delivery.handler.ScheduleEnumHandler" />
     </resultMap>
     <select id="get" resultMap="scheduleMap" >

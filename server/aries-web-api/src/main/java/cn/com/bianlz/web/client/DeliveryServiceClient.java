@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @FeignClient(name = ServiceHelper.DATA_DELIVERY_SERVICE)
 public interface DeliveryServiceClient {
-    @RequestMapping(value="/data/delivery/schedule/{index}/{pageSize}/{uuid}",method = RequestMethod.GET)
-    public Result<User> getSchedule(@PathVariable("token") String token);
+    @RequestMapping(value="/data/delivery/schedule/{pageNum}/{pageSize}",method = RequestMethod.GET)
+    public Result getSchedule(@PathVariable("pageNum") Integer pageNum,@PathVariable("pageSize") Integer pageSize);
 
+    @RequestMapping(value="/data/delivery/schedule/{pageNum}/{pageSize}/{uuid}",method = RequestMethod.GET)
+    public Result getScheduleById(@PathVariable("pageNum") Integer pageNum,@PathVariable("pageSize") Integer pageSize,@PathVariable("uuid") String uuid);
 }

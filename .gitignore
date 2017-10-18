@@ -13,3 +13,4 @@ server/aries-user-api/target
 server/aries-user/target
 server/aries-web-api/.idea
 server/aries-web-api/target
+server/aries-data-delivery/.idea

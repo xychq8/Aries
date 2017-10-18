@@ -46,6 +46,10 @@
             <groupId>cn.com.bianlz</groupId>
             <artifactId>aries-user-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.com.bianlz</groupId>
+            <artifactId>aries-data-delivery-api</artifactId>
+        </dependency>
         <!-- aries end -->
     </dependencies>
     <build>

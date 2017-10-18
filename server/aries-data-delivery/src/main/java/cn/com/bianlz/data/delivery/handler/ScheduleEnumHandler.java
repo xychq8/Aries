@@ -1,6 +1,7 @@
 package cn.com.bianlz.data.delivery.handler;
 
 import cn.com.bianlz.data.delivery.api.vo.Schedule;
+import cn.com.bianlz.data.delivery.common.MybatisStringTypeHandlerEnum;
 import cn.com.bianlz.data.delivery.common.ScheduleEnums;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
@@ -16,21 +17,14 @@ import java.sql.SQLException;
  */
 public class ScheduleEnumHandler extends BaseTypeHandler<String> {
 
-    private ScheduleEnums.IdeaType getEnum(String code) {
-        for(ScheduleEnums.IdeaType ideaType:ScheduleEnums.IdeaType.values()){
-            if(ideaType.getCode().equals(code)){
-                return ideaType;
-            }
-        }
-        return ScheduleEnums.IdeaType.UNKNOW;
-    }
+    private static final String IDEA_TYPE = "idea_type";
+    private static final String ORDER_TYPE = "order_type";
+    private static final String UNKNOW = "未知";
+
 
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, String s, JdbcType jdbcType) throws SQLException {
-        if(ScheduleEnums.IdeaType.valueOf(s)!=null){
-            preparedStatement.setString(i, ScheduleEnums.IdeaType.valueOf(s).getName());
-        }
-        preparedStatement.setString(i, ScheduleEnums.IdeaType.UNKNOW.getName());
+        return;
     }
 
     @Override
@@ -39,26 +33,40 @@ public class ScheduleEnumHandler extends BaseTypeHandler<String> {
         if (resultSet.wasNull()) {
             return ScheduleEnums.IdeaType.UNKNOW.getName();
         } else {
-            return getEnum(code).getName();
+            return getValue(s,code);
         }
     }
 
     @Override
     public String getNullableResult(ResultSet resultSet, int i) throws SQLException {
-        String code = resultSet.getString(i);
-        if (resultSet.wasNull()) {
-            return ScheduleEnums.IdeaType.UNKNOW.getName();
-        } else {
-            return getEnum(code).getName();
-        }
+        return null;
     }
 
     @Override
     public String getNullableResult(CallableStatement callableStatement, int i) throws SQLException {
-        String code = callableStatement.getString(i);
-        if (code != null) {
-            return getEnum(code).getName();
+        return null;
+    }
+
+    public String getValue(String colName,String code){
+        MybatisStringTypeHandlerEnum typeEnum = null;
+        if(IDEA_TYPE.equals(colName)){
+            for(ScheduleEnums.IdeaType ideaType: ScheduleEnums.IdeaType.values()){
+                if(ideaType.getCode().equals(code)){
+                    typeEnum = ideaType;
+                    break;
+                }
+            }
+        }else if(ORDER_TYPE.equals(colName)){
+            for(ScheduleEnums.OrderType orderType: ScheduleEnums.OrderType.values()){
+                if(orderType.getCode().equals(code)){
+                    typeEnum = orderType;
+                    break;
+                }
+            }
         }
-        return ScheduleEnums.IdeaType.UNKNOW.getName();
+        if(typeEnum!=null){
+            return typeEnum.getString();
+        }
+        return UNKNOW;
     }
 }
