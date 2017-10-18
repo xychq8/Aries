@@ -19,12 +19,12 @@ import java.net.URI;
 public class DeliveryController {
     @Autowired
     private DeliveryServiceClient deliveryServiceClient;
-    @GetMapping(value={"/data/schedule/{pageNum}/{pageSize}","/data/schedule/{pageNum}/{pageSize}/{uuid}"})
-    public Result getSchedule(@PathVariable("pageNum") Integer pageNum,@PathVariable("pageSize") Integer pageSize,@PathVariable(value = "uuid",required = false) String uuid){
+    @GetMapping(value={"/data/schedule/{pageNum}/{pageSize}/{day}","/data/schedule/{pageNum}/{pageSize}/{day}/{uuid}"})
+    public Result getSchedule(@PathVariable("pageNum") Integer pageNum,@PathVariable("pageSize") Integer pageSize,@PathVariable(value = "day") String day,@PathVariable(value = "uuid",required = false) String uuid){
         if(uuid!=null){
-            return deliveryServiceClient.getScheduleById(pageNum, pageSize, uuid);
+            return deliveryServiceClient.getScheduleById(pageNum, pageSize,day,uuid);
         }else{
-            return deliveryServiceClient.getSchedule(pageNum,pageSize);
+            return deliveryServiceClient.getSchedule(pageNum,pageSize,day);
         }
 
     }

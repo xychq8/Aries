@@ -1,7 +1,7 @@
 <template>
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
   <ul>
-    <li v-for="m1 in menus" class="submenu"> <a href="#"><i class="icon icon-info-sign"></i> <span>{{m1.name}}</span> </a>
+    <li v-for="m1 in menus" class="submenu"> <a href="#"><i class="icon  icon-fire"></i> <span>{{m1.name}}</span> </a>
       <ul>
         <li v-for="m2 in m1.subMenu" ><a v-on:click="jump(m2.path)" >{{m2.name}}</a></li>
       </ul>

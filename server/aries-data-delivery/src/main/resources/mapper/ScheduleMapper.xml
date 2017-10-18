@@ -12,6 +12,7 @@
         <result column="hours" jdbcType="VARCHAR" property="hours" />
         <result column="order_type" jdbcType="VARCHAR" property="orderType" typeHandler="cn.com.bianlz.data.delivery.handler.ScheduleEnumHandler"/>
         <result column="idea_type" jdbcType="VARCHAR" property="ideaType" typeHandler="cn.com.bianlz.data.delivery.handler.ScheduleEnumHandler" />
+        <result column="date_stamp" jdbcType="VARCHAR" property="dateStamp" />
     </resultMap>
     <select id="get" resultMap="scheduleMap" >
           select * from ad_nadp_schedule where 1
@@ -23,6 +24,9 @@
           </if>
           <if test="uuid!=null and uuid!=''">
               and uuid = #{uuid,jdbcType=VARCHAR}
+          </if>
+          <if test="dataStamp!=null and dataStamp!=''">
+              and data_stamp = #{dataStamp,jdbcType=VARCHAR}
           </if>
     </select>
 </mapper>

@@ -14,6 +14,7 @@ public class Schedule {
     private String orderType;
     private String ideaType;
     private String hours;
+    private String dateStamp;
 
     public Long getSid() {
         return sid;
@@ -93,5 +94,13 @@ public class Schedule {
 
     public void setHours(String hours) {
         this.hours = hours;
+    }
+
+    public String getDateStamp() {
+        return dateStamp;
+    }
+
+    public void setDateStamp(String dateStamp) {
+        this.dateStamp = dateStamp;
     }
 }
