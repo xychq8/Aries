@@ -35,7 +35,8 @@
 		              label="操作"
 		              width="100">
 		              <template scope="scope">
-		                <el-button type="text" size="small" @click.native.prevent="handleMenuDetail(scope.row.id)" >查看菜单</el-button>
+		                <el-button type="text" size="small" @click.native.prevent="handleMaterialInfo(scope.row.id)" >素材</el-button>
+		                <el-button type="text" size="small" @click.native.prevent="handleMenuDetail(scope.row.id)" >实时投放</el-button>
 		              </template>
 		            </el-table-column>
 	         	</el-table>
@@ -89,7 +90,8 @@ export default {
 	        });
     	},
     	handleCurrentChange:function(val){
-    		var param = "/"+val+"/10";
+    		var dateStr = formatDate(new Date(),'yyyyMMdd');
+    		var param = "/"+val+"/10/"+dateStr;
     		getSchedule(param).then(resp => {
 		        if(resp.code == 'DD10000'){
 		            if(resp.data){
@@ -98,6 +100,9 @@ export default {
 		            }
 		        }
 	        });
+    	},
+    	handleMaterialInfo:function(id){
+    		
     	}
     }
  }

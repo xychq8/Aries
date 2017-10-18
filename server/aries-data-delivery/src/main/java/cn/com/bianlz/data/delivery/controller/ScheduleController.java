@@ -5,6 +5,8 @@ import cn.com.bianlz.data.delivery.api.vo.Schedule;
 import cn.com.bianlz.data.delivery.service.ScheduleService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +44,19 @@ public class ScheduleController {
         rtn.put("pages",page.getPages());
         result.setCode("DD10000");
         result.setData(rtn);
+        return result;
+    }
+
+    @GetMapping(value = "/consume/{uuid}")
+    public Result get(@PathVariable("uuid")String uuid){
+        Result<String> result = new Result<String>();
+        String data = null;
+        try {
+            data = Unirest.get("http://data-helper/data/consume/"+uuid).asString().getBody();
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        }
+        result.setData(data);
         return result;
     }
 }
