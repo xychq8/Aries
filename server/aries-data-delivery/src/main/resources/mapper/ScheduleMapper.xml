@@ -5,7 +5,7 @@
         <id column="s_id" jdbcType="BIGINT" property="sid" />
         <result column="id" jdbcType="BIGINT" property="id" />
         <result column="uuid" jdbcType="BIGINT" property="uuid" />
-        <result column="cast_speed" jdbcType="INTEGER" property="castSpeed" />
+        <result column="cast_speed" jdbcType="INTEGER" property="castSpeed" typeHandler="cn.com.bianlz.data.delivery.handler.ScheduleEnumHandler"/>
         <result column="cpm" jdbcType="INTEGER" property="cpm" />
         <result column="repair" jdbcType="INTEGER" property="repair" />
         <result column="frequence" jdbcType="VARCHAR" property="frequence" />

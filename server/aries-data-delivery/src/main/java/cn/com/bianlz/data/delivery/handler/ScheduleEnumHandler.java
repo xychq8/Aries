@@ -17,8 +17,9 @@ import java.sql.SQLException;
  */
 public class ScheduleEnumHandler extends BaseTypeHandler<String> {
 
-    private static final String IDEA_TYPE = "idea_type";
-    private static final String ORDER_TYPE = "order_type";
+    private static final String COL_IDEA_TYPE = "idea_type";
+    private static final String COL_ORDER_TYPE = "order_type";
+    private static final String COL_CAST_SPEED = "cast_speed";
     private static final String UNKNOW = "未知";
 
 
@@ -49,17 +50,24 @@ public class ScheduleEnumHandler extends BaseTypeHandler<String> {
 
     public String getValue(String colName,String code){
         MybatisStringTypeHandlerEnum typeEnum = null;
-        if(IDEA_TYPE.equals(colName)){
+        if(COL_IDEA_TYPE.equals(colName)){
             for(ScheduleEnums.IdeaType ideaType: ScheduleEnums.IdeaType.values()){
                 if(ideaType.getCode().equals(code)){
                     typeEnum = ideaType;
                     break;
                 }
             }
-        }else if(ORDER_TYPE.equals(colName)){
+        }else if(COL_ORDER_TYPE.equals(colName)){
             for(ScheduleEnums.OrderType orderType: ScheduleEnums.OrderType.values()){
                 if(orderType.getCode().equals(code)){
                     typeEnum = orderType;
+                    break;
+                }
+            }
+        }else if(COL_CAST_SPEED.equals(colName)){
+            for(ScheduleEnums.CastSpeed castSpeed: ScheduleEnums.CastSpeed.values()){
+                if(castSpeed.getCode().equals(code)){
+                    typeEnum = castSpeed;
                     break;
                 }
             }

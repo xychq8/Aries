@@ -10,15 +10,15 @@
 	                    {{scope.$index+1}}
 	                </template>
 	            </el-table-column>
-	            <el-table-column prop="name" label="uuid" width="130">
+	            <el-table-column prop="uuid" label="uuid" width="130">
 	            </el-table-column>
 	            <el-table-column prop="orderType" label="售卖模式" width="160">
 	            </el-table-column>
 	            <el-table-column prop="ideaType" label="素材类型" width="160">
 	            </el-table-column>
-	            <el-table-column prop="ideaType" label="速率" width="160">
+	            <el-table-column prop="cast_speed" label="速率" width="160">
 	            </el-table-column>
-	            <el-table-column prop="hours" label="投放时间" width="240">
+	            <el-table-column prop="hours" label="投放时间" >
 	            </el-table-column>
 	            <el-table-column
 	              fixed="right"
@@ -34,7 +34,9 @@
 	          <el-pagination
 	            :page-size="10"
 	            layout="total, prev, pager, next"
-	            :total="count">
+	            :total="count"
+				:current-page="currentPage"
+	            >
 	          </el-pagination>
 	        </div>
 	      </div>
@@ -42,13 +44,14 @@
 	</div>
 </template>
 <script>
-import {getRoles,getUserMenu,saveMenuRole} from "@/api/api";
+import {getSchedule} from "@/api/api";
 export default {
     name: 'scheduleList',
     data () {
        	return {
         	tableData: [],
-        	count:0
+        	count:0,
+        	currentPage:1
     	}  
     },
     mounted:function(){
@@ -56,7 +59,15 @@ export default {
     },
     methods:{
     	getTableData:function(){
-    		
+    		var param = "/"+this.currentPage+"/10";
+    		getSchedule(param).then(resp => {
+		        if(resp.code == 'DD10000'){
+		            if(resp.data){
+		                this.tableData = resp.data.data;
+		                this.count = resp.data.total
+		            }
+		        }
+	        });
     	}
     }
  }

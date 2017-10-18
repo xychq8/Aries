@@ -72,4 +72,27 @@ public class ScheduleEnums{
             return name;
         }
     }
+
+    public enum CastSpeed implements MybatisStringTypeHandlerEnum{
+        FAST("1","快速"),UNIFORM("2","匀速");
+        private String code;
+        private String name;
+        CastSpeed(String code,String name){
+            this.code = code;
+            this.name = name;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String getString() {
+            return name;
+        }
+    }
 }
