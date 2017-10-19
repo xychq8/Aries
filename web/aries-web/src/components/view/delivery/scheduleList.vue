@@ -2,18 +2,14 @@
   	<!--main-container-part-->
 	<section>
 		<el-dialog title="实时投放" size="tiny" :visible.sync="dialog.consumeDialogTableVisible" >
-		 	<el-form >
-		        <el-form-item label="投放曝光量:" >
-					{{delivery.consume}}
-		        </el-form-item>
-		        <el-form-item label="实际曝光量:" >
-		          	{{delivery.actualConsume}}
-		        </el-form-item>
-		    </el-form>
-		    <div slot="footer" class="dialog-footer">
-		        <el-button @click="dialogTableVisible = false">取 消</el-button>
-		        <el-button type="primary" >确 定</el-button>
-		    </div>
+			<span style="margin-left: 50px">投放曝光量:{{delivery.consume}}</span>
+			</br>
+			<span style="margin-left: 50px">实际曝光量:{{delivery.actualConsume}}</span>
+			</br>
+			<span slot="footer" class="dialog-footer">
+				<el-button @click="dialog.consumeDialogTableVisible = false">取 消</el-button>
+		        <el-button type="primary" @click="dialog.consumeDialogTableVisible = false" >确 定</el-button>
+			</span>
 	    </el-dialog>
 		<div class="row-fluid">
       		<div class="span12">
