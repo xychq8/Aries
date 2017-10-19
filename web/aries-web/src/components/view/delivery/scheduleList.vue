@@ -36,7 +36,7 @@
 		              width="100">
 		              <template scope="scope">
 		                <el-button type="text" size="small" @click.native.prevent="handleMaterialInfo(scope.row.id)" >素材</el-button>
-		                <el-button type="text" size="small" @click.native.prevent="handleMenuDetail(scope.row.id)" >实时投放</el-button>
+		                <el-button type="text" size="small" @click.native.prevent="handleConsume(scope.row.uuid)" >实时投放</el-button>
 		              </template>
 		            </el-table-column>
 	         	</el-table>
@@ -55,7 +55,7 @@
 	  </section>
 </template>
 <script>
-import {getSchedule} from "@/api/api";
+import {getSchedule,getConsume} from "@/api/api";
 import {formatDate} from "@/components/view/common/date"
 export default {
     name: 'scheduleList',
@@ -102,7 +102,12 @@ export default {
 	        });
     	},
     	handleMaterialInfo:function(id){
-    		
+
+    	},
+    	handleConsume:function(uuid){
+    		getConsume(uuid).then(resp => {
+		        console.log(resp.data);
+	        });
     	}
     }
  }

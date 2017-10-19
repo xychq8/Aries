@@ -52,7 +52,7 @@ public class ScheduleController {
         Result<String> result = new Result<String>();
         String data = null;
         try {
-            data = Unirest.get("http://data-helper/data/consume/"+uuid).asString().getBody();
+            data = Unirest.get("http://data.delivery.com/data/consume/"+uuid).asString().getBody();
         } catch (UnirestException e) {
             e.printStackTrace();
         }
