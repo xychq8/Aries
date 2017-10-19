@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class DataCron {
     @Autowired
     private ScheduleTask scheduleTask;
-    @Scheduled(cron = "0 */1 * * * * ")
+    @Scheduled(cron = "0 */30 * * * * ")
     public void schedule(){
         scheduleTask.run();
     }
