@@ -9,6 +9,7 @@ import cn.com.bianlz.vo.Schedule;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,22 @@ public class ScheduleTask implements ITask{
     @Autowired
     private ScheduleService scheduleService;
     public void run(){
+//        try {
+//            String schedule = ScheduleServerProxy.getInstance().get(Constants.DATA_URL+Constants.DATA_GET_PARAM_SCHEDULE);
+//            if(schedule!=null&&!"".equals(schedule)){
+//                Map<String,Schedule> map = GsonUtils.getInstances().fromJson(new TypeToken<Map<String, Schedule>>(){},schedule);
+//                scheduleService.saveSchedule(map.values());
+//            }
+//        } catch (UnirestException e) {
+//            e.printStackTrace();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         try {
-            String schedule = ScheduleServerProxy.getInstance().get(Constants.DATA_URL+Constants.DATA_GET_PARAM_SCHEDULE);
-            if(schedule!=null&&!"".equals(schedule)){
-                Map<String,Schedule> map = GsonUtils.getInstances().fromJson(new TypeToken<Map<String, Schedule>>(){},schedule);
-                scheduleService.saveSchedule(map.values());
+            String schedule = Unirest.get("http://c.ka.163.com/mf/mfm?querys=scheduleMap").asString().getBody();
+            if(null!=schedule&&!"".equals(schedule)){
+                Map<String,Map<String,Schedule>> map = GsonUtils.getInstances().fromJson(new TypeToken<Map<String, Map<String,Schedule>>>(){},schedule);
+                scheduleService.saveSchedule(map.get("scheduleMap").values());
             }
         } catch (UnirestException e) {
             e.printStackTrace();

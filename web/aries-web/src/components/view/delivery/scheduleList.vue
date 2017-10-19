@@ -1,6 +1,20 @@
 <template>
   	<!--main-container-part-->
 	<section>
+		<el-dialog title="实时投放" size="tiny" :visible.sync="dialog.consumeDialogTableVisible" >
+		 	<el-form >
+		        <el-form-item label="投放曝光量:" >
+					{{delivery.consume}}
+		        </el-form-item>
+		        <el-form-item label="实际曝光量:" >
+		          	{{delivery.actualConsume}}
+		        </el-form-item>
+		    </el-form>
+		    <div slot="footer" class="dialog-footer">
+		        <el-button @click="dialogTableVisible = false">取 消</el-button>
+		        <el-button type="primary" >确 定</el-button>
+		    </div>
+	    </el-dialog>
 		<div class="row-fluid">
       		<div class="span12">
       			<el-col  :offset="1" class="toolbar" style="padding-bottom: -100px;padding-top: 20px">
@@ -22,9 +36,9 @@
 	            	</el-table-column>
 		            <el-table-column prop="uuid" label="uuid" width="130">
 		            </el-table-column>
-		            <el-table-column prop="orderType" label="售卖模式" width="160">
+		            <el-table-column prop="frequence" label="频次" width="120" :formatter="formatFrequence" >
 		            </el-table-column>
-		            <el-table-column prop="ideaType" label="素材类型" width="160">
+		            <el-table-column prop="ideaType" label="素材类型" width="120">
 		            </el-table-column>
 		            <el-table-column prop="castSpeed" label="速率" width="160">
 		            </el-table-column>
@@ -33,9 +47,8 @@
 		            <el-table-column
 		              fixed="right"
 		              label="操作"
-		              width="100">
+		              width="130">
 		              <template scope="scope">
-		                <el-button type="text" size="small" @click.native.prevent="handleMaterialInfo(scope.row.id)" >素材</el-button>
 		                <el-button type="text" size="small" @click.native.prevent="handleConsume(scope.row.uuid)" >实时投放</el-button>
 		              </template>
 		            </el-table-column>
@@ -61,13 +74,20 @@ export default {
     name: 'scheduleList',
     data () {
        	return {
+       		tableData: [],
+        	count:0,
+        	currentPage:1,
+        	loading: false,
        		filters: {
 					uuid: ''
 			},
-        	tableData: [],
-        	count:0,
-        	currentPage:1,
-        	loading:false
+			dialog:{
+				consumeDialogTableVisible:false,
+			},
+        	delivery:{
+        		consume:0,
+        		actualConsume:0
+        	}
     	}  
     },
     mounted:function(){
@@ -75,6 +95,7 @@ export default {
     },
     methods:{
     	getTableData:function(){
+    		this.loading = true;
     		var dateStr = formatDate(new Date(),'yyyyMMdd');
     		var param = "/"+this.currentPage+"/10/"+dateStr;
     		if(this.filters.uuid){
@@ -87,9 +108,11 @@ export default {
 		                this.count = resp.data.total
 		            }
 		        }
+		        this.loading = false;
 	        });
     	},
     	handleCurrentChange:function(val){
+    		this.loading = true;
     		var dateStr = formatDate(new Date(),'yyyyMMdd');
     		var param = "/"+val+"/10/"+dateStr;
     		getSchedule(param).then(resp => {
@@ -99,6 +122,7 @@ export default {
 		                this.count = resp.data.total
 		            }
 		        }
+		        this.loading = false;
 	        });
     	},
     	handleMaterialInfo:function(id){
@@ -106,8 +130,24 @@ export default {
     	},
     	handleConsume:function(uuid){
     		getConsume(uuid).then(resp => {
-		        console.log(resp.data);
+    			this.dialog.consumeDialogTableVisible = true;
+		        if(JSON.parse(resp.data).consume){
+		        	this.delivery.consume = JSON.parse(resp.data).consume;
+		        }else{
+		        	this.delivery.consume = 0;
+		        }
+		        if(JSON.parse(resp.data).actualConsume){
+		        	this.delivery.actualConsume = JSON.parse(resp.data).actualConsume;
+		        }else{
+		        	this.delivery.actualConsume = 0;
+		        }
 	        });
+    	},
+    	formatFrequence:function(row, column, cellValue){
+    		if(!cellValue || cellValue == 0){
+    			return "无"
+    		}
+    		return cellValue+"次";
     	}
     }
  }
