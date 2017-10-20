@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by bianlanzhou on 17/10/13.
@@ -40,4 +41,10 @@ public class ScheduleServiceImpl implements ScheduleService{
             }
         }
     }
+
+    @Override
+    public List<Schedule> getScheduleByDay(String day) {
+        return scheduleDao.selectByDay(day);
+    }
+
 }

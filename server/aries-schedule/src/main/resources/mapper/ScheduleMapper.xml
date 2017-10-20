@@ -17,17 +17,23 @@
     <result column="order_type" jdbcType="VARCHAR" property="orderType" />
     <result column="idea_type" jdbcType="VARCHAR" property="ideaType" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="md5" jdbcType="VARCHAR" property="md5" />
+    <result column="dateStamp" jdbcType="VARCHAR" property="date_stamp" />
   </resultMap>
   <sql id="Base_Column_List">
     s_id, id, uuid, cast_speed, cpm, repair, frequence, source, third_plat, full_amount,
-    hours, refresh_round, order_type, idea_type, create_date, md5
+    hours, refresh_round, order_type, idea_type, create_date, date_stamp
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from ad_nadp_schedule
     where s_id = #{sId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByDay" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ad_nadp_schedule
+    where  date_stamp = #{dateStamp,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from ad_nadp_schedule

@@ -1,5 +1,6 @@
 package cn.com.bianlz.cron;
 
+import cn.com.bianlz.task.ConsumeStatisticsTask;
 import cn.com.bianlz.task.ITask;
 import cn.com.bianlz.task.ScheduleTask;
 import cn.com.bianlz.vo.Schedule;
@@ -17,8 +18,15 @@ import org.springframework.stereotype.Component;
 public class DataCron {
     @Autowired
     private ScheduleTask scheduleTask;
+    @Autowired
+    private ConsumeStatisticsTask consumeStatisticsTask;
     @Scheduled(cron = "0 */30 * * * * ")
     public void schedule(){
         scheduleTask.run();
+    }
+    @Scheduled(cron = "0 */10 * * * * ")
+    public void consume(){
+        consumeStatisticsTask.run();
+
     }
 }

@@ -3,6 +3,8 @@ package cn.com.bianlz.dao;
 import cn.com.bianlz.vo.Schedule;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ScheduleDao {
     int deleteByPrimaryKey(Long sId);
@@ -18,4 +20,6 @@ public interface ScheduleDao {
     int updateByPrimaryKey(Schedule record);
 
     int deleteByDatestamp(String dateStamp);
+
+    List<Schedule> selectByDay(String day);
 }

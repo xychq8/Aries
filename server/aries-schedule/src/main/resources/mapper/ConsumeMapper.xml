@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bianlz.dao.ConsumeDao">
+  <resultMap id="BaseResultMap" type="cn.com.bianlz.vo.Consume">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="uuid" jdbcType="BIGINT" property="uuid" />
+    <result column="consume" jdbcType="BIGINT" property="consume" />
+    <result column="actual_consume" jdbcType="BIGINT" property="actualConsume" />
+    <result column="date_stamp" jdbcType="VARCHAR" property="dateStamp" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id,uuid,consume,actual_consume,date_stamp,create_date
+  </sql>
+  <select id="selectByDay" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ad_nadp_consume
+    where date_stamp = #{day,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="cn.com.bianlz.vo.Consume">
+    insert into ad_nadp_consume ( uuid, consume,
+      actual_consume,date_stamp,create_date
+      )
+    values ( #{uuid,jdbcType=BIGINT},  #{consume,jdbcType=BIGINT}, #{actualConsume,jdbcType=BIGINT},
+      #{dateStamp,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <delete id="deleteByDay" parameterType="java.lang.String" >
+    delete from ad_nadp_consume where date_stamp=#{dateStamp,jdbcType=VARCHAR}
+  </delete>
+</mapper>
