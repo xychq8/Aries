@@ -7,7 +7,7 @@
         <result column="consume" jdbcType="BIGINT" property="consume" />
         <result column="actual_consume" jdbcType="BIGINT" property="actualConsume" />
         <result column="date_stamp" jdbcType="VARCHAR" property="dateStamp" />
-        <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     </resultMap>
     <select id="get" resultMap="consumeMap" >
           select * from ad_nadp_consume where 1

@@ -24,6 +24,10 @@ export default {
        	return {
        		filters:{
        			uuid:''
+       		},
+       		chart:{
+       			xData:[],
+       			yData:[]
        		}
     	}  
     },
@@ -42,7 +46,9 @@ export default {
     			return ;
     		}
     		var dateStr = formatDate(new Date(),'yyyyMMdd');
-    		getConsumeByDay(uuid,dateStr)
+    		getConsumeByDay(uuid,dateStr).then(resp => {
+		        console.log(resp.data)
+	        })
     	},
     	getChart:function(){
 	        // 基于准备好的dom，初始化echarts实例
@@ -52,13 +58,13 @@ export default {
 	            title: { text: '投放量折线' },
 	            tooltip: {},
 	            xAxis: {
-	                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+	                data: this.chart.xData
 	            },
 	            yAxis: {},
 	            series: [{
-	                name: '销量',
+	                name: '投放量',
 	                type: 'line',
-	                data: [5, 20, 36, 10, 10, 20]
+	                data: this.chart.yData
 	            }]
 	        });
     	}
