@@ -29,8 +29,9 @@ public class DeliveryController {
 
     }
 
-    @GetMapping(value="/data/consume/{uuid}")
-    public Result getConsume(@PathVariable("uuid")String uuid){
-        return deliveryServiceClient.getConsume(uuid);
+    @GetMapping(value={"/data/consume/{uuid}/{day}","/data/consume/{uuid}"})
+    public Result getConsume(@PathVariable("uuid")Long uuid,@PathVariable(value = "day",required = false)String day){
+        return deliveryServiceClient.getConsume(uuid,day);
     }
+
 }

@@ -47,16 +47,5 @@ public class ScheduleController {
         return result;
     }
 
-    @GetMapping(value = "/consume/{uuid}")
-    public Result get(@PathVariable("uuid")String uuid){
-        Result<String> result = new Result<String>();
-        String data = null;
-        try {
-            data = Unirest.get("http://data.delivery.com/data/consume/"+uuid).asString().getBody();
-        } catch (UnirestException e) {
-            e.printStackTrace();
-        }
-        result.setData(data);
-        return result;
-    }
+
 }
