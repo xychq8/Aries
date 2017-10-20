@@ -36,6 +36,8 @@ export default {
     },
     methods:{
     	getData:function(){
+    		this.chart.xData = [];
+		    this.chart.yData = [];
     		var uuid = this.filters.uuid ;
     		if(!uuid || uuid==''){
     			this.$message({
@@ -47,7 +49,14 @@ export default {
     		}
     		var dateStr = formatDate(new Date(),'yyyyMMdd');
     		getConsumeByDay(uuid,dateStr).then(resp => {
-		        console.log(resp.data)
+    			var x = [];
+    			var y = [];
+		        for(consume in resp.data){
+		        	x.push(consume.createDate);
+		        	y.push(consume.actualConsume);
+		        }
+		        this.chart.xData = x;
+		        this.chart.yData = y;
 	        })
     	},
     	getChart:function(){

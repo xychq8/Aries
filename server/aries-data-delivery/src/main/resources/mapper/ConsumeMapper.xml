@@ -17,7 +17,7 @@
           <if test="uuid!=null">
               and uuid = #{uuid,jdbcType=BIGINT}
           </if>
-              order by create_date asc;
+              order by create_date asc
         order by
     </select>
 </mapper>
