@@ -119,9 +119,6 @@ export default {
 		        this.loading = false;
 	        });
     	},
-    	handleMaterialInfo:function(id){
-
-    	},
     	handleConsume:function(uuid){
     		getConsume(uuid).then(resp => {
     			this.dialog.consumeDialogTableVisible = true;

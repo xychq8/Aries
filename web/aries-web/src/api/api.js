@@ -21,3 +21,4 @@ export let getSchedule = params => { return axios.get(host_addr + `/data/schedul
 
 export let getConsume = uuid => { return axios.get(host_addr + `/data/consume/`+ uuid).then(res => res.data).catch(function(thrown){alert('服务繁忙!')});};
 
+export let getConsumeByDay = (uuid,day) => { return axios.get(host_addr + `/data/consume/`+ uuid + "/" + day).then(res => res.data).catch(function(thrown){alert('服务繁忙!')});};

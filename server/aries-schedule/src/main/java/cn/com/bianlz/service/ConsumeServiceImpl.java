@@ -59,7 +59,6 @@ public class ConsumeServiceImpl implements ConsumeService {
         Consume consumeVo ;
         Long consume = 0l;
         Long actualConsume = 0l;
-        consumeDao.deleteByDay(date);
         for(Map<String,Long> map : list){
             try{
                 consumeVo = new Consume();
