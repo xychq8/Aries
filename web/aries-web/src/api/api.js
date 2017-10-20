@@ -19,5 +19,5 @@ export let saveMenuRole = params => { return axios.post(host_addr + `/menu/menuR
 
 export let getSchedule = params => { return axios.get(host_addr + `/data/schedule`+ params).then(res => res.data).catch(function(thrown){alert('服务繁忙!')});};
 
-export let getConsume = uuid => { return axios.get(host_addr + `/data/realtime/consume/`+ uuid).then(res => res.data).catch(function(thrown){alert('服务繁忙!')});};
+export let getConsume = uuid => { return axios.get(host_addr + `/data/consume/`+ uuid).then(res => res.data).catch(function(thrown){alert('服务繁忙!')});};
 

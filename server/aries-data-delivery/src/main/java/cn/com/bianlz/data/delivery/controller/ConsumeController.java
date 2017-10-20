@@ -21,7 +21,7 @@ public class ConsumeController {
     @Autowired
     private ConsumeService consumeService;
     @GetMapping(value={"/consume/{uuid}/{day}","/consume/{uuid}"})
-    public Result<Object> getConsume(@PathVariable(value = "day")String day,@PathVariable(value = "uuid",required = false)Long uuid){
+    public Result<Object> getConsume(@PathVariable(value = "day",required = false)String day,@PathVariable(value = "uuid")Long uuid){
         Result<Object> result = new Result<Object>();
         if(day==null){
             try {
