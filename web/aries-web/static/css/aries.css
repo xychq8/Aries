@@ -22,7 +22,7 @@ a:hover, a:focus {
 	text-decoration: none; color:#28b779;
 }
 section{
-	height:0px;
+	min-height:0px;
 	padding-bottom:50%
 }
 
@@ -1702,5 +1702,6 @@ div.tagsinput div { display:block; float: left; }
 /*media */
 
 .pagination-el{
-	float:right
+	float:right;
+	padding-top:10px;
 }

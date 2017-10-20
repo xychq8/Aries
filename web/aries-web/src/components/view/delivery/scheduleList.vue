@@ -11,7 +11,7 @@
 	    </el-dialog>
 		<div class="row-fluid">
       		<div class="span12">
-      			<el-col  :offset="1" class="toolbar" style="padding-bottom: -100px;padding-top: 20px">
+      			<el-col  :offset="1" class="toolbar" style="padding-top: 20px">
 					<el-form :inline="true" >
 						<el-form-item>
 							<el-input auto-complete="off" size="large" placeholder="uuid" v-model="filters.uuid"  autosize style="width: 250px"></el-input>
