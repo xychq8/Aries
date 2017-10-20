@@ -21,3 +21,11 @@ export function formatDate(date, fmt) {
 function padLeftZero(str) {
     return ('00' + str).substr(str.length);
 }
+
+function parseTime(timestamp) {
+    var date = new Date(parseInt(timestamp)).toLocaleDateString();
+　　//输出结果为2016/8/9
+    date = formatDate(date);
+　　//输出结果为2016-08-09，满足YYYY-MM-DD格式要求
+    return date;
+}
