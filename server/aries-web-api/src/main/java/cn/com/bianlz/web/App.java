@@ -1,6 +1,7 @@
 package cn.com.bianlz.web;
 
 import cn.com.bianlz.web.common.AuthInterceptor;
+import org.springframework.context.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableDiscoveryClient
 @EnableFeignClients
 public class App {
+    private static ApplicationContext applicationContext ;
     @Bean
     @LoadBalanced
     public RestTemplate restTemplate(){
@@ -29,9 +31,12 @@ public class App {
     }
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(App.class).web(true).run(args);
+        applicationContext = new SpringApplicationBuilder(App.class).web(true).run(args);
     }
 
+    public static <T> T getBean(Class T,String name){
+        return (T)applicationContext.getBean(name);
+    }
     @Configuration
     static class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         @Autowired
