@@ -34,9 +34,6 @@ public class App {
         applicationContext = new SpringApplicationBuilder(App.class).web(true).run(args);
     }
 
-    public static <T> T getBean(Class T,String name){
-        return (T)applicationContext.getBean(name);
-    }
     @Configuration
     static class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         @Autowired
