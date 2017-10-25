@@ -45,7 +45,7 @@
 	          <el-pagination
 	            :page-size="10"
 	            layout="total, prev, pager, next"
-	            :total="dLength">
+	            :total="count">
 	          </el-pagination>
 	        </div>
 	      </div>
@@ -61,7 +61,7 @@ export default {
         tableData: [],
         treeData:[],
         checkData:[],
-        dLength:0,
+        count:0,
         currentRoleId:'',
         dialogTableVisible:false,
         defaultProps: {
@@ -79,7 +79,7 @@ export default {
 	            if(resp.code == 'W10000'&&resp.data){
 	              this.tableData = resp.data;
 	              if(resp.data){
-	              	this.dLength = resp.data.length
+	              	this.count = resp.data.length
 	              }
 	            }else{
 	                if(resp.message){

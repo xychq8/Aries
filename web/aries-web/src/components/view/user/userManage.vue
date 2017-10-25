@@ -48,7 +48,7 @@
           <el-pagination
             :page-size="10"
             layout="total, prev, pager, next"
-            :total="dLength">
+            :total="count">
           </el-pagination>
         </div>
       </div>
@@ -63,7 +63,7 @@
     data () {
       return {
         tableData: [],
-        dLength:0,
+        count:0,
         dialogTableVisible:false,
         formLabelWidth:'100px',
         currentId:'',
@@ -76,7 +76,7 @@
             if(resp.code == 'W10000'){
               this.tableData = resp.data;
               if(resp.data){
-                this.dLength = resp.data.length
+                this.count = resp.data.length
               }
             }else{
               this.$message({
