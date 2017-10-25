@@ -11,7 +11,9 @@
 					</el-form-item>
 			</el-form>
 		</el-col>
-		<div id="myChart" :style="{width: '100%', height: '300px'}"></div>
+		<el-col  :offset="0" class="toolbar" style="padding-top: 20px">
+			<div id="myChart" style="width: 100%;height: 300px" ></div>
+		</el-col>
 	</section>
 </template>
 <script>
@@ -51,25 +53,41 @@ export default {
     		getConsumeByDay(uuid,dateStr).then(resp => {
     			var x = [];
     			var y = [];
-		        for(consume in resp.data){
-		        	x.push(consume.createDate);
-		        	y.push(consume.actualConsume);
-		        }
+    			$.each(resp.data,function(index,consume){
+		        	x.push(formatDate(new Date(consume.createDate),'hh:mm'));
+		        	y.push(consume.actualConsume);	
+    			});
+		        
 		        this.chart.xData = x;
 		        this.chart.yData = y;
+		        this.getChart();
 	        })
     	},
     	getChart:function(){
+    		var dateStr = formatDate(new Date(),'yyyyMMdd');
 	        // 基于准备好的dom，初始化echarts实例
 	        let myChart = echarts.init(document.getElementById('myChart'))
 	        // 绘制图表
 	        myChart.setOption({
-	            title: { text: '投放量折线' },
+	        	backgroundColor: new echarts.graphic.RadialGradient(0, 0, 0.8,0),
+	            title: { text: '投放量折线('+dateStr+')'},
 	            tooltip: {},
 	            xAxis: {
-	                data: this.chart.xData
+	                data: this.chart.xData,
+	                splitLine: {
+			            lineStyle: {
+			                type: 'dashed'
+			            }
+			        }
 	            },
-	            yAxis: {},
+	            yAxis: {
+	            	splitLine: {
+			            lineStyle: {
+			                type: 'dashed'
+			            }
+			        },
+			        scale: true
+	            },
 	            series: [{
 	                name: '投放量',
 	                type: 'line',

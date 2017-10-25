@@ -33,4 +33,8 @@ public class LoginController {
         }
         return ResultHelper.getUserResult(userResult);
     }
+
+    public static void main(String[] args) {
+        System.out.println(Math.ceil(12000/24/60/17));
+    }
 }
