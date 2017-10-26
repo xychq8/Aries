@@ -4,10 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store/store'
-import axios from 'axios';
+import * as types from "@/store/type"
+import axios from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
-
+import { Message } from 'element-ui'
 
 Vue.use(ElementUI);
 Vue.config.productionTip = false
@@ -42,4 +43,35 @@ axios.interceptors.request.use(function (config) {    // 这里的config包含�
     return config;
 }, function (err) {
     return Promise.reject(err);
+});
+
+
+axios.interceptors.response.use(
+  function (response) {
+    return response;
+  }, 
+  function (error,response) {
+    var mess ='加载失败!';
+    switch(error.response.status){
+      case 403:
+        if(error.response.data){
+          mess = error.response.data.message;
+        }
+        Message.error({   
+          showClose: true,
+          duration:1500,
+          message: mess
+        })
+        store.commit(types.LOGOUT);
+        router.push({path:'/'});
+        break;
+      case 500:
+        Message.error({   
+          showClose: true,
+          duration:1500,
+          message: '服务繁忙'
+        })
+        break;
+    }
+    return Promise.reject(error);
 });
