@@ -70,7 +70,7 @@ export default {
 	        // 绘制图表
 	        myChart.setOption({
 	        	backgroundColor: new echarts.graphic.RadialGradient(0, 0, 0.8,0),
-	            title: { text: '投放量折线('+dateStr+')',x:'center'},
+	            title: { text: '实际曝光量折线('+dateStr+')',x:'center'},
 	            tooltip: {},
 	            xAxis: {
 	                data: this.chart.xData,
