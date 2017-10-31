@@ -1,6 +1,7 @@
 package cn.com.bianlz.data.delivery.controller;
 
 import cn.com.bianlz.common.vo.Result;
+import cn.com.bianlz.data.delivery.api.vo.DataDeliveryApiProtocolCode;
 import cn.com.bianlz.data.delivery.api.vo.Schedule;
 import cn.com.bianlz.data.delivery.service.ScheduleService;
 import com.github.pagehelper.Page;
@@ -31,21 +32,26 @@ public class ScheduleController {
     @GetMapping(value={"/schedule/{pageNum}/{pageSize}/{day}/{uuid}","/schedule/{pageNum}/{pageSize}/{day}"})
     public Result get(@PathVariable("pageNum") Integer pageNum,@PathVariable("pageSize") Integer pageSize,@PathVariable("day") String day,@PathVariable(value = "uuid",required = false) String uuid){
         Result<Map<String,Object>> result = new Result<Map<String, Object>>();
-        Map<String,Object> rtn = new HashMap<String, Object>();
-        Schedule schedule = new Schedule();
-        if(uuid!=null){
-            schedule.setUuid(uuid);
+        result.setCode(DataDeliveryApiProtocolCode.SUCCESS.getCode());
+        result.setCode(DataDeliveryApiProtocolCode.FAIL.getMessage());
+        try{
+            Map<String,Object> rtn = new HashMap<String, Object>();
+            Schedule schedule = new Schedule();
+            if(uuid!=null){
+                schedule.setUuid(uuid);
+            }
+            schedule.setDateStamp(day);
+            Page page = PageHelper.offsetPage(((pageNum-1)*pageSize), pageSize,true);
+            List<Schedule> data = scheduleService.get(schedule);
+            rtn.put("data",data);
+            rtn.put("total",page.getTotal());
+            rtn.put("pages",page.getPages());
+            result.setCode("DD10000");
+            result.setData(rtn);
+        }catch (Exception ex){
+            result.setCode(DataDeliveryApiProtocolCode.FAIL.getCode());
+            result.setMessage(DataDeliveryApiProtocolCode.FAIL.getMessage());
         }
-        schedule.setDateStamp(day);
-        Page page = PageHelper.offsetPage(((pageNum-1)*pageSize), pageSize,true);
-        List<Schedule> data = scheduleService.get(schedule);
-        rtn.put("data",data);
-        rtn.put("total",page.getTotal());
-        rtn.put("pages",page.getPages());
-        result.setCode("DD10000");
-        result.setData(rtn);
         return result;
     }
-
-
 }

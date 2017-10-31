@@ -1,6 +1,7 @@
 package cn.com.bianlz.web.common;
 
 import cn.com.bianlz.common.vo.Result;
+import cn.com.bianlz.data.delivery.api.vo.DataDeliveryApiProtocolCode;
 import cn.com.bianlz.user.api.protocol.UserProtocolCode;
 
 /**
@@ -16,6 +17,9 @@ public class ResultHelper {
         }
         result = userResult;
         if(result.getCode().equals(UserProtocolCode.SUCCESS.getCode())){
+            result.setCode(WebApiProtocolCode.SUCCESS.getCode());
+            result.setMessage(WebApiProtocolCode.SUCCESS.getMessage());
+        }else if(result.getCode().equals(DataDeliveryApiProtocolCode.SUCCESS.getCode())){
             result.setCode(WebApiProtocolCode.SUCCESS.getCode());
             result.setMessage(WebApiProtocolCode.SUCCESS.getMessage());
         }else{

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import cn.com.bianlz.data.delivery.api.vo.DataDeliveryApiProtocolCode;
 
 import java.util.List;
 
@@ -23,11 +24,15 @@ public class ConsumeController {
     @GetMapping(value={"/consume/{uuid}/{day}","/consume/{uuid}"})
     public Result<Object> getConsume(@PathVariable(value = "day",required = false)String day,@PathVariable(value = "uuid")Long uuid){
         Result<Object> result = new Result<Object>();
+        result.setCode(DataDeliveryApiProtocolCode.SUCCESS.getCode());
+        result.setCode(DataDeliveryApiProtocolCode.FAIL.getMessage());
         if(day==null){
             try {
                 result.setData(Unirest.get("http://data.delivery.com/data/consume/" + uuid).asString().getBody());
             } catch (UnirestException e) {
                 e.printStackTrace();
+                result.setCode(DataDeliveryApiProtocolCode.FAIL.getCode());
+                result.setMessage(DataDeliveryApiProtocolCode.FAIL.getMessage());
             }
         }else{
             result.setData(consumeService.getConsume(day,uuid));
