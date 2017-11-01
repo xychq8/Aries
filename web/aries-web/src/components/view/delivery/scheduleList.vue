@@ -39,7 +39,7 @@
 		            </el-table-column>
 		            <el-table-column prop="frequence" label="频次" width="80" :formatter="formatFrequence" >
 		            </el-table-column>
-		            <el-table-column prop="ideaType" label="素材类型" width="100">
+		            <el-table-column prop="ideaType" label="素材类型" width="120">
 		            </el-table-column>
 		            <el-table-column prop="castSpeed" label="速率" width="100">
 		            </el-table-column>
