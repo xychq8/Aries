@@ -1,9 +1,11 @@
 package cn.com.bianlz.cron;
 
 import cn.com.bianlz.task.ConsumeStatisticsTask;
+import cn.com.bianlz.task.ContextTask;
 import cn.com.bianlz.task.ITask;
 import cn.com.bianlz.task.ScheduleTask;
 import cn.com.bianlz.vo.Schedule;
+import cn.com.bianlz.vo.SchedulePosition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -20,13 +22,16 @@ public class DataCron {
     private ScheduleTask scheduleTask;
     @Autowired
     private ConsumeStatisticsTask consumeStatisticsTask;
+    @Autowired
+    private ContextTask contextTask;
     @Scheduled(cron = "0 */30 * * * * ")
     public void schedule(){
         scheduleTask.run();
+        contextTask.run();
     }
     @Scheduled(cron = "0 */10 * * * * ")
     public void consume(){
         consumeStatisticsTask.run();
-
     }
+
 }

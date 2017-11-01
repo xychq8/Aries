@@ -29,7 +29,7 @@ import java.util.Map;
 public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService;
-    @GetMapping(value={"/schedule/{pageNum}/{pageSize}/{day}/{uuid}","/schedule/{pageNum}/{pageSize}/{day}"})
+    @GetMapping(value={"/schedule/list/{pageNum}/{pageSize}/{day}/{uuid}","/schedule/list/{pageNum}/{pageSize}/{day}"})
     public Result get(@PathVariable("pageNum") Integer pageNum,@PathVariable("pageSize") Integer pageSize,@PathVariable("day") String day,@PathVariable(value = "uuid",required = false) String uuid){
         Result<Map<String,Object>> result = new Result<Map<String, Object>>();
         result.setCode(DataDeliveryApiProtocolCode.SUCCESS.getCode());
@@ -54,4 +54,5 @@ public class ScheduleController {
         }
         return result;
     }
+
 }

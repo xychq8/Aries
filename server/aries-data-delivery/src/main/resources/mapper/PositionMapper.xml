@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bianlz.data.delivery.dao.PositionDao">
+    <resultMap id="positionMap" type="cn.com.bianlz.data.delivery.api.vo.Position">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="position_id" jdbcType="BIGINT" property="positionId" />
+        <result column="category" jdbcType="VARCHAR" property="category" />
+        <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+        <result column="location" jdbcType="VARCHAR" property="location" />
+        <result column="location_name" jdbcType="VARCHAR" property="locationName" />
+        <result column="channel" jdbcType="VARCHAR" property="channel" typeHandler="cn.com.bianlz.data.delivery.handler.PositionEnumHandler" />
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    </resultMap>
+    <select id="getByPositionId" resultMap="positionMap" >
+          select category,category_name,location,location_name,channel from ad_nadp_position
+          where position_id = #{positionId,jdbcType=BIGINT}
+          order by channel asc
+    </select>
+</mapper>

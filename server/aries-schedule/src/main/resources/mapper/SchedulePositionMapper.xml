@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bianlz.dao.SchedulePositionDao">
+  <resultMap id="BaseResultMap" type="cn.com.bianlz.vo.SchedulePosition">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uuid" jdbcType="BIGINT" property="uuid" />
+    <result column="position_id" jdbcType="BIGINT" property="positionId" />
+    <result column="date_stamp" jdbcType="VARCHAR" property="dateStamp" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uuid, position_id, date_stamp, create_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ad_nadp_schedule_position
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ad_nadp_schedule_position
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByDay" parameterType="java.lang.String">
+    delete from ad_nadp_schedule_position
+    where date_stamp = #{date_stamp,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.com.bianlz.vo.SchedulePosition">
+    insert into ad_nadp_schedule_position (id, uuid, position_id,
+      date_stamp, create_date)
+    values (#{id,jdbcType=INTEGER}, #{uuid,jdbcType=BIGINT}, #{positionId,jdbcType=BIGINT},
+      #{dateStamp,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.bianlz.vo.SchedulePosition">
+    insert into ad_nadp_schedule_position
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="positionId != null">
+        position_id,
+      </if>
+      <if test="dateStamp != null">
+        date_stamp,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=BIGINT},
+      </if>
+      <if test="positionId != null">
+        #{positionId,jdbcType=BIGINT},
+      </if>
+      <if test="dateStamp != null">
+        #{dateStamp,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.bianlz.vo.SchedulePosition">
+    update ad_nadp_schedule_position
+    <set>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=BIGINT},
+      </if>
+      <if test="positionId != null">
+        position_id = #{positionId,jdbcType=BIGINT},
+      </if>
+      <if test="dateStamp != null">
+        date_stamp = #{dateStamp,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.bianlz.vo.SchedulePosition">
+    update ad_nadp_schedule_position
+    set uuid = #{uuid,jdbcType=BIGINT},
+      position_id = #{positionId,jdbcType=BIGINT},
+      date_stamp = #{dateStamp,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

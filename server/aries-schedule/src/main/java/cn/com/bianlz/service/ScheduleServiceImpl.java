@@ -2,15 +2,14 @@ package cn.com.bianlz.service;
 
 import cn.com.bianlz.common.utils.DateUtils;
 import cn.com.bianlz.dao.ScheduleDao;
+import cn.com.bianlz.dao.SchedulePositionDao;
 import cn.com.bianlz.vo.Schedule;
+import cn.com.bianlz.vo.SchedulePosition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by bianlanzhou on 17/10/13.
@@ -20,6 +19,8 @@ import java.util.List;
 public class ScheduleServiceImpl implements ScheduleService{
     @Autowired
     private ScheduleDao scheduleDao;
+    @Autowired
+    private SchedulePositionDao schedulePositionDao;
     @Override
     @Transactional
     public void saveSchedule(Collection<Schedule> collection)throws Exception{
@@ -45,6 +46,24 @@ public class ScheduleServiceImpl implements ScheduleService{
     @Override
     public List<Schedule> getScheduleByDay(String day) {
         return scheduleDao.selectByDay(day);
+    }
+
+
+    @Override
+    @Transactional
+    public void saveSchedulePosition(String date,Map<String,List<String>> positionContext){
+        schedulePositionDao.deleteByDay(date);
+        for(Map.Entry<String,List<String>> entry:positionContext.entrySet()){
+            String positionId = entry.getKey();
+            List<String> uuids = entry.getValue();
+            for(String uuid:uuids){
+                SchedulePosition schedulePosition = new SchedulePosition();
+                schedulePosition.setDateStamp(date);
+                schedulePosition.setUuid(Long.valueOf(uuid));
+                schedulePosition.setPositionId(Long.valueOf(positionId));
+                schedulePositionDao.insert(schedulePosition);
+            }
+        }
     }
 
 }
