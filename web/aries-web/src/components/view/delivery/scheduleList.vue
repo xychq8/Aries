@@ -9,6 +9,13 @@
 		        <el-button type="primary" @click="dialog.consumeDialogTableVisible = false" >确 定</el-button>
 			</span>
 	    </el-dialog>
+	    <el-dialog title="投放位置" size="tiny" :visible.sync="dialog.positionDialogTableVisible" top="30%" >
+			<el-table :data="positionData">
+    			<el-table-column property="channel" label="平台" width="150"></el-table-column>
+    			<el-table-column property="categoryName" label="栏目" width="150"></el-table-column>
+    			<el-table-column property="locationName" label="位置" width="200"></el-table-column>
+  			</el-table>
+	    </el-dialog>
 		<div class="row-fluid">
       		<div class="span12">
       			<el-col  :offset="1" class="toolbar" style="padding-top: 20px">
@@ -48,6 +55,7 @@
 		              width="130">
 		              <template scope="scope">
 		                <el-button type="text" size="small" @click.native.prevent="handleConsume(scope.row.uuid)" >实时投放</el-button>
+						<el-button type="text" size="small" @click.native.prevent="handleGetPosition(scope.row.uuid)" >投放位置</el-button>
 		              </template>
 		            </el-table-column>
 	         	</el-table>
@@ -66,13 +74,14 @@
 	  </section>
 </template>
 <script>
-import {getSchedule,getConsume} from "@/api/api";
+import {getSchedule,getConsume,getPosition} from "@/api/api";
 import {formatDate} from "@/components/view/common/date"
 export default {
     name: 'scheduleList',
     data () {
        	return {
        		tableData: [],
+       		positionData:[{}],
         	count:0,
         	currentPage:1,
         	loading: false,
@@ -81,6 +90,7 @@ export default {
 			},
 			dialog:{
 				consumeDialogTableVisible:false,
+				positionDialogTableVisible:false
 			},
         	delivery:{
         		consume:0,
@@ -143,6 +153,15 @@ export default {
     			return "无"
     		}
     		return cellValue+"次";
+    	},
+    	handleGetPosition:function(uuid){
+    		getPosition(uuid).then(resp => {
+    			if(resp.data){
+    				console.log(resp.data)
+    				this.positionData = resp.data;
+    				this.dialog.positionDialogTableVisible = true;
+    			}
+	        });
     	}
     }
  }

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const host_addr = 'http://10.234.138.194:8082/api'
+const host_addr = 'http://10.234.138.164:8082/api'
 //const host_addr = 'http://localhost:8082/api'
 
 
@@ -23,3 +23,5 @@ export let getSchedule = params => { return axios.get(host_addr + `/data/schedul
 export let getConsume = uuid => { return axios.get(host_addr + `/data/consume/`+ uuid).then(res => res.data).catch(function(thrown){});};
 
 export let getConsumeByDay = (uuid,day) => { return axios.get(host_addr + `/data/consume/`+ uuid + "/" + day).then(res => res.data).catch(function(thrown){});};
+
+export let getPosition = (uuid) => { return axios.get(host_addr + `/data/position/uuid/`+ uuid ).then(res => res.data).catch(function(thrown){});};
