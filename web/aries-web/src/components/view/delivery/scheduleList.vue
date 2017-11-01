@@ -52,7 +52,7 @@
 		            <el-table-column
 		              fixed="right"
 		              label="操作"
-		              width="130">
+		              width="150">
 		              <template scope="scope">
 		                <el-button type="text" size="small" @click.native.prevent="handleConsume(scope.row.uuid)" >实时投放</el-button>
 						<el-button type="text" size="small" @click.native.prevent="handleGetPosition(scope.row.uuid)" >投放位置</el-button>
