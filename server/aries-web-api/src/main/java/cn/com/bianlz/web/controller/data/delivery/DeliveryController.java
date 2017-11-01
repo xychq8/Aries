@@ -37,4 +37,10 @@ public class DeliveryController {
         return deliveryServiceClient.getConsumeByDay(uuid,day);
     }
 
+
+    @GetMapping(value={"/data/position/uuid/{uuid}"})
+    public Result getPositionByUuid(@PathVariable("uuid")Long uuid){
+        return deliveryServiceClient.getPositionById(uuid);
+    }
+
 }

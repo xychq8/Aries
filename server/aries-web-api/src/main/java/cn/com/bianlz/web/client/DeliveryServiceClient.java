@@ -26,5 +26,6 @@ public interface DeliveryServiceClient {
     @RequestMapping(value={"/data/delivery/consume/{uuid}/{day}"},method = RequestMethod.GET)
     public Result getConsumeByDay(@PathVariable("uuid")Long uuid,@PathVariable(value = "day",required = false)String day);
 
-
+    @RequestMapping(value={"/data/delivery/position/uuid/{uuid}"},method = RequestMethod.GET)
+    public Result getPositionById(@PathVariable("uuid")Long uuid);
 }
