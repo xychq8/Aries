@@ -200,11 +200,12 @@ export default {
     		if(!myChart){
     			myChart = echarts.init(document.getElementById('myChart'));
     		}
+    		var unDeliveryPersent = '0%';
     		var labelTop = {
 			    normal : {
-			    	color: '#FF0000',
+			    	color: '#884C3A',
 			        label : {
-			            show : true,
+			            show : false,
 			            position : 'center',
 			            formatter : '未投放',
 			            textStyle: {
@@ -218,10 +219,10 @@ export default {
 			};
 			var labelFromatter = {
 			    normal : {
-			    	color: '#FFCC33',
 			        label : {
 			            formatter : function (params){
-			                return ((1-(params.percent/100.00))*100.00).toFixed(2)+'%';
+			            	unDeliveryPersent = ((1-(params.percent/100.00))*100.00).toFixed(2)+'%';
+			                return unDeliveryPersent;
 			            },
 			            textStyle: {
 			                baseline : 'top'
@@ -231,9 +232,9 @@ export default {
 			}
 			var labelBottom = {
 			    normal : {
-			        color: '#3399FF',
+			        color: '#0089A7', 
 			        label : {
-			            show : true,
+			            show : false,
 			            position : 'center',
 			            textStyle: {
 			                baseline : 'bottom'
@@ -267,6 +268,24 @@ export default {
 			        }
 			    ]
 	        });
+
+	        myChart.setOption({
+	        	title: {
+				        text: unDeliveryPersent,
+				        subtext: '未投放',
+				        x: 'center',
+				        y: '33',
+				        itemGap: 1,
+				        textStyle : {
+				            color : '#854836',
+				            fontSize :5
+				        },
+				        subtextStyle: {
+					        color: '#854836' ,
+					        fontSize :5
+					    }
+				    }
+	        })
     	}
     }
  }
