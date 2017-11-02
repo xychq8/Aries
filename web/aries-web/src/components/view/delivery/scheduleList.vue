@@ -2,9 +2,29 @@
   	<!--main-container-part-->
 	<section>
 		<el-dialog title="实时投放" size="tiny" :visible.sync="dialog.consumeDialogTableVisible" top="30%" >
-			<span style="margin-left: 50px;height: 10px">投放曝光量:{{delivery.consume}}</span>
-			</br>
-			<span style="margin-left: 50px">实际曝光量:{{delivery.actualConsume}}</span>
+			<el-row :gutter="20">
+				<el-col :span="10" >
+					<el-row>
+						<el-col id="myChart" style="width: 100%;height: 100px" >
+						</el-col>
+					</el-row>
+				</el-col>
+				<el-col :span="10" >
+					<el-row>
+						<el-col>&nbsp;
+						</el-col>
+						<el-col>&nbsp;
+						</el-col>
+						<el-col>
+							投放曝光量:{{delivery.consume}}
+						</el-col>
+						<el-col>
+							实际曝光量:{{delivery.actualConsume}}
+						</el-col>
+					</el-row>
+				</el-col>
+				
+			</el-row>
 			<span slot="footer" class="dialog-footer">
 		        <el-button type="primary" @click="dialog.consumeDialogTableVisible = false" >确 定</el-button>
 			</span>
@@ -54,7 +74,7 @@
 		              label="操作"
 		              width="150">
 		              <template scope="scope">
-		                <el-button type="text" size="small" @click.native.prevent="handleConsume(scope.row.uuid)" >实时投放</el-button>
+		                <el-button type="text" size="small" @click.native.prevent="handleConsume(scope.row.uuid,scope.row.cpm,scope.row.repair)" >实时投放</el-button>
 						<el-button type="text" size="small" @click.native.prevent="handleGetPosition(scope.row.uuid)" >投放位置</el-button>
 		              </template>
 		            </el-table-column>
@@ -76,6 +96,7 @@
 <script>
 import {getSchedule,getConsume,getPosition} from "@/api/api";
 import {formatDate} from "@/components/view/common/date"
+import echarts from 'echarts';
 export default {
     name: 'scheduleList',
     data () {
@@ -94,8 +115,10 @@ export default {
 			},
         	delivery:{
         		consume:0,
-        		actualConsume:0
-        	}
+        		actualConsume:0,
+        		unDeliveryNum:0
+        	},
+        	myChart:null
     	}  
     },
     mounted:function(){
@@ -133,7 +156,7 @@ export default {
 		        this.loading = false;
 	        });
     	},
-    	handleConsume:function(uuid){
+    	handleConsume:function(uuid,cpm,repair){
     		getConsume(uuid).then(resp => {
     			this.dialog.consumeDialogTableVisible = true;
 		        if(JSON.parse(resp.data).consume){
@@ -146,6 +169,9 @@ export default {
 		        }else{
 		        	this.delivery.actualConsume = 0;
 		        }
+		        
+	        }).then(()=>{
+	        	this.handleConsumeStat(cpm,repair);
 	        });
     	},
     	formatFrequence:function(row, column, cellValue){
@@ -157,10 +183,86 @@ export default {
     	handleGetPosition:function(uuid){
     		getPosition(uuid).then(resp => {
     			if(resp.data){
-    				console.log(resp.data)
     				this.positionData = resp.data;
     				this.dialog.positionDialogTableVisible = true;
     			}
+	        });
+    	},
+    	handleConsumeStat:function(cpm,repair){
+    		this.delivery.unDeliveryNum = 1000*(cpm+repair) - this.delivery.actualConsume;
+    		if(!this.delivery.unDeliveryNum||this.delivery.unDeliveryNum<0){
+    			this.delivery.unDeliveryNum = 0;
+    		}
+    		this.drawChart();
+    	},
+    	drawChart:function(){
+    		var radius = [40, 55];
+    		let myChart = echarts.getInstanceByDom(document.getElementById('myChart'))
+    		if(!myChart){
+    			myChart = echarts.init(document.getElementById('myChart'));
+    		}
+    		var labelTop = {
+			    normal : {
+			    	color: '#0080FF',
+			        label : {
+			            show : true,
+			            position : 'center',
+			            formatter : '{b}',
+			            textStyle: {
+			                baseline : 'bottom'
+			            }
+			        },
+			        labelLine : {
+			            show : false
+			        }
+			    }
+			};
+			var labelFromatter = {
+			    normal : {
+			        label : {
+			            formatter : function (params){
+			                return ((1-(params.percent/100.00))*100.00).toFixed(2)+'%';
+			            },
+			            textStyle: {
+			                baseline : 'top'
+			            }
+			        }
+			    },
+			}
+			var labelBottom = {
+			    normal : {
+			        color: '#980000',
+			        label : {
+			            show : true,
+			            position : 'center'
+			        },
+			        labelLine : {
+			            show : false
+			        }
+			    }
+			};
+	        // 绘制图表
+	        myChart.setOption({
+	        	tooltip : {
+			        trigger: 'item',
+			        formatter: "{a} <br/>{b} : {c} ({d}%)"
+			    },
+			    toolbox: {
+			        show : false,
+			    },
+			    calculable : true,
+			    series : [
+			        {
+			            name:'投放',
+			            type:'pie',
+			            radius : ['50%', '70%'],
+			            itemStyle : labelFromatter,
+			            data:[
+			                {value:this.delivery.actualConsume,name:'已投放',itemStyle:labelBottom},
+			                {value:this.delivery.unDeliveryNum,name:'未投放',itemStyle:labelTop}
+			            ]
+			        }
+			    ]
 	        });
     	}
     }

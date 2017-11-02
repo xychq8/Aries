@@ -66,7 +66,10 @@ export default {
     	getChart:function(){
     		var dateStr = formatDate(new Date(),'yyyyMMdd');
 	        // 基于准备好的dom，初始化echarts实例
-	        let myChart = echarts.init(document.getElementById('myChart'))
+	        let myChart = echarts.getInstanceByDom(document.getElementById('myChart'))
+    		if(!myChart){
+    			myChart = echarts.init(document.getElementById('myChart'));
+    		}
 	        // 绘制图表
 	        myChart.setOption({
 	        	backgroundColor: new echarts.graphic.RadialGradient(0, 0, 0.8,0),
