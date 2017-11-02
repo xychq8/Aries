@@ -196,18 +196,17 @@ export default {
     		this.drawChart();
     	},
     	drawChart:function(){
-    		var radius = [40, 55];
     		let myChart = echarts.getInstanceByDom(document.getElementById('myChart'))
     		if(!myChart){
     			myChart = echarts.init(document.getElementById('myChart'));
     		}
     		var labelTop = {
 			    normal : {
-			    	color: '#0080FF',
+			    	color: '#FF0000',
 			        label : {
 			            show : true,
 			            position : 'center',
-			            formatter : '{b}',
+			            formatter : '未投放',
 			            textStyle: {
 			                baseline : 'bottom'
 			            }
@@ -219,6 +218,7 @@ export default {
 			};
 			var labelFromatter = {
 			    normal : {
+			    	color: '#FFCC33',
 			        label : {
 			            formatter : function (params){
 			                return ((1-(params.percent/100.00))*100.00).toFixed(2)+'%';
@@ -231,31 +231,34 @@ export default {
 			}
 			var labelBottom = {
 			    normal : {
-			        color: '#980000',
+			        color: '#3399FF',
 			        label : {
 			            show : true,
-			            position : 'center'
+			            position : 'center',
+			            textStyle: {
+			                baseline : 'bottom'
+			            }
 			        },
 			        labelLine : {
-			            show : false
-			        }
+                        show : false
+                    }
 			    }
 			};
 	        // 绘制图表
 	        myChart.setOption({
-	        	tooltip : {
+			    calculable : true,
+			    tooltip : {
 			        trigger: 'item',
 			        formatter: "{a} <br/>{b} : {c} ({d}%)"
 			    },
 			    toolbox: {
 			        show : false,
 			    },
-			    calculable : true,
 			    series : [
 			        {
 			            name:'投放',
 			            type:'pie',
-			            radius : ['50%', '70%'],
+			            radius : ['55%', '80%'],
 			            itemStyle : labelFromatter,
 			            data:[
 			                {value:this.delivery.actualConsume,name:'已投放',itemStyle:labelBottom},
