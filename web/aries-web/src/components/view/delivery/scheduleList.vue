@@ -278,11 +278,13 @@ export default {
 				        itemGap: 1,
 				        textStyle : {
 				            color : '#854836',
-				            fontSize :5
+				            fontSize :6,
+				            fontWeight : 500
 				        },
 				        subtextStyle: {
 					        color: '#854836' ,
-					        fontSize :5
+					        fontSize :6,
+					        fontWeight : 500
 					    }
 				    }
 	        })
