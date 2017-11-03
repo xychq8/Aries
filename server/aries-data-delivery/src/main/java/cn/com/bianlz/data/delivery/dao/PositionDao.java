@@ -11,5 +11,6 @@ import java.util.List;
  */
 @Repository
 public interface PositionDao {
-    public List<Position> getByPositionId(Long positionId);
+    List<Position> getByPositionId(Long positionId);
+    List<Position> getPositionByIds(List<Long> ids);
 }

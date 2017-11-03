@@ -27,5 +27,7 @@ public interface SchedulePositionDao {
     int updateByPrimaryKeySelective(SchedulePosition record);
 
     int updateByPrimaryKey(SchedulePosition record);
+
+    List<Long> selectDistinctPositionByDay(String day);
 }
 

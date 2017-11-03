@@ -43,4 +43,8 @@ public class DeliveryController {
         return deliveryServiceClient.getPositionById(uuid);
     }
 
+    @GetMapping(value={"/data/position/info"})
+    public Result getPositionInfo(){
+        return deliveryServiceClient.getPositionInfo();
+    }
 }

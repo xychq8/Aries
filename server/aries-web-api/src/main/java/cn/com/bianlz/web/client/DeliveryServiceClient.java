@@ -28,4 +28,8 @@ public interface DeliveryServiceClient {
 
     @RequestMapping(value={"/data/delivery/position/uuid/{uuid}"},method = RequestMethod.GET)
     public Result getPositionById(@PathVariable("uuid")Long uuid);
+
+    @RequestMapping(value={"/data/delivery/position/info"},method = RequestMethod.GET)
+    public Result getPositionInfo();
+
 }
