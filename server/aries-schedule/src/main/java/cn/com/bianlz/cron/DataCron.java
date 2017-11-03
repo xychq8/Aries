@@ -24,14 +24,14 @@ public class DataCron {
     private ConsumeStatisticsTask consumeStatisticsTask;
     @Autowired
     private ContextTask contextTask;
-    @Scheduled(cron = "0 */30 * * * * ")
+    @Scheduled(cron = "0 */1 * * * * ")
     public void schedule(){
-        scheduleTask.run();
+        //scheduleTask.run();
         contextTask.run();
     }
     @Scheduled(cron = "0 */10 * * * * ")
     public void consume(){
-        consumeStatisticsTask.run();
+        //consumeStatisticsTask.run();
     }
 
 }

@@ -45,6 +45,10 @@
             <groupId>cn.com.bianlz</groupId>
             <artifactId>aries-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.com.bianlz</groupId>
+            <artifactId>aries-data-delivery-api</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <finalName>aries-schedule</finalName>

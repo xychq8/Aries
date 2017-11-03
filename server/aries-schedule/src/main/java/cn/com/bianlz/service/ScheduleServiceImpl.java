@@ -51,15 +51,15 @@ public class ScheduleServiceImpl implements ScheduleService{
 
     @Override
     @Transactional
-    public void saveSchedulePosition(String date,Map<String,List<String>> positionContext){
+    public void saveSchedulePosition(String date,Map<String,Set<Long>> positionContext){
         schedulePositionDao.deleteByDay(date);
-        for(Map.Entry<String,List<String>> entry:positionContext.entrySet()){
+        for(Map.Entry<String,Set<Long>> entry:positionContext.entrySet()){
             String positionId = entry.getKey();
-            List<String> uuids = entry.getValue();
-            for(String uuid:uuids){
+            Set<Long> uuids = entry.getValue();
+            for(Long uuid:uuids){
                 SchedulePosition schedulePosition = new SchedulePosition();
                 schedulePosition.setDateStamp(date);
-                schedulePosition.setUuid(Long.valueOf(uuid));
+                schedulePosition.setUuid(uuid);
                 schedulePosition.setPositionId(Long.valueOf(positionId));
                 schedulePositionDao.insert(schedulePosition);
             }

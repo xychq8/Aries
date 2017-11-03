@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bianlz.dao.ContextTypeDao">
+  <resultMap id="Context" type="cn.com.bianlz.data.delivery.api.vo.ContextType">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uuid" jdbcType="BIGINT" property="uuid" />
+    <result column="order_type" jdbcType="INTEGER" property="orderType" />
+    <result column="date_stamp" jdbcType="VARCHAR" property="dateStamp" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+
+  <insert id="insert" parameterType="cn.com.bianlz.data.delivery.api.vo.ContextType">
+    insert into ad_nadp_context_type
+    (
+      id, uuid,order_type,
+      date_stamp, create_date
+    )
+    values
+    (
+      #{id,jdbcType=INTEGER}, #{uuid,jdbcType=BIGINT}, #{orderType,jdbcType=INTEGER},
+      #{dateStamp,jdbcType=VARCHAR},#{createDate,jdbcType=TIMESTAMP}
+    )
+  </insert>
+  <delete id="deleteByDay" parameterType="java.lang.String">
+    delete from ad_nadp_context_type
+    where date_stamp = #{day,jdbcType=VARCHAR}
+  </delete>
+</mapper>
