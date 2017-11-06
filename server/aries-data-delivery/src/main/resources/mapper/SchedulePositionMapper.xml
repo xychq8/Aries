@@ -110,7 +110,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectDistinctPositionByDay" parameterType="java.lang.String" resultType="java.lang.Long"  >
-    select distinct position_id as position_id FROM aries.ad_nadp_schedule_position
+    select distinct position_id as position_id FROM ad_nadp_schedule_position
     where date_stamp = #{dateStamp,jdbcType=VARCHAR}
   </select>
 </mapper>
