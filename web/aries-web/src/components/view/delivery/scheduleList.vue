@@ -159,7 +159,7 @@ export default {
     	handleConsume:function(uuid,cpm,repair){
     		getConsume(uuid).then(resp => {
     			if(resp.data){
-    				this.dialog.consumeDialogTableVisible = true;
+    				this.dialog.consumeDialogTableVisible=true
     			}
 		        if(JSON.parse(resp.data).consume){
 		        	this.delivery.consume = JSON.parse(resp.data).consume;

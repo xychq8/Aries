@@ -18,9 +18,15 @@
     <select id="getPositionByIds" parameterType="java.util.List" resultMap="positionMap" >
         select position_id,channel,category_name,location_name from ad_nadp_position
         where position_id in
-        <foreach item="item" collection="list" open="(" close=")" separator="," >
+        <foreach item="item" collection="ids" open="(" close=")" separator="," >
           #{item}
         </foreach>
+        <if test="apps!=null and app.size>0">
+            and chennel in
+            <foreach item="item" collection="apps" open="(" close=")" separator="," >
+                #{item}
+            </foreach>
+        </if>
         order by channel,category,location
     </select>
 </mapper>

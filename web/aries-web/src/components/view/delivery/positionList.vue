@@ -6,7 +6,14 @@
       			<el-col  :offset="1" class="toolbar" style="padding-top: 20px">
 					<el-form :inline="true" >
 						<el-form-item>
-							<el-input auto-complete="off" size="large" placeholder="uuid"  autosize style="width: 250px"></el-input>
+							<el-select v-model="filters.category" multiple placeholder="平台" style="width: 220px;height: 35px" >
+						    <el-option
+						      v-for="item in filters.categoryOps"
+						      :key="item.value"
+						      :label="item.label"
+						      :value="item.value">
+						    </el-option>
+						  </el-select>
 						</el-form-item>
 						<el-form-item>
 							<el-button type="primary" v-on:click="getData" >查询</el-button>
@@ -56,7 +63,20 @@ export default {
     name: 'scheduleList',
     data () {
        	return {
-       		tableData:[]
+       		tableData:[],
+       		filters:{
+				category:'',
+				categoryOps:[
+		        	{
+				        value: '7A16FBB6',
+				        label: '新闻客户端'
+			        },
+			        {
+				        value: '3E0F733C',
+				       	label: '邮箱大师'
+			        }
+			   	]
+       		}
     	}  
     },
     mounted:function(){
@@ -64,8 +84,12 @@ export default {
     },
     methods:{
     	getData:function(){
-    		getPositionInfo().then(resp => {
-    			if(resp.data){
+    		var param = [];
+    		if(this.filters.category && this.filters.category.length>0){
+    			param = this.filters.category;
+    		}
+    		getPositionInfo(param).then(resp => {
+    			if(resp && resp.data){
     				this.tableData = resp.data;
     			}
 	        })

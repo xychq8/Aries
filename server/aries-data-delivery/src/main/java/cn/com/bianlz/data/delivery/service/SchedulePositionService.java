@@ -13,5 +13,5 @@ import java.util.Map;
 public interface SchedulePositionService {
     List<Position> getById(Long uuid);
 
-    List<Map<String,Object>> getPositionInfo(String day);
+    List<Map<String,Object>> getPositionInfo(String day,List<String> apps);
 }

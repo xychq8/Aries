@@ -40,11 +40,11 @@ public class SchedulePositionServiceImpl implements SchedulePositionService{
     }
 
     @Override
-    public List<Map<String,Object>> getPositionInfo(String day) {
+    public List<Map<String,Object>> getPositionInfo(String day,List<String> apps) {
         Integer gdType = 1,ngdType = 2;
         List<Map<String,Object>> rtn = new ArrayList<Map<String, Object>>();
         List<Long> positionIds = schedulePositionDao.selectDistinctPositionByDay(day);
-        List<Position> positions = positionDao.getPositionByIds(positionIds);
+        List<Position> positions = positionDao.getPositionByIds(positionIds,apps);
         for(Position position:positions){
             Map<String,Object> map = new HashMap<String, Object>();
             map.put("position",position);

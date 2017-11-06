@@ -26,4 +26,4 @@ export let getConsumeByDay = (uuid,day) => { return axios.get(host_addr + `/data
 
 export let getPosition = (uuid) => { return axios.get(host_addr + `/data/position/uuid/`+ uuid ).then(res => res.data).catch(function(thrown){});};
 
-export let getPositionInfo = () => { return axios.get(host_addr + `/data/position/info`).then(res => res.data).catch(function(thrown){});};
+export let getPositionInfo = (param) => { return axios.post(host_addr + `/data/position/info`,param).then(res => res.data).catch(function(thrown){});};

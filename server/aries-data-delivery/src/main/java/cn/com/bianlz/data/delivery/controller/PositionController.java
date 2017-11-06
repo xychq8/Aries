@@ -47,7 +47,7 @@ public class PositionController {
         result.setCode(DataDeliveryApiProtocolCode.SUCCESS.getCode());
         result.setCode(DataDeliveryApiProtocolCode.FAIL.getMessage());
         try{
-            List<Map<String,Object>> infoList = schedulePositionService.getPositionInfo(date);
+            List<Map<String,Object>> infoList = schedulePositionService.getPositionInfo(date,apps);
             result.setData(infoList);
             result.setCode("DD10000");
         }catch (Exception ex){

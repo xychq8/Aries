@@ -1,6 +1,7 @@
 package cn.com.bianlz.data.delivery.dao;
 
 import cn.com.bianlz.data.delivery.api.vo.Position;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,5 +13,5 @@ import java.util.List;
 @Repository
 public interface PositionDao {
     List<Position> getByPositionId(Long positionId);
-    List<Position> getPositionByIds(List<Long> ids);
+    List<Position> getPositionByIds(@Param("ids") List<Long> ids,@Param("apps") List<String> apps);
 }
