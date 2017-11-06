@@ -4,12 +4,13 @@ import cn.com.bianlz.common.vo.Result;
 import cn.com.bianlz.web.client.DeliveryServiceClient;
 import cn.com.bianlz.web.common.Authorizition;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.net.URI;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by bianlanzhou on 17/10/17.
  * Description
@@ -43,8 +44,8 @@ public class DeliveryController {
         return deliveryServiceClient.getPositionById(uuid);
     }
 
-    @GetMapping(value={"/data/position/info"})
-    public Result getPositionInfo(){
-        return deliveryServiceClient.getPositionInfo();
+    @PostMapping(value={"/data/position/info"})
+    public Result getPositionInfo(@RequestBody  List<String> apps){
+        return deliveryServiceClient.getPositionInfo(apps);
     }
 }

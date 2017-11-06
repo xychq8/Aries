@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by bianlanzhou on 17/10/17.
  * Description
@@ -29,7 +32,7 @@ public interface DeliveryServiceClient {
     @RequestMapping(value={"/data/delivery/position/uuid/{uuid}"},method = RequestMethod.GET)
     public Result getPositionById(@PathVariable("uuid")Long uuid);
 
-    @RequestMapping(value={"/data/delivery/position/info"},method = RequestMethod.GET)
-    public Result getPositionInfo();
+    @RequestMapping(value={"/data/delivery/position/info"},method = RequestMethod.POST)
+    public Result getPositionInfo(List<String> apps);
 
 }
