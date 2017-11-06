@@ -13,7 +13,8 @@
 					<el-row>
 						<el-col>&nbsp;
 						</el-col>
-						<el-col>&nbsp;
+						<el-col>
+							媒介计划ID:{{delivery.uuid}}
 						</el-col>
 						<el-col>
 							投放曝光量:{{delivery.consume}}
@@ -116,7 +117,8 @@ export default {
         	delivery:{
         		consume:0,
         		actualConsume:0,
-        		unDeliveryNum:0
+        		unDeliveryNum:0,
+        		uuid:''
         	},
         	myChart:null
     	}  
@@ -157,9 +159,10 @@ export default {
 	        });
     	},
     	handleConsume:function(uuid,cpm,repair){
+    		console.log("u"+uuid)
     		getConsume(uuid).then(resp => {
     			if(resp.data){
-    				this.dialog.consumeDialogTableVisible=true
+    				this.dialog.consumeDialogTableVisible=true;
     			}
 		        if(JSON.parse(resp.data).consume){
 		        	this.delivery.consume = JSON.parse(resp.data).consume;
@@ -174,6 +177,8 @@ export default {
 		        
 	        }).then(()=>{
 	        	this.handleConsumeStat(cpm,repair);
+	        	this.delivery.uuid = uuid;
+	        	console.log("u2"+uuid)
 	        });
     	},
     	formatFrequence:function(row, column, cellValue){
