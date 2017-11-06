@@ -23,7 +23,7 @@
 	          	<el-table :data="tableData" style="width: 100%">
 				    <el-table-column type="expand">
 				      <template scope="props">
-				        <el-form label-position="left" inline class="demo-table-expand">
+				        <el-form label-position="left" inline class="position-table-expand">
 		          			<el-form-item label="保量计划数:">
 		            			<span>{{ props.row.gdSize }}</span>
 			         		</el-form-item>
@@ -106,14 +106,14 @@ export default {
  }
 </script>
 <style scoped>
-  .demo-table-expand {
+  .position-table-expand {
     font-size: 0;
   }
-  .demo-table-expand label {
+  .position-table-expand label {
     width: 90px;
     color: #99a9bf;
   }
-  .demo-table-expand .el-form-item {
+  .position-table-expand .el-form-item {
     margin-right: 0;
     margin-bottom: 0;
     width: 50%;
