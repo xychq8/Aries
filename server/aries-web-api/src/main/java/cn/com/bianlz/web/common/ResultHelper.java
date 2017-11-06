@@ -14,7 +14,9 @@ public class ResultHelper {
         if(userResult==null){
             result.setCode(WebApiProtocolCode.FAIL.getCode());
             result.setMessage(WebApiProtocolCode.FAIL.getMessage());
+            return result;
         }
+        result.setData(userResult.getData());
         if(UserProtocolCode.SUCCESS.getCode().equals(userResult.getCode())){
             result.setCode(WebApiProtocolCode.SUCCESS.getCode());
             result.setMessage(WebApiProtocolCode.SUCCESS.getMessage());
