@@ -34,14 +34,12 @@ public class ConsumeServiceImpl implements ConsumeService {
         List<Map<String,Long>> rtn = new ArrayList<Map<String, Long>>();
         String date = DateUtils.getYYMMDD(new Date());
         List<Schedule> scheduleList = scheduleService.getScheduleByDay(date);
-        int count = 0;
         for(Schedule schedule:scheduleList){
             try {
                 String json = Unirest.get("http://data.delivery.com/data/consume/"+schedule.getUuid()).asString().getBody();
                 Map<String,Long> map = GsonUtils.getInstances().fromJson(new TypeToken<Map<String,Long>>(){},json);
                 map.put("uuid",schedule.getUuid());
                 rtn.add(map);
-                System.out.println(count++);
                 TimeUnit.SECONDS.sleep(2);
             } catch (InterruptedException e) {
                 e.printStackTrace();
