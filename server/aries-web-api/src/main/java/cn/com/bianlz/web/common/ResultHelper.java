@@ -15,11 +15,10 @@ public class ResultHelper {
             result.setCode(WebApiProtocolCode.FAIL.getCode());
             result.setMessage(WebApiProtocolCode.FAIL.getMessage());
         }
-        result = userResult;
-        if(result.getCode().equals(UserProtocolCode.SUCCESS.getCode())){
+        if(UserProtocolCode.SUCCESS.getCode().equals(userResult.getCode())){
             result.setCode(WebApiProtocolCode.SUCCESS.getCode());
             result.setMessage(WebApiProtocolCode.SUCCESS.getMessage());
-        }else if(result.getCode().equals(DataDeliveryApiProtocolCode.SUCCESS.getCode())){
+        }else if(DataDeliveryApiProtocolCode.SUCCESS.getCode().equals(userResult.getCode())){
             result.setCode(WebApiProtocolCode.SUCCESS.getCode());
             result.setMessage(WebApiProtocolCode.SUCCESS.getMessage());
         }else{
