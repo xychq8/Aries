@@ -21,7 +21,7 @@
         <foreach item="item" collection="ids" open="(" close=")" separator="," >
           #{item}
         </foreach>
-        <if test="apps!=null and app.size>0">
+        <if test="apps!=null and apps.size>0">
             and chennel in
             <foreach item="item" collection="apps" open="(" close=")" separator="," >
                 #{item}
