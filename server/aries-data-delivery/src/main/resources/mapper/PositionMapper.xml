@@ -14,7 +14,7 @@
     <select id="getByPositionId" resultMap="positionMap" >
           select category,category_name,location,location_name,channel from ad_nadp_position
           where position_id = #{positionId,jdbcType=BIGINT}
-          order by channel asc
+          order by channel,category asc
     </select>
     <select id="getPositionByIds" parameterType="java.util.List" resultMap="positionMap" >
         select position_id,channel,category_name,location_name from ad_nadp_position
