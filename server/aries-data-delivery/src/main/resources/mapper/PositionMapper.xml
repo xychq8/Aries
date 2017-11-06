@@ -22,7 +22,7 @@
           #{item}
         </foreach>
         <if test="apps!=null and apps.size>0">
-            and chennel in
+            and channel in
             <foreach item="item" collection="apps" open="(" close=")" separator="," >
                 #{item}
             </foreach>
