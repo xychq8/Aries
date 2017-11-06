@@ -1,11 +1,14 @@
 package cn.com.bianlz.web.controller.login;
 
+import cn.com.bianlz.common.utils.GsonUtils;
 import cn.com.bianlz.common.utils.MD5Utils;
 import cn.com.bianlz.common.vo.Result;
 import cn.com.bianlz.user.api.protocol.UserProtocolCode;
 import cn.com.bianlz.web.client.UserServiceClient;
 import cn.com.bianlz.web.common.ResultHelper;
 import cn.com.bianlz.web.common.WebApiProtocolCode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +26,7 @@ import java.util.Map;
  */
 @RestController
 public class LoginController {
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
     @Autowired
     private UserServiceClient userServiceClient;
     @PostMapping(value="/login")
@@ -33,6 +37,7 @@ public class LoginController {
         }catch (Exception ex){
             ex.printStackTrace();
         }
+        logger.debug(" user login:"+GsonUtils.getInstances().toJson(userResult));
         return ResultHelper.getUserResult(userResult);
     }
 
