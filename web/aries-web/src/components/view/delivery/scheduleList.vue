@@ -50,7 +50,7 @@
 					</el-form>
 			  	</el-col>
 	          <!--工具条-->
-	          	<el-table :data="tableData"  style="width: 100%" v-loading="loading">
+	          	<el-table :data="tableData"  style="width: 100%" highlight-current-row v-loading="loading">
 	            	<el-table-column label="序号" width="70" >
 	                	<template scope="scope">
 	                    	{{scope.$index+1}}
