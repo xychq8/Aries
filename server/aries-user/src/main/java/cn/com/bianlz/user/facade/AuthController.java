@@ -5,6 +5,8 @@ import cn.com.bianlz.user.api.user.User;
 import cn.com.bianlz.user.common.RedisKeys;
 import cn.com.bianlz.user.api.protocol.UserProtocolCode;
 import cn.com.bianlz.user.service.LoginService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +22,16 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
     @Autowired
     private StringRedisTemplate template;
     @Autowired
     private LoginService loginService;
     @PostMapping(value="/login")
     public Result login(@RequestBody Map<String,String> param){
-        return loginService.login(param.get("username"),param.get("password"));
+        Result result = loginService.login(param.get("username"),param.get("password"));
+        logger.debug("login result:"+(result==null?"null":GsonUtils.getInstances().toJson(result)));
+        return result;
     }
 
     @GetMapping(value="/token/{token}")
