@@ -51,8 +51,8 @@
 			  	</el-col>
 	          <!--工具条-->
 	          	<el-table :data="tableData"  style="width: 100%" highlight-current-row v-loading="loading">
-	            	<el-table-column label="序号" width="70" >
-	                	<template scope="scope">
+	            	<el-table-column label="序号" width="70" fixed>
+	                	<template scope="scope" >
 	                    	{{scope.$index+1}}
 	                	</template>
 	            	</el-table-column>
@@ -60,7 +60,7 @@
 		            </el-table-column>
 		            <el-table-column prop="frequence" label="频次" width="80" :formatter="formatFrequence" >
 		            </el-table-column>
-		            <el-table-column prop="ideaType" label="素材类型" width="120">
+		            <el-table-column prop="ideaType" label="素材类型" width="180">
 		            </el-table-column>
 		            <el-table-column prop="castSpeed" label="速率" width="100">
 		            </el-table-column>
@@ -68,7 +68,7 @@
 		            </el-table-column>
 		            <el-table-column prop="repair" label="补量" width="80">
 		            </el-table-column>
-		            <el-table-column prop="hours" label="投放时间" >
+		            <el-table-column prop="hours" label="投放时间" width="620" >
 		            </el-table-column>
 		            <el-table-column
 		              fixed="right"
