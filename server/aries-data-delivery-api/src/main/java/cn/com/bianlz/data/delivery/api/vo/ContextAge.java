@@ -6,10 +6,10 @@ import java.util.Date;
  * Created by bianlanzhou on 17/11/3.
  * Description
  */
-public class ContextType {
+public class ContextAge {
     private Integer id;
     private Long uuid;
-    private Integer orderType;
+    private String age;
     private String dateStamp;
     private Date createDate = new Date();
 
@@ -29,12 +29,12 @@ public class ContextType {
         this.uuid = uuid;
     }
 
-    public Integer getOrderType() {
-        return orderType;
+    public String getAge() {
+        return age;
     }
 
-    public void setOrderType(Integer orderType) {
-        this.orderType = orderType;
+    public void setAge(String age) {
+        this.age = age;
     }
 
     public String getDateStamp() {

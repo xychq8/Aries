@@ -60,6 +60,36 @@ public class ContextTask implements ITask {
                 }catch (Exception ex){
                     ex.printStackTrace();
                 }
+                try{
+                    Map<String,Set<Long>> sexMap = castcontext.get("ad.nadp.castcontext.list.sex");
+                    contextService.saveContextSex(sexMap,date);
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+                try{
+                    Map<String,Set<Long>> areaMap = castcontext.get("ad.nadp.castcontext.list.area");
+                    contextService.saveContextArea(areaMap,date);
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+                try{
+                    Map<String,Set<Long>> osMap = castcontext.get("ad.nadp.castcontext.list.os");
+                    contextService.saveContextOs(osMap, date);
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+                try{
+                    Map<String,Set<Long>> ageMap = castcontext.get("ad.nadp.castcontext.list.age");
+                    contextService.saveContextAge(ageMap, date);
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+                try{
+                    Map<String,Set<Long>> networkMap = castcontext.get("ad.nadp.castcontext.list.network");
+                    contextService.saveContextNetwork(networkMap,date);
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
