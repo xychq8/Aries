@@ -60,6 +60,9 @@ public class ContextServiceImpl implements ContextService {
     }
 
     private String getContextVal(List list){
+        if(list==null||list.isEmpty()){
+            return "-";
+        }
         Object obj = list.get(0);
         if(obj==null){
             return "-";
