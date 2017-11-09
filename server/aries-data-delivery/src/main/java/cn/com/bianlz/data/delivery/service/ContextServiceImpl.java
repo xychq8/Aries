@@ -119,7 +119,7 @@ public class ContextServiceImpl implements ContextService {
         }else if(obj instanceof ContextArea){
             Integer areaId = ((ContextArea)obj).getArea();
             if(areaId==-1){
-                return "不限";
+                return "全国";
             }
             List<Area> areaList = areaDao.getAreaByIds(list);
             String areaStr = "";
