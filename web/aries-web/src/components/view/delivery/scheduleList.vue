@@ -68,7 +68,7 @@
 		            </el-table-column>
 		            <el-table-column prop="repair" label="补量" width="80">
 		            </el-table-column>
-		            <el-table-column prop="hours" label="投放时间" width="620" >
+		            <el-table-column prop="hours" label="投放时间" min-width="620" >
 		            </el-table-column>
 		            <el-table-column
 		              fixed="right"
