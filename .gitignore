@@ -16,3 +16,4 @@ server/aries-web-api/target
 server/aries-data-delivery/.idea
 server/aries-schedule/target
 server/aries-schedule/logs
+server/aries-web-api/logs

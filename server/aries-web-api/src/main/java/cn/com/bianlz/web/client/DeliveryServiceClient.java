@@ -36,6 +36,6 @@ public interface DeliveryServiceClient {
     public Result getPositionInfo(List<String> apps);
 
     @RequestMapping(value={"/data/delivery/context/all/{uuid}"},method = RequestMethod.GET)
-    public Result getContext(Long uuid);
+    public Result getContext(@PathVariable("uuid")Long uuid);
 
 }
