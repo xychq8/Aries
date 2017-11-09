@@ -24,7 +24,6 @@
 						</el-col>
 					</el-row>
 				</el-col>
-				
 			</el-row>
 			<span slot="footer" class="dialog-footer">
 		        <el-button type="primary" @click="dialog.consumeDialogTableVisible = false" >确 定</el-button>
@@ -36,6 +35,31 @@
     			<el-table-column property="categoryName" label="栏目" width="150"></el-table-column>
     			<el-table-column property="locationName" label="位置" width="200"></el-table-column>
   			</el-table>
+	    </el-dialog>
+	    <el-dialog title="定向" size="small" :visible.sync="dialog.directDialogTableVisible" top="30%" >
+			<el-form label-position="left" inline class="schedule-table-expand">
+		        <el-form-item label="年龄定向:">
+		            <span>{{direction.contextAge}}</span>
+			    </el-form-item>
+			    <el-form-item label="设备定向:">
+			        <span>{{direction.contextOs}}</span>
+			    </el-form-item>
+			    <el-form-item label="网络定向:">
+			        <span>{{direction.contextNetwork}}</span>
+			    </el-form-item>
+			    <el-form-item label="性别定向:">
+			        <span>{{direction.contextSex}}</span>
+			    </el-form-item>
+			    <el-form-item label="类型定向:">
+			        <span>{{direction.contextType}}</span>
+			    </el-form-item>
+			    <el-form-item label="地域定向:">
+			        <span>{{direction.contextArea}}</span>
+			    </el-form-item>
+			    <el-form-item label="兴趣定向:">
+			        <span>{{direction.contextInterest}}</span>
+			    </el-form-item>
+		    </el-form>
 	    </el-dialog>
 		<div class="row-fluid">
       		<div class="span12">
@@ -73,10 +97,11 @@
 		            <el-table-column
 		              fixed="right"
 		              label="操作"
-		              width="150">
+		              width="200">
 		              <template scope="scope">
 		                <el-button type="text" size="small" @click.native.prevent="handleConsume(scope.row.uuid,scope.row.cpm,scope.row.repair)" >实时投放</el-button>
 						<el-button type="text" size="small" @click.native.prevent="handleGetPosition(scope.row.uuid)" >投放位置</el-button>
+						<el-button type="text" size="small" @click.native.prevent="handleGetContext(scope.row.uuid)" >定向</el-button>
 		              </template>
 		            </el-table-column>
 	         	</el-table>
@@ -95,7 +120,7 @@
 	  </section>
 </template>
 <script>
-import {getSchedule,getConsume,getPosition} from "@/api/api";
+import {getSchedule,getConsume,getPosition,getContext} from "@/api/api";
 import {formatDate} from "@/components/view/common/date"
 import echarts from 'echarts';
 export default {
@@ -112,7 +137,8 @@ export default {
 			},
 			dialog:{
 				consumeDialogTableVisible:false,
-				positionDialogTableVisible:false
+				positionDialogTableVisible:false,
+				directDialogTableVisible:false
 			},
         	delivery:{
         		consume:0,
@@ -120,7 +146,16 @@ export default {
         		unDeliveryNum:0,
         		uuid:''
         	},
-        	myChart:null
+        	myChart:null,
+        	direction:{
+        		contextAge :'',
+        		contextOs:'',
+        		contextNetwork:'',
+        		contextSex:'',
+        		contextType:'',
+        		contextArea:'',
+        		contextInterest:''
+        	}
     	}  
     },
     mounted:function(){
@@ -295,9 +330,37 @@ export default {
 					    }
 				    }
 	        })
-    	}
+    	},
+    	handleGetContext:function(uuid){
+	    	getContext(uuid).then(resp => {
+	    		if(resp.data){
+
+	    			this.dialog.directDialogTableVisible = true; 
+	    			this.direction.contextAge = resp.data.contextAge;
+	    			this.direction.contextOs = resp.data.contextOs;
+	    			this.direction.contextNetwork = resp.data.contextNetwork;
+	    			this.direction.contextSex = resp.data.contextSex;
+	    			this.direction.contextType = resp.data.contextType;
+	    			this.direction.contextArea = resp.data.contextArea;
+	    			this.direction.contextInterest = resp.data.contextInterest;
+	    		}
+		    });
+	    }
     }
  }
 </script>
 <style scoped>
+  .schedule-table-expand {
+  	padding-left: 100px;
+    font-size: 0;
+  }
+  .schedule-table-expand label {
+    width: 90px;
+    color: #99a9bf;
+  }
+  .schedule-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%;
+  }
 </style>
