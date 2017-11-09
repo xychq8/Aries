@@ -90,6 +90,12 @@ public class ContextTask implements ITask {
                 }catch (Exception ex){
                     ex.printStackTrace();
                 }
+                try{
+                    Map<String,Set<Long>> interestMap = castcontext.get("ad.nadp.castcontext.list.interest");
+                    contextService.saveContextInterest(interestMap,date);
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

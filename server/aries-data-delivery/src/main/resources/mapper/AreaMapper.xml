@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bianlz.data.delivery.dao.AreaDao">
+    <resultMap id="areaMap" type="cn.com.bianlz.data.delivery.api.vo.Area">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="area_id" jdbcType="INTEGER" property="areaId" />
+        <result column="area_name" jdbcType="VARCHAR" property="areaName" />
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    </resultMap>
+    <select id="getAreaById" resultMap="areaMap" >
+          select * from ad_nadp_area where
+            area_id = #{code,jdbcType=VARCHAR}
+    </select>
+    <select id="getAreaByIds" parameterType="cn.com.bianlz.data.delivery.api.vo.ContextArea" resultMap="areaMap" >
+        select * from ad_nadp_area where
+        area_id in
+        <foreach item="item" collection="ids" open="(" close=")" separator="," >
+            #{item.area}
+        </foreach>
+    </select>
+</mapper>

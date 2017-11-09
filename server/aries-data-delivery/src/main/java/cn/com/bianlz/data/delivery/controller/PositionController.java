@@ -41,7 +41,6 @@ public class PositionController {
 
     @PostMapping(value={"/position/info"})
     public Result getById(@RequestBody List<String> apps){
-        System.out.println("arrays:"+Arrays.toString(apps.toArray()));
         String date = DateUtils.getYYMMDD(new Date());
         Result<List<Map<String,Object>>> result = new Result<List<Map<String,Object>>>();
         result.setCode(DataDeliveryApiProtocolCode.SUCCESS.getCode());

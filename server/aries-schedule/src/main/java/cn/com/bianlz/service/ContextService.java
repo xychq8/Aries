@@ -22,4 +22,6 @@ public interface ContextService {
     void saveContextNetwork(Map<String,Set<Long>> networkIndex,String date);
 
     void saveContextAge(Map<String,Set<Long>> ageIndex,String date);
+
+    void saveContextInterest(Map<String,Set<Long>> interestIndex,String date);
 }

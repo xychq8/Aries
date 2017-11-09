@@ -18,4 +18,10 @@
                           )
                           and order_type = #{orderType,jdbcType=INTEGER}
     </select>
+    <select id="getByUuid" resultMap="contextTypeMap" >
+        select * from ad_nadp_context_type where
+        uuid = #{uuid,jdbcType=BIGINT}
+        and
+        date_stamp = #{date,jdbcType=VARCHAR}
+    </select>
 </mapper>
