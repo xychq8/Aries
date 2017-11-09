@@ -35,4 +35,7 @@ public interface DeliveryServiceClient {
     @RequestMapping(value={"/data/delivery/position/info"},method = RequestMethod.POST)
     public Result getPositionInfo(List<String> apps);
 
+    @RequestMapping(value={"/data/delivery/context/all/{uuid}"},method = RequestMethod.GET)
+    public Result getContext(Long uuid);
+
 }

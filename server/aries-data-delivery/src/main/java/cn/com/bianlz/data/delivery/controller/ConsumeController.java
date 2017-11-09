@@ -25,17 +25,17 @@ public class ConsumeController {
     public Result<Object> getConsume(@PathVariable(value = "day",required = false)String day,@PathVariable(value = "uuid")Long uuid){
         Result<Object> result = new Result<Object>();
         result.setCode(DataDeliveryApiProtocolCode.SUCCESS.getCode());
-        result.setCode(DataDeliveryApiProtocolCode.FAIL.getMessage());
-        if(day==null){
-            try {
+        result.setCode(DataDeliveryApiProtocolCode.SUCCESS.getMessage());
+        try {
+            if(day==null){
                 result.setData(Unirest.get("http://data.delivery.com/data/consume/" + uuid).asString().getBody());
-            } catch (UnirestException e) {
-                e.printStackTrace();
-                result.setCode(DataDeliveryApiProtocolCode.FAIL.getCode());
-                result.setMessage(DataDeliveryApiProtocolCode.FAIL.getMessage());
+            }else{
+                result.setData(consumeService.getConsume(day, uuid));
             }
-        }else{
-            result.setData(consumeService.getConsume(day,uuid));
+        } catch (UnirestException e) {
+            e.printStackTrace();
+            result.setCode(DataDeliveryApiProtocolCode.FAIL.getCode());
+            result.setMessage(DataDeliveryApiProtocolCode.FAIL.getMessage());
         }
         return result;
     }

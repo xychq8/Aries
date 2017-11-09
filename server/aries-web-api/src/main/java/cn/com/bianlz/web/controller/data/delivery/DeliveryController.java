@@ -48,4 +48,10 @@ public class DeliveryController {
     public Result getPositionInfo(@RequestBody  List<String> apps){
         return deliveryServiceClient.getPositionInfo(apps);
     }
+
+
+    @GetMapping(value={"/data/context/all/{uuid}"})
+    public Result getPositionInfo(@PathVariable("uuid")Long uuid){
+        return deliveryServiceClient.getContext(uuid);
+    }
 }
