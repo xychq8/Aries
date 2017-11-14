@@ -107,8 +107,8 @@ public class ContextServiceImpl implements ContextService {
         Set<Long> iosSet = ifNullSetDefault(osIndex.get(ios.toString()));
         unlimitedSet.addAll(andriodSet);
         unlimitedSet.retainAll(iosSet);
-        andriodSet.retainAll(unlimitedSet);
-        iosSet.retainAll(unlimitedSet);
+        andriodSet.removeAll(unlimitedSet);
+        iosSet.removeAll(unlimitedSet);
         saveContextOs(unlimitedSet,unlimit,date);
         saveContextOs(andriodSet,andriod,date);
         saveContextOs(iosSet,ios,date);
