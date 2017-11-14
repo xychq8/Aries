@@ -73,7 +73,7 @@
 						</el-form-item>
 					</el-form>
 			  	</el-col>
-	          <!--工具条-->
+	          	<!--工具条-->
 	          	<el-table :data="tableData"  style="width: 100%" highlight-current-row v-loading="loading">
 	            	<el-table-column label="序号" width="70" fixed>
 	                	<template scope="scope" >
@@ -194,7 +194,6 @@ export default {
 	        });
     	},
     	handleConsume:function(uuid,cpm,repair){
-    		console.log("u"+uuid)
     		getConsume(uuid).then(resp => {
     			if(resp.data){
     				this.dialog.consumeDialogTableVisible=true;
@@ -213,7 +212,6 @@ export default {
 	        }).then(()=>{
 	        	this.handleConsumeStat(cpm,repair);
 	        	this.delivery.uuid = uuid;
-	        	console.log("u2"+uuid)
 	        });
     	},
     	formatFrequence:function(row, column, cellValue){

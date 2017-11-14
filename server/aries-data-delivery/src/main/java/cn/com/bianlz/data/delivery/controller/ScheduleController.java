@@ -8,6 +8,8 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,10 +29,12 @@ import java.util.Map;
  */
 @RestController
 public class ScheduleController {
+    private static final Logger logger = LoggerFactory.getLogger(ScheduleController.class);
     @Autowired
     private ScheduleService scheduleService;
     @GetMapping(value={"/schedule/list/{pageNum}/{pageSize}/{day}/{uuid}","/schedule/list/{pageNum}/{pageSize}/{day}"})
     public Result get(@PathVariable("pageNum") Integer pageNum,@PathVariable("pageSize") Integer pageSize,@PathVariable("day") String day,@PathVariable(value = "uuid",required = false) String uuid){
+        Long start = System.currentTimeMillis();
         Result<Map<String,Object>> result = new Result<Map<String, Object>>();
         result.setCode(DataDeliveryApiProtocolCode.SUCCESS.getCode());
         result.setCode(DataDeliveryApiProtocolCode.FAIL.getMessage());
@@ -52,6 +56,7 @@ public class ScheduleController {
             result.setCode(DataDeliveryApiProtocolCode.FAIL.getCode());
             result.setMessage(DataDeliveryApiProtocolCode.FAIL.getMessage());
         }
+        logger.debug("scheule list cast :" + (System.currentTimeMillis() - start ));
         return result;
     }
 
