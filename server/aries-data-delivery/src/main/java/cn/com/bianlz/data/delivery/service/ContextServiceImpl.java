@@ -112,11 +112,11 @@ public class ContextServiceImpl implements ContextService {
                 interest = ((ContextInterest)list.get(i)).getInterest();
                 List<Interest> interests = interestDao.getInterestByCode(interest);
                 if(interests!=null&&!interests.isEmpty()){
-                    interestsStr = interests.get(0) + "," + interestsStr;
+                    interestsStr = interestsStr + "," + interests.get(0).getName() ;
                 }
-                if(!"".equals(interestsStr)){
-                    interestsStr = interestsStr.replaceFirst(",","");
-                }
+            }
+            if(!"".equals(interestsStr)){
+                interestsStr = interestsStr.replaceFirst(",","");
             }
             return interestsStr;
         }else if(obj instanceof ContextArea){
