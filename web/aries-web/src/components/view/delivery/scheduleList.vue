@@ -29,11 +29,11 @@
 		        <el-button type="primary" @click="dialog.consumeDialogTableVisible = false" >确 定</el-button>
 			</span>
 	    </el-dialog>
-	    <el-dialog title="投放位置" size="tiny" :visible.sync="dialog.positionDialogTableVisible" top="30%" >
+	    <el-dialog title="投放位置" size="small" :visible.sync="dialog.positionDialogTableVisible" top="30%" >
 			<el-table :data="positionData">
     			<el-table-column property="channel" label="平台" width="150"></el-table-column>
-    			<el-table-column property="categoryName" label="栏目" width="150"></el-table-column>
-    			<el-table-column property="locationName" label="位置" width="200"></el-table-column>
+    			<el-table-column property="categoryName" label="栏目" ></el-table-column>
+    			<el-table-column property="locationName" label="位置" ></el-table-column>
   			</el-table>
 	    </el-dialog>
 	    <el-dialog title="定向" size="small" :visible.sync="dialog.directDialogTableVisible" top="30%" >
