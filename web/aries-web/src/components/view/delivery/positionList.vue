@@ -23,7 +23,7 @@
 	          	<el-table :data="tableData" style="width: 100%">
 				    <el-table-column type="expand">
 				      <template scope="props">
-				        <el-form label-position="left" inline class="position-table-expand">
+				        <el-form label-position="left" inline class="position-table-expand" >
 		          			<el-form-item label="保量计划数:">
 		            			<span>{{ props.row.gdSize }}</span>
 			         		</el-form-item>
@@ -31,10 +31,10 @@
 			            		<span>{{ props.row.ngdSize }}</span>
 			          		</el-form-item>
 			          		<el-form-item label="保量计划:">
-			            		<span>{{ props.row.gdUuids | nullToDefault }}</span>
+			            		<span class="content-span">{{ props.row.gdUuids | nullToDefault }}</span>
 			          		</el-form-item>
 			          		<el-form-item label="不保量计划:">
-			            		<span>{{ props.row.ngdUuids | nullToDefault }}</span>
+			            		<span class="content-span">{{ props.row.ngdUuids | nullToDefault }}</span>
 			          		</el-form-item>
 		        		</el-form>
 				      </template>
@@ -117,5 +117,8 @@ export default {
     margin-right: 0;
     margin-bottom: 0;
     width: 50%;
+  }
+  .position-table-expand .content-span{
+  	word-wrap : break-word ;overflow: hidden ;width: 410px;
   }
 </style>
