@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="form-actions">
-                    <span class="pull-left"><a href="#" @click="handleFormChange" class="flip-link btn btn-info" id="to-recover">Lost password?</a></span>
+                    <span class="pull-left"><a href="#" @click="handleFormChange" class="flip-link btn btn-info" id="to-recover" >Lost password?</a></span>
                     <span class="pull-right"><a href="javascript:;" id="" v-on:click="handleLogin()" class="btn btn-success"> Login</a></span>
                 </div>
             </form>

@@ -1,5 +1,5 @@
 <template>
-<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
+<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home" style="padding-left: 10px"></i> Dashboard</a>
   <ul>
     <li v-for="m1 in menus" class="submenu"> <a href="#"><i class="icon  icon-fire"></i> <span>{{m1.name}}</span> </a>
       <ul>
