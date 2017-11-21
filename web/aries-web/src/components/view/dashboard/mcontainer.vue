@@ -1,17 +1,20 @@
 <template>
-  <!--main-container-part-->
-  <div id="content">
-    <!--breadcrumbs-->
-    <div id="content-header">
-      <div id="breadcrumb"> <a v-on:click="backToHome" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
-    </div>
-    <!--End-breadcrumbs-->
-    <router-view></router-view>
+    <section class="content-container">
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>当前页</el-breadcrumb-item>
+      </el-breadcrumb>
+      <div>
+        <el-col :span="24">
+          <transition name="fade" mode="out-in">
+            <router-view></router-view>
+          </transition>
+        </el-col>
+      </div>
+    </section>
   </div>
-  <!--end-main-container-part-->
 </template>
 <script>
-
 export default {
   name: 'container',
   data () {
@@ -26,7 +29,6 @@ export default {
   }
 }
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 

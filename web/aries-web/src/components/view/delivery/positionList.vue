@@ -3,10 +3,10 @@
 	<section>
 		<div class="row-fluid">
       		<div class="span12">
-      			<el-col  :offset="1" class="toolbar" style="padding-top: 20px">
+      			<el-col :span="24" class="search-toolbar" >
 					<el-form :inline="true" >
 						<el-form-item>
-							<el-select v-model="filters.category" multiple placeholder="平台" style="width: 220px;height: 35px" >
+							<el-select v-model="filters.category" multiple placeholder="平台"  >
 						    <el-option
 						      v-for="item in filters.categoryOps"
 						      :key="item.value"
@@ -19,7 +19,7 @@
 							<el-button type="primary" v-on:click="getData" >查询</el-button>
 						</el-form-item>
 					</el-form>
-			  	</el-col>
+				</el-col>
 	          	<el-table :data="tableData" style="width: 100%">
 				    <el-table-column type="expand">
 				      <template scope="props">

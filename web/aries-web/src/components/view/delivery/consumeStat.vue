@@ -1,17 +1,17 @@
 <template>
   	<!--main-container-part-->
 	<section>
-		<el-col  :offset="1" class="toolbar" style="padding-top: 20px">
-			<el-form :inline="true" >
+		<el-col :span="24" class="search-toolbar" >
+			<el-form :inline="true"  >
 				<el-form-item>
-					<el-input auto-complete="off" size="large" placeholder="uuid" v-model="filters.uuid"  autosize style="width: 250px"></el-input>
-					</el-form-item>
-					<el-form-item>
-						<el-button type="primary" @click="getData" >查询</el-button>
-					</el-form-item>
+					<el-input auto-complete="off" size="medium" placeholder="uuid" v-model="filters.uuid"  ></el-input>
+				</el-form-item>
+				<el-form-item>
+						<el-button type="primary" v-on:click="getData" >查询</el-button>
+				</el-form-item>
 			</el-form>
 		</el-col>
-		<el-col  :offset="0" class="toolbar" style="padding-top: 20px">
+		<el-col  :offset="0"  style="padding-top: 20px">
 			<div id="myChart" style="width: 100%;height: 300px" ></div>
 		</el-col>
 	</section>

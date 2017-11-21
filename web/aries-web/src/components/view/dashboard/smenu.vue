@@ -1,13 +1,23 @@
 <template>
-<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home" style="padding-left: 10px"></i> Dashboard</a>
-  <ul>
-    <li v-for="m1 in menus" class="submenu"> <a href="#"><i class="icon  icon-fire"></i> <span>{{m1.name}}</span> </a>
-      <ul>
-        <li v-for="m2 in m1.subMenu" ><a v-on:click="jump(m2.path)" >{{m2.name}}</a></li>
-      </ul>
-    </li> 
-  </ul>
-</div>
+  <aside class="aries-menu-aside">
+    <el-menu default-active="2" class="el-menu-vertical-demo aries-menu" @select="handleSelect">
+      <template v-for="m1 in menus" >
+        <el-submenu :index="m1.id+''" >
+            <template slot="title">
+              <i class="icon icon-fire icon-fire-red"></i>
+              <span class="aries-menu-title" >{{m1.name}}</span>
+            </template>
+            <template v-for="m2 in m1.subMenu" >
+              <el-menu-item :index="m2.id+''">
+                <template>
+                  <span class="aries-menu-title" >{{m2.name}}</span>
+                </template>
+              </el-menu-item>
+            </template>
+        </el-submenu>
+      </template>
+    </el-menu>
+  </aside>
 </template>
 <script>
 import {getMenu} from "@/api/api";
@@ -15,14 +25,15 @@ export default {
   name: 'smenu',
   data () {
     return {
-      menus:[]
+      menus:[],
+      menuMap:{}
     };
   },
   mounted:function(){
       getMenu(this.$store.state.token).then(resp => {
           if(resp.code == 'W10000'){
               if(resp.data){
-                this.loadMenu(resp.data,this);
+                this.loadMenu(resp.data);
               }
           }else{
               
@@ -30,58 +41,32 @@ export default {
         });      
   },
   updated:function(){
-    this.bindMenuClick();
+    //this.bindMenuClick();
   },
   methods: {
       loadMenu:function(menus){
         this.menus = menus;
-      },
-      bindMenuClick:function(event){
-            // === Sidebar navigation === //
-            $('.submenu > a').click(function(e){ 
-              e.preventDefault();
-              var submenu = $(this).siblings('ul');
-              var li = $(this).parents('li');
-              var submenus = $('#sidebar li.submenu ul');
-              var submenus_parents = $('#sidebar li.submenu');
-              if(li.hasClass('open')){
-                if(($(window).width() > 768) || ($(window).width() < 479)) {
-                  submenu.slideUp();
-                } else {
-                  submenu.fadeOut(250);
+        var obj = {};
+        if(menus){
+          $.each(menus,function(index,m1){
+              $.each(m1.subMenu,function(index,m2){
+                if(!this.menuMap){
+                  this.menuMap = {};
                 }
-                li.removeClass('open');
-                li.removeClass('active');
-              }else{
-                if(($(window).width() > 768) || ($(window).width() < 479)) {
-                  submenus.slideUp();     
-                  submenu.slideDown();
-                } else {
-                  submenus.fadeOut(250);      
-                  submenu.fadeIn(250);
-                }
-                submenus_parents.removeClass('open');   
-                submenus_parents.removeClass('active');   
-                li.addClass('open');  
-                li.addClass('active');  
-              }
-            });
-            var ul = $('#sidebar > ul');            
-            $('#sidebar > a').click(function(e){
-              e.preventDefault();
-              var sidebar = $('#sidebar');
-              if(sidebar.hasClass('open')){
-                sidebar.removeClass('open');
-                ul.slideUp(250);
-              }else{
-                sidebar.addClass('open');
-                ul.slideDown(250);
-              }
-            });
+                obj[m2.id] = m2.path;
+              });
+          });
+        };
+        this.menuMap = obj;
       },
-      jump:function(_path){
-        this.$router.push({path: _path});
-      } 
+      handleSelect:function(key,keyPath){
+          if(this.menuMap){
+            if(this.menuMap[key]){
+              console.log(this.menuMap[key]);
+              this.$router.push({path:this.menuMap[key]})
+            }
+          }
+      }
   }
 }
 </script>

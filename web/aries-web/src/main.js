@@ -9,6 +9,7 @@ import axios from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import { Message } from 'element-ui'
+import 'font-awesome/css/font-awesome.min.css'
 
 Vue.use(ElementUI);
 Vue.config.productionTip = false
@@ -17,10 +18,12 @@ router.beforeEach((to, from, next) => {
       if(store.state.token){
         next();
       }else{
-        next({
+        next(
+        {
             path: '/',
             query: { redirect: to.fullPath }
-        })
+        }
+        )
       }
     }else{
       next();

@@ -61,12 +61,10 @@
 			    </el-form-item>
 		    </el-form>
 	    </el-dialog>
-		<div class="row-fluid">
-      		<div class="span12">
-      			<el-col  :offset="1" class="toolbar" style="padding-top: 20px">
-					<el-form :inline="true" >
+      			<el-col :span="24" class="search-toolbar" >
+					<el-form :inline="true"  >
 						<el-form-item>
-							<el-input auto-complete="off" size="large" placeholder="uuid" v-model="filters.uuid"  autosize style="width: 250px"></el-input>
+							<el-input auto-complete="off" size="medium" placeholder="uuid" v-model="filters.uuid"  ></el-input>
 						</el-form-item>
 						<el-form-item>
 							<el-button type="primary" v-on:click="getTableData" >查询</el-button>
@@ -105,18 +103,16 @@
 		              </template>
 		            </el-table-column>
 	         	</el-table>
-	        </div>
-	        <div class="block pagination-el">
+	        
 	          <el-pagination
 	          	@current-change="handleCurrentChange"
 	            layout="total, prev, pager, next"
 	            :total="count"
 				:current-page="currentPage"
 	            :page-size="10"
+	            class="block pagination-el"
 	            >
 	          </el-pagination>
-	        </div>
-	    </div>
 	  </section>
 </template>
 <script>
@@ -332,7 +328,6 @@ export default {
     	handleGetContext:function(uuid){
 	    	getContext(uuid).then(resp => {
 	    		if(resp.data){
-
 	    			this.dialog.directDialogTableVisible = true; 
 	    			this.direction.contextAge = resp.data.contextAge;
 	    			this.direction.contextOs = resp.data.contextOs;
@@ -348,17 +343,18 @@ export default {
  }
 </script>
 <style scoped>
-  .schedule-table-expand {
+.schedule-table-expand {
   	padding-left: 100px;
-    font-size: 0;
-  }
-  .schedule-table-expand label {
-    width: 90px;
-    color: #99a9bf;
-  }
-  .schedule-table-expand .el-form-item {
+	font-size: 0;
+}
+.schedule-table-expand label {
+   	width: 90px;
+   	color: #99a9bf;
+}
+.schedule-table-expand .el-form-item {
     margin-right: 0;
     margin-bottom: 0;
     width: 50%;
-  }
+}
+
 </style>
