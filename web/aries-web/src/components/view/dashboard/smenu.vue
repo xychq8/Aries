@@ -1,10 +1,10 @@
 <template>
   <aside class="aries-menu-aside">
-    <el-menu default-active="2" class="el-menu-vertical-demo aries-menu" @select="handleSelect">
+    <el-menu default-active="2" class="el-menu-vertical-demo aries-menu" @select="handleSelect" theme="light">
       <template v-for="m1 in menus" >
         <el-submenu :index="m1.id+''" >
             <template slot="title">
-              <i class="icon icon-fire icon-fire-red"></i>
+              <i class="fa fa-fire icon-fire-red"></i>
               <span class="aries-menu-title" >{{m1.name}}</span>
             </template>
             <template v-for="m2 in m1.subMenu" >
