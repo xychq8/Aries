@@ -62,7 +62,6 @@ export default {
       handleSelect:function(key,keyPath){
           if(this.menuMap){
             if(this.menuMap[key]){
-              console.log(this.menuMap[key]);
               this.$router.push({path:this.menuMap[key]})
             }
           }

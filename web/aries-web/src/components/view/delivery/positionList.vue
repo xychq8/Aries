@@ -31,10 +31,10 @@
 			            		<span>{{ props.row.ngdSize }}</span>
 			          		</el-form-item>
 			          		<el-form-item label="保量计划:">
-			            		<span class="content-span">{{ props.row.gdUuids | nullToDefault }}</span>
+			            		<span class="content-span" v-html="breakWord(nullToDefault(props.row.gdUuids))" ></span>
 			          		</el-form-item>
 			          		<el-form-item label="不保量计划:">
-			            		<span class="content-span">{{ props.row.ngdUuids | nullToDefault }}</span>
+			            		<span class="content-span" v-html="breakWord(nullToDefault(props.row.ngdUuids))" ></span>
 			          		</el-form-item>
 		        		</el-form>
 				      </template>
@@ -93,15 +93,34 @@ export default {
     				this.tableData = resp.data;
     			}
 	        })
-    	}
-    },
-    filters: {
+    	},
     	nullToDefault:function(value){
     		if(!value){
     			return '-';
     		}
     		return value;
+    	},
+    	breakWord:function(value){
+    		if(value){
+    			var arr = value.split(",");
+    			var strs = "";
+    			$.each(arr,function(index,str){
+    				if(index == 0){
+    					strs = str;
+    					return;
+    				}
+    				if(index>0&&(index%10==0)){
+    					strs = strs+","+"</br>"+str;
+    					return;
+    				}
+    				strs = strs+","+str;
+    			})
+    			return strs;
+    		}
     	}
+    },
+    filters: {
+    	
     }
  }
 </script>
@@ -119,6 +138,6 @@ export default {
     width: 50%;
   }
   .position-table-expand .content-span{
-  	word-wrap : break-word ;overflow: hidden ;width: 410px;
+  	word-wrap : break-word ;overflow: hidden ;width: 10px;
   }
 </style>
