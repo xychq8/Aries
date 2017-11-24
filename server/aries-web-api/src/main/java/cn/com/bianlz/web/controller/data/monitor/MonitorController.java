@@ -28,15 +28,16 @@ public class MonitorController {
             result.setMessage("计划不存在!");
             return result;
         }
-        List<Schedule> scheduleList = (List)(scheduleResult.getData().get("data"));
+        List<Map<String,Object>> scheduleList = (List)(scheduleResult.getData().get("data"));
         if(scheduleList.size()<=0){
             result.setCode(WebApiProtocolCode.FAIL.getCode());
             result.setMessage("计划不存在!");
             return result;
         }
-        Schedule schedule = scheduleList.get(0);
+
+        String hours= scheduleList.get(0).get("hours")+"";
         String currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)+"";
-        if(!Arrays.asList(schedule.getHours().split(",")).contains(currentHour)){
+        if(!Arrays.asList(hours.split(",")).contains(currentHour)){
             result.setCode(WebApiProtocolCode.FAIL.getCode());
             result.setMessage("不在投放时间!");
             return result;
