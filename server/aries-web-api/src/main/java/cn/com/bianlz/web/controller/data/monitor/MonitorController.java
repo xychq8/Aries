@@ -37,6 +37,9 @@ public class MonitorController {
 
         String hours= scheduleList.get(0).get("hours")+"";
         String currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)+"";
+        System.out.println("hours:"+hours);
+        System.out.println("current:"+currentHour);
+        System.out.println("contain:"+Arrays.asList(hours.split(",")).contains(currentHour));
         if(!Arrays.asList(hours.split(",")).contains(currentHour)){
             result.setCode(WebApiProtocolCode.FAIL.getCode());
             result.setMessage("不在投放时间!");
