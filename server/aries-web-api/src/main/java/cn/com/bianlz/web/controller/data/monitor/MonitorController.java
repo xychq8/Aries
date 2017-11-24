@@ -22,13 +22,19 @@ public class MonitorController {
     @GetMapping(value={"/monitor/consume/{uuid}"})
     public Result getComsumeMonitor(@PathVariable("uuid")Long uuid){
         Result result = new Result();
-        Result<List<Schedule>> scheduleResult = deliveryServiceClient.getScheduleById(1, 1, DateUtils.getYYMMDD(new Date()),uuid+"");
-        if(scheduleResult == null || scheduleResult.getData()==null||scheduleResult.getData().size()<=0){
+        Result<Map<String,Object>> scheduleResult = deliveryServiceClient.getScheduleById(1, 1, DateUtils.getYYMMDD(new Date()),uuid+"");
+        if(scheduleResult == null || scheduleResult.getData()==null||scheduleResult.getData()==null){
             result.setCode(WebApiProtocolCode.FAIL.getCode());
             result.setMessage("计划不存在!");
             return result;
         }
-        Schedule schedule = scheduleResult.getData().get(0);
+        List<Schedule> scheduleList = (List)(scheduleResult.getData().get("data"));
+        if(scheduleList.size()<=0){
+            result.setCode(WebApiProtocolCode.FAIL.getCode());
+            result.setMessage("计划不存在!");
+            return result;
+        }
+        Schedule schedule = scheduleList.get(0);
         String currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)+"";
         if(!Arrays.asList(schedule.getHours().split(",")).contains(currentHour)){
             result.setCode(WebApiProtocolCode.FAIL.getCode());
