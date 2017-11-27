@@ -66,7 +66,6 @@ export default {
           };
           this.menuMap = obj;
           this.menus = menus;
-          console.log(menus);
         });
       },
       handleSelect:function(key,keyPath){

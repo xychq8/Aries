@@ -101,7 +101,6 @@ export default {
                   breadcrumb.push(obj);
                 })
                 this.breadcrumb = breadcrumb;
-                console.log("breadcrumb:"+JSON.stringify(this.breadcrumb)); 
               }
               this.$router.push({path:this.menuMap[key].path})
             }
