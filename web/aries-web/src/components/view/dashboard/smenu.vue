@@ -4,8 +4,8 @@
       <template v-for="m1 in menus" >
         <el-submenu :index="m1.id+''" >
             <template slot="title">
-              <i class="fa fa-fire icon-fire-red"></i>
-              <span class="aries-menu-title" >{{m1.name}}</span>
+              <i :class="m1.icon"></i>&nbsp;
+              <span class="aries-menu-title">{{m1.name}}</span>
             </template>
             <template v-for="m2 in m1.subMenu" >
               <el-menu-item :index="m2.id+''">
@@ -20,7 +20,8 @@
   </aside>
 </template>
 <script>
-import {getMenu} from "@/api/api";
+import {getMenu,getIcon} from "@/api/api";
+import {formatDate} from "@/components/view/common/date"
 export default {
   name: 'smenu',
   data () {
@@ -45,19 +46,28 @@ export default {
   },
   methods: {
       loadMenu:function(menus){
-        this.menus = menus;
         var obj = {};
-        if(menus){
-          $.each(menus,function(index,m1){
-              $.each(m1.subMenu,function(index,m2){
-                if(!this.menuMap){
-                  this.menuMap = {};
+        getIcon().then(resp => {
+          var icon = resp.data;
+          if(menus){
+            $.each(menus,function(index,m1){
+                if(icon[m1["id"]]){
+                  m1.icon = icon[m1["id"]].icon;
+                }else{
+                  m1.icon = icon["default"].icon;
                 }
-                obj[m2.id] = m2.path;
-              });
-          });
-        };
-        this.menuMap = obj;
+                $.each(m1.subMenu,function(index,m2){
+                  if(!this.menuMap){
+                    this.menuMap = {};
+                  }
+                  obj[m2.id] = m2.path;
+                });
+            });
+          };
+          this.menuMap = obj;
+          this.menus = menus;
+          console.log(menus);
+        });
       },
       handleSelect:function(key,keyPath){
           if(this.menuMap){

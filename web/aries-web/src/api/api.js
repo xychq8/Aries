@@ -3,6 +3,7 @@ import axios from 'axios';
 const host_addr = 'http://10.234.138.164:8082/api'
 //const host_addr = 'http://localhost:8082/api'
 
+export let getIcon = () => { return axios.get(`/static/icon.json`).then(res => res).catch(function(thrown){});};
 
 export let login = params => { return axios.post(host_addr + `/login`, params).then(res => res.data).catch(function(thrown){});};
 

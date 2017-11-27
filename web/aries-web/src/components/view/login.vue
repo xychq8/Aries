@@ -9,7 +9,7 @@
         <el-input type="password" v-model="user.password" auto-complete="off" placeholder="密码"></el-input>
       </el-form-item>
       <el-form-item style="width:100%;">
-        <el-button type="primary" style="width:100%;" @click.native.prevent="handleLogin" >登录</el-button>
+        <el-button type="primary" style="width:100%;" @click.native.prevent="handleLogin" v-loading="loading" >登录</el-button>
       </el-form-item>
     </el-form>
   </section>
@@ -21,11 +21,11 @@ export default {
   name: 'login',
   data () {
     return {
-      showForm : true,
       user : {
         username : '',
         password : ''
-      }
+      },
+      loading:false
     }
   },  
   methods:{
@@ -46,8 +46,10 @@ export default {
             });
             return;
         }
+        this.loading = true;
         var loginParams = { username : this.user.username, password : this.user.password};
         login(loginParams).then(resp => {
+            this.loading = false;
             if(resp&&resp.code&&resp.code == 'W10000'){
                 this.$store.commit(types.LOGIN,resp.data.token)
                 this.$router.push({
@@ -62,10 +64,7 @@ export default {
                     });
                 }
             }
-      });  
-    },
-    handleFormChange:function(){
-      this.showForm = !this.showForm;
+        });  
     }
   }
 }

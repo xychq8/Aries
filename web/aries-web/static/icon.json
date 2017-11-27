@@ -1,0 +1,12 @@
+{
+    "default":{
+    	"icon":"fa fa-fire"
+    },
+    "3": {
+        "icon": "fa fa-user-o"
+    },
+    "6": {
+        "icon": "fa fa-truck"
+    }
+
+}
