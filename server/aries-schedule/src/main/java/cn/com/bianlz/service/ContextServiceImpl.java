@@ -34,20 +34,25 @@ public class ContextServiceImpl implements ContextService {
         Integer gdType = 1,ngdType = 2;
         contextTypeDao.deleteByDay(date);
         ContextType contextType = null;
-        for(Long uuid:gdSet){
-            contextType = new ContextType();
-            contextType.setDateStamp(date);
-            contextType.setUuid(uuid);
-            contextType.setOrderType(gdType);
-            contextTypeDao.insert(contextType);
+        if(gdSet!=null){
+            for(Long uuid:gdSet){
+                contextType = new ContextType();
+                contextType.setDateStamp(date);
+                contextType.setUuid(uuid);
+                contextType.setOrderType(gdType);
+                contextTypeDao.insert(contextType);
+            }
         }
-        for(Long uuid:ngdSet){
-            contextType = new ContextType();
-            contextType.setDateStamp(date);
-            contextType.setUuid(uuid);
-            contextType.setOrderType(ngdType);
-            contextTypeDao.insert(contextType);
+        if(ngdSet!=null){
+            for(Long uuid:ngdSet){
+                contextType = new ContextType();
+                contextType.setDateStamp(date);
+                contextType.setUuid(uuid);
+                contextType.setOrderType(ngdType);
+                contextTypeDao.insert(contextType);
+            }
         }
+
     }
 
     @Override

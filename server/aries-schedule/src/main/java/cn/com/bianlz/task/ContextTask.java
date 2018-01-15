@@ -36,7 +36,7 @@ public class ContextTask implements ITask {
                     return;
                 }
                 try{
-                    Map<String,Set<Long>> positionMap = castcontext.get("ad.nadp.castcontext.list.position");
+                    Map<String,Set<Long>> positionMap = castcontext.get("position");
                     if(positionMap==null&&positionMap.isEmpty()){
                         return;
                     }
@@ -45,53 +45,45 @@ public class ContextTask implements ITask {
                     ex.printStackTrace();
                 }
                 try{
-                    Map<String,Set<Long>> gdMap = castcontext.get("ad.nadp.castcontext.list.gd");
-                    Map<String,Set<Long>> ngdMap = castcontext.get("ad.nadp.castcontext.list.ngd");
-                    Set<Long> gdSet = new HashSet<Long>();
-                    Set<Long> ngdSet = new HashSet<Long>();
-                    for(Set<Long> set:gdMap.values()){
-                        gdSet.addAll(set);
-                    }
-                    for(Set<Long> set:ngdMap.values()){
-                        ngdSet.addAll(set);
-
-                    }
+                    Map<String,Set<Long>> orderType = castcontext.get("orderType");
+                    Set<Long> gdSet = orderType.get("GD");
+                    Set<Long> ngdSet = orderType.get("NGD");
                     contextService.saveContextType(gdSet,ngdSet,date);
                 }catch (Exception ex){
                     ex.printStackTrace();
                 }
                 try{
-                    Map<String,Set<Long>> sexMap = castcontext.get("ad.nadp.castcontext.list.sex");
+                    Map<String,Set<Long>> sexMap = castcontext.get("sex");
                     contextService.saveContextSex(sexMap,date);
                 }catch (Exception ex){
                     ex.printStackTrace();
                 }
                 try{
-                    Map<String,Set<Long>> areaMap = castcontext.get("ad.nadp.castcontext.list.area");
+                    Map<String,Set<Long>> areaMap = castcontext.get("area");
                     contextService.saveContextArea(areaMap,date);
                 }catch (Exception ex){
                     ex.printStackTrace();
                 }
                 try{
-                    Map<String,Set<Long>> osMap = castcontext.get("ad.nadp.castcontext.list.os");
+                    Map<String,Set<Long>> osMap = castcontext.get("os");
                     contextService.saveContextOs(osMap, date);
                 }catch (Exception ex){
                     ex.printStackTrace();
                 }
                 try{
-                    Map<String,Set<Long>> ageMap = castcontext.get("ad.nadp.castcontext.list.age");
+                    Map<String,Set<Long>> ageMap = castcontext.get("age");
                     contextService.saveContextAge(ageMap, date);
                 }catch (Exception ex){
                     ex.printStackTrace();
                 }
                 try{
-                    Map<String,Set<Long>> networkMap = castcontext.get("ad.nadp.castcontext.list.network");
+                    Map<String,Set<Long>> networkMap = castcontext.get("network");
                     contextService.saveContextNetwork(networkMap,date);
                 }catch (Exception ex){
                     ex.printStackTrace();
                 }
                 try{
-                    Map<String,Set<Long>> interestMap = castcontext.get("ad.nadp.castcontext.list.interest");
+                    Map<String,Set<Long>> interestMap = castcontext.get("interest");
                     contextService.saveContextInterest(interestMap,date);
                 }catch (Exception ex){
                     ex.printStackTrace();
