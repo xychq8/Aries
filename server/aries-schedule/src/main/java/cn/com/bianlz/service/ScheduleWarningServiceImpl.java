@@ -100,7 +100,7 @@ public class ScheduleWarningServiceImpl implements ScheduleWarningService {
             }
             warning.setActualConsume(consume.getActualConsume());
             warning.setCpm(schedule.getCpm().longValue()+schedule.getRepair().longValue());
-            warning.setPercent((int)Math.ceil(percent*100)+"%");
+            warning.setPercent((int)Math.ceil(percent*100));
             scheduleWarningDao.insert(warning);
         }
     }

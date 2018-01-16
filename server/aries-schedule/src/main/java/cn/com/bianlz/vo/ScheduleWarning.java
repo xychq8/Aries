@@ -9,7 +9,7 @@ public class ScheduleWarning {
     private String location;
     private Long cpm;
     private Long actualConsume;
-    private String percent;
+    private Integer percent;
     private String dateStamp;
     private Date createDate = new Date();
 
@@ -61,11 +61,11 @@ public class ScheduleWarning {
         this.actualConsume = actualConsume;
     }
 
-    public String getPercent() {
+    public Integer getPercent() {
         return percent;
     }
 
-    public void setPercent(String percent) {
+    public void setPercent(Integer percent) {
         this.percent = percent;
     }
 
