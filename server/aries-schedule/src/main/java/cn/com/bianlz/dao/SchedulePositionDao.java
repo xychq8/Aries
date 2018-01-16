@@ -1,7 +1,10 @@
 package cn.com.bianlz.dao;
 
 import cn.com.bianlz.vo.SchedulePosition;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created by bianlanzhou on 17/11/1.
@@ -22,5 +25,7 @@ public interface SchedulePositionDao {
     int updateByPrimaryKeySelective(SchedulePosition record);
 
     int updateByPrimaryKey(SchedulePosition record);
+
+    List<SchedulePosition> getByUuid(@Param("uuid")Long uuid, @Param("dateStamp")String dateStamp);
 }
 

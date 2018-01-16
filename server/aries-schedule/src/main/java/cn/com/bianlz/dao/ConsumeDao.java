@@ -14,4 +14,5 @@ public interface ConsumeDao {
     List<Consume> selectByDay(String day);
     int insert(Consume consume);
     int deleteByDay(String day);
+    List<Consume> selectRecentActualConsume(Long uuid);
 }

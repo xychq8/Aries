@@ -73,7 +73,14 @@ public class ConsumeServiceImpl implements ConsumeService {
         }
     }
 
-
+    @Override
+    public Consume getRecentActualConsume(Long uuid){
+        List<Consume> consumes = consumeDao.selectRecentActualConsume(uuid);
+        if(null!=consumes&&consumes.size()>0){
+            return consumes.get(0);
+        }
+        return null;
+    }
 
 
 }

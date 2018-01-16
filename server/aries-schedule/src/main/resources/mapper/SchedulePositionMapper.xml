@@ -94,4 +94,7 @@
       create_date = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getByUuid" resultMap="BaseResultMap" >
+    select * from ad_nadp_schedule_position where uuid = #{uuid,jdbcType=BIGINT} and date_stamp = #{dateStamp,jdbcType=VARCHAR}
+  </select>
 </mapper>
