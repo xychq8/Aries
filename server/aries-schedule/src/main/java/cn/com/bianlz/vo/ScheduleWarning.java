@@ -12,6 +12,7 @@ public class ScheduleWarning {
     private Integer percent;
     private String dateStamp;
     private Date createDate = new Date();
+    private String reason;
 
     public Long getId() {
         return id;
@@ -85,6 +86,14 @@ public class ScheduleWarning {
         this.createDate = createDate;
     }
 
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
     @Override
     public String toString() {
         return "ScheduleWarning{" +
@@ -94,9 +103,10 @@ public class ScheduleWarning {
                 ", location='" + location + '\'' +
                 ", cpm=" + cpm +
                 ", actualConsume=" + actualConsume +
-                ", percent='" + percent + '\'' +
+                ", percent=" + percent +
                 ", dateStamp='" + dateStamp + '\'' +
                 ", createDate=" + createDate +
+                ", reason='" + reason + '\'' +
                 '}';
     }
 }

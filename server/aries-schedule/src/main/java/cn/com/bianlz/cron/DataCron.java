@@ -7,6 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import sun.util.resources.cldr.aa.CalendarData_aa_DJ;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by bianlanzhou on 17/10/9.
@@ -38,6 +43,12 @@ public class DataCron {
     @Scheduled(cron = "0 */30 * * * * ")
     public void diagnosis(){
         doctorTask.run();
+    }
+
+
+    public static void main(String[] args) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(sdf.format(new Date(1515657153946l)));
     }
 
 }

@@ -17,13 +17,13 @@
   </sql>
   <insert id="insert" parameterType="cn.com.bianlz.vo.ScheduleWarning">
     INSERT INTO `ad_nadp_schedule_warning`
-    (`uuid`,`category`, `location`, `cpm`, `actual_consume`, `percent`, `date_stamp`)
+    (`uuid`,`category`, `location`, `cpm`, `actual_consume`, `percent`, `date_stamp`, `reason`)
     VALUES
     (
       #{uuid,jdbcType=BIGINT}, #{category,jdbcType=VARCHAR},
       #{location,jdbcType=VARCHAR},#{cpm,jdbcType=BIGINT},
       #{actualConsume,jdbcType=BIGINT},#{percent,jdbcType=VARCHAR},
-      #{dateStamp,jdbcType=VARCHAR}
+      #{dateStamp,jdbcType=VARCHAR},#{reason,jdbcType=VARCHAR}
     )
   </insert>
   <delete id="deleteByDatestamp" parameterType="java.lang.String">

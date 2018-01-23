@@ -1,6 +1,7 @@
 package cn.com.bianlz.service;
 
 import cn.com.bianlz.common.utils.DateUtils;
+import cn.com.bianlz.common.utils.GsonUtils;
 import cn.com.bianlz.dao.PositionDao;
 import cn.com.bianlz.dao.SchedulePositionDao;
 import cn.com.bianlz.dao.ScheduleWarningDao;
@@ -8,6 +9,10 @@ import cn.com.bianlz.vo.Consume;
 import cn.com.bianlz.vo.Schedule;
 import cn.com.bianlz.vo.SchedulePosition;
 import cn.com.bianlz.vo.ScheduleWarning;
+import com.google.gson.reflect.TypeToken;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,16 +33,25 @@ public class ScheduleWarningServiceImpl implements ScheduleWarningService {
     @Autowired
     private ConsumeService consumeService;
 
-
     @Transactional
     public void warning(){
         //对已经投放了时间大于百分之30的进行校验   如果投放的回量小于百分之10的进行提示
+        Map<String,List<Map<String,Object>>> ideaMap = null;
         int currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         String date = DateUtils.getYYMMDD(new Date());
         Double timeRedLine = .3D;
         Double consumeRedLine = .1D;
         List<Schedule> scheduleList = scheduleService.getScheduleByDay(date);
         scheduleWarningDao.deleteByDatestamp(date);
+        //idea 校验
+        try {
+            String content = Unirest.get("http://c.ka.163.com/mf/mfm?querys=ideaMap").asString().getBody();
+            Map<String,Map<String,List<Map<String,Object>>>> ideaTotalMap = GsonUtils.getInstances().fromJson(new TypeToken<Map<String,Map<String,List<Map<String,Object>>>>>(){},content);
+            ideaMap = ideaTotalMap.get("ideaMap");
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        }
+
         for(Schedule schedule : scheduleList){
             Double timePer = 0d;
             Double passed = 0d;
@@ -72,7 +86,7 @@ public class ScheduleWarningServiceImpl implements ScheduleWarningService {
                             Double perD = consume.getActualConsume()/cpm;
                             if(perD < consumeRedLine){
                                 //save
-                                this.save(schedule,consume,perD);
+                                this.save(schedule,consume,perD,ideaMap);
                             }
                         }
                     }
@@ -81,7 +95,7 @@ public class ScheduleWarningServiceImpl implements ScheduleWarningService {
 
         }
     }
-    private void save(Schedule schedule,Consume consume,Double percent){
+    private void save(Schedule schedule,Consume consume,Double percent,Map<String,List<Map<String,Object>>> ideaMap){
         String date = DateUtils.getYYMMDD(new Date());
         ScheduleWarning warning = new ScheduleWarning();
         warning.setDateStamp(date);
@@ -97,6 +111,11 @@ public class ScheduleWarningServiceImpl implements ScheduleWarningService {
                 if(null!=position.get(0).get("location_name")){
                     warning.setLocation(position.get(0).get("location_name")+"");
                 }
+            }
+            //check idea
+            String posKey = schedule.getUuid() + ":" + positionId;
+            if(ideaMap==null || ideaMap.get(posKey) == null || ideaMap.get(posKey).size()<=0){
+                warning.setReason("没有素材!");
             }
             warning.setActualConsume(consume.getActualConsume());
             warning.setCpm(schedule.getCpm().longValue()+schedule.getRepair().longValue());
