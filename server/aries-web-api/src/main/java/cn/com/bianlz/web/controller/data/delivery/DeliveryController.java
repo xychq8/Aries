@@ -85,6 +85,12 @@ public class DeliveryController {
                 e.printStackTrace();
             }
         }
+    }
 
+
+    @GetMapping(value={"/data/warning/indexes"})
+    public Result getDeliveryIndexes(){
+        String date = DateUtils.getYYMMDD(new Date());
+        return deliveryServiceClient.getScheduleIndex(date);
     }
 }

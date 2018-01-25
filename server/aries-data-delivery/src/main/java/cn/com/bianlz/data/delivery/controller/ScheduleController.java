@@ -71,4 +71,23 @@ public class ScheduleController {
         }
         return result;
     }
+
+
+
+
+    @GetMapping(value={"/schedule/indexes/dateStamp/{dateStamp}"})
+    public Result<Map<String,Integer>> getScheduleIndex(@PathVariable("dateStamp")String dateStamp){
+        Result<Map<String,Integer>> result = new Result<Map<String,Integer>>();
+        result.setCode(DataDeliveryApiProtocolCode.SUCCESS.getCode());
+        result.setMessage(DataDeliveryApiProtocolCode.SUCCESS.getMessage());
+        try {
+            if(dateStamp!=null){
+                result.setData(scheduleService.getScheduleIndex(dateStamp));
+            }
+        }catch (Exception ex){
+            result.setCode(DataDeliveryApiProtocolCode.FAIL.getCode());
+            result.setMessage(DataDeliveryApiProtocolCode.FAIL.getMessage());
+        }
+        return result;
+    }
 }

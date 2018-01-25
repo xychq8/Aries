@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by bianlanzhou on 17/10/17.
@@ -39,5 +40,8 @@ public interface DeliveryServiceClient {
 
     @RequestMapping(value={"/data/delivery/schedule/warning/getWarnningByDatestamp/{dateStamp}"},method = RequestMethod.GET)
     public Result<List<ScheduleWarning>> getWarnning(@PathVariable("dateStamp")String dateStamp);
+
+    @RequestMapping(value={"/data/delivery/schedule/indexes/dateStamp/{dateStamp}"},method = RequestMethod.GET)
+    public Result<Map<String,Integer>> getScheduleIndex(@PathVariable("dateStamp")String dateStamp);
 
 }

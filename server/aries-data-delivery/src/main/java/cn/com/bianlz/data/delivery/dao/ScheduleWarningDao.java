@@ -8,4 +8,6 @@ import java.util.List;
 @Repository
 public interface ScheduleWarningDao {
     List<ScheduleWarning> getByDay(String dateStamp);
+    int getWarningPositionIndex(String dateStamp);
+    int getWarningIndex(String dateStamp);
 }

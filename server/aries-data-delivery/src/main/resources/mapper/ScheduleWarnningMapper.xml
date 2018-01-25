@@ -18,4 +18,14 @@
             date_stamp = #{dateStamp,jdbcType=VARCHAR}
     </select>
 
+    <select id="getWarningPositionIndex" resultMap="java.lang.Integer" >
+        select count(1) as pos_index from (SELECT category,location FROM ad_nadp_schedule_warning where
+        date_stamp = #{dateStamp,jdbcType=VARCHAR} group by category,location) a
+    </select>
+
+    <select id="getWarningIndex" resultMap="java.lang.Integer" >
+        SELECT count(1) as warn_index FROM ad_nadp_schedule_warning where
+        date_stamp = #{dateStamp,jdbcType=VARCHAR}
+    </select>
+
 </mapper>
