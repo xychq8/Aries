@@ -3,6 +3,7 @@ package cn.com.bianlz.data.delivery.controller;
 import cn.com.bianlz.common.vo.Result;
 import cn.com.bianlz.data.delivery.api.vo.DataDeliveryApiProtocolCode;
 import cn.com.bianlz.data.delivery.api.vo.Schedule;
+import cn.com.bianlz.data.delivery.api.vo.ScheduleWarning;
 import cn.com.bianlz.data.delivery.service.ScheduleService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -32,6 +33,7 @@ public class ScheduleController {
     private static final Logger logger = LoggerFactory.getLogger(ScheduleController.class);
     @Autowired
     private ScheduleService scheduleService;
+
     @GetMapping(value={"/schedule/list/{pageNum}/{pageSize}/{day}/{uuid}","/schedule/list/{pageNum}/{pageSize}/{day}"})
     public Result get(@PathVariable("pageNum") Integer pageNum,@PathVariable("pageSize") Integer pageSize,@PathVariable("day") String day,@PathVariable(value = "uuid",required = false) String uuid){
         Long start = System.currentTimeMillis();
@@ -60,4 +62,19 @@ public class ScheduleController {
         return result;
     }
 
+    @GetMapping(value={"/schedule/warning/getByDatestamp/{dateStamp}"})
+    public Result<List<ScheduleWarning>> getWarnning(@PathVariable("dateStamp")String dateStamp){
+        Result<List<ScheduleWarning>> result = new Result<List<ScheduleWarning>>();
+        result.setCode(DataDeliveryApiProtocolCode.SUCCESS.getCode());
+        result.setCode(DataDeliveryApiProtocolCode.FAIL.getMessage());
+        try {
+            if(dateStamp!=null){
+                result.setData(scheduleService.getByDay(dateStamp));
+            }
+        }catch (Exception ex){
+            result.setCode(DataDeliveryApiProtocolCode.FAIL.getCode());
+            result.setMessage(DataDeliveryApiProtocolCode.FAIL.getMessage());
+        }
+        return result;
+    }
 }

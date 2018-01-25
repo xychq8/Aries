@@ -1,6 +1,7 @@
 package cn.com.bianlz.data.delivery.service;
 
 import cn.com.bianlz.data.delivery.api.vo.Schedule;
+import cn.com.bianlz.data.delivery.api.vo.ScheduleWarning;
 
 import java.util.List;
 
@@ -9,5 +10,6 @@ import java.util.List;
  * Description
  */
 public interface ScheduleService {
-    public List<Schedule> get(Schedule schedule);
+    List<Schedule> get(Schedule schedule);
+    List<ScheduleWarning> getByDay(String dateStamp);
 }
