@@ -4,7 +4,6 @@ import cn.com.bianlz.data.delivery.api.vo.Schedule;
 import cn.com.bianlz.data.delivery.api.vo.ScheduleWarning;
 import cn.com.bianlz.data.delivery.dao.ScheduleDao;
 import cn.com.bianlz.data.delivery.dao.ScheduleWarningDao;
-import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +26,6 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public List<ScheduleWarning> getByDay(String dateStamp) {
-        return null;
+        return scheduleWarningDao.getByDay(dateStamp);
     }
 }

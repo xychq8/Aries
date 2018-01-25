@@ -7,19 +7,13 @@ import cn.com.bianlz.data.delivery.api.vo.ScheduleWarning;
 import cn.com.bianlz.data.delivery.service.ScheduleService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,7 +60,7 @@ public class ScheduleController {
     public Result<List<ScheduleWarning>> getWarnning(@PathVariable("dateStamp")String dateStamp){
         Result<List<ScheduleWarning>> result = new Result<List<ScheduleWarning>>();
         result.setCode(DataDeliveryApiProtocolCode.SUCCESS.getCode());
-        result.setCode(DataDeliveryApiProtocolCode.FAIL.getMessage());
+        result.setMessage(DataDeliveryApiProtocolCode.SUCCESS.getMessage());
         try {
             if(dateStamp!=null){
                 result.setData(scheduleService.getByDay(dateStamp));
