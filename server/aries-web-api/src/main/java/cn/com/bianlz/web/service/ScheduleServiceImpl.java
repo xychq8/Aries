@@ -23,7 +23,7 @@ public class ScheduleServiceImpl implements ScheduleService{
     public HSSFWorkbook createWarningScheduleExcel() {
         String date = DateUtils.getYYMMDD(new Date());
         List<ScheduleWarning> scheduleWarningList = null;
-        Result<List<ScheduleWarning>> result = deliveryServiceClient.getWarningByDatestamp(date);
+        Result<List<ScheduleWarning>> result = deliveryServiceClient.getWarnning(date);
         if(result!=null&&result.getData()!=null){
             scheduleWarningList = result.getData();
         }else{

@@ -1,7 +1,9 @@
 package cn.com.bianlz.web.controller.data.delivery;
 
 import cn.com.bianlz.common.utils.DateUtils;
+import cn.com.bianlz.common.utils.GsonUtils;
 import cn.com.bianlz.common.vo.Result;
+import cn.com.bianlz.data.delivery.api.vo.ScheduleWarning;
 import cn.com.bianlz.web.client.DeliveryServiceClient;
 import cn.com.bianlz.web.common.Authorizition;
 import cn.com.bianlz.web.service.ScheduleService;
@@ -67,10 +69,10 @@ public class DeliveryController {
     @GetMapping(value={"/data/warning/excel/getByDatestamp"})
     public void getWarningByDatestamp(HttpServletResponse response){
         response.setContentType("application/binary;charset=UTF-8");
+        response.setHeader("Content-disposition", "attachment; filename=warning.xls");
         ServletOutputStream out = null;
         try {
             out = response.getOutputStream();
-            response.setHeader("Content-disposition", "attachment; filename=warning.xls");
             HSSFWorkbook workbook = scheduleService.createWarningScheduleExcel();
             workbook.write(out);
         }catch (Exception ex){
