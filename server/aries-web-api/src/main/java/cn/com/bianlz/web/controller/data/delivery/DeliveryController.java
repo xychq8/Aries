@@ -1,13 +1,20 @@
 package cn.com.bianlz.web.controller.data.delivery;
 
+import cn.com.bianlz.common.utils.DateUtils;
 import cn.com.bianlz.common.vo.Result;
 import cn.com.bianlz.web.client.DeliveryServiceClient;
 import cn.com.bianlz.web.common.Authorizition;
+import cn.com.bianlz.web.service.ScheduleService;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.net.URI;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +27,8 @@ import java.util.Map;
 public class DeliveryController {
     @Autowired
     private DeliveryServiceClient deliveryServiceClient;
+    @Autowired
+    private ScheduleService scheduleService;
     @GetMapping(value={"/data/schedule/{pageNum}/{pageSize}/{day}","/data/schedule/{pageNum}/{pageSize}/{day}/{uuid}"})
     public Result getSchedule(@PathVariable("pageNum") Integer pageNum,@PathVariable("pageSize") Integer pageSize,@PathVariable(value = "day") String day,@PathVariable(value = "uuid",required = false) String uuid){
         if(uuid!=null){
@@ -53,5 +62,27 @@ public class DeliveryController {
     @GetMapping(value={"/data/context/all/{uuid}"})
     public Result getPositionInfo(@PathVariable("uuid")Long uuid){
         return deliveryServiceClient.getContext(uuid);
+    }
+
+    @GetMapping(value={"/data/warning/excel/getByDatestamp"})
+    public void getWarningByDatestamp(HttpServletResponse response){
+        response.setContentType("application/binary;charset=UTF-8");
+        ServletOutputStream out = null;
+        try {
+            out = response.getOutputStream();
+            response.setHeader("Content-disposition", "attachment; filename=warning.xls");
+            HSSFWorkbook workbook = scheduleService.createWarningScheduleExcel();
+            workbook.write(out);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }finally {
+            try {
+                out.flush();
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 }

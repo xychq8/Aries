@@ -1,7 +1,7 @@
 package cn.com.bianlz.web.client;
 
 import cn.com.bianlz.common.vo.Result;
-import cn.com.bianlz.user.api.user.User;
+import cn.com.bianlz.data.delivery.api.vo.ScheduleWarning;
 import cn.com.bianlz.web.common.ServiceHelper;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by bianlanzhou on 17/10/17.
@@ -37,5 +36,8 @@ public interface DeliveryServiceClient {
 
     @RequestMapping(value={"/data/delivery/context/all/{uuid}"},method = RequestMethod.GET)
     public Result getContext(@PathVariable("uuid")Long uuid);
+
+    @RequestMapping(value={"/schedule/warning/getByDatestamp/{dateStamp}"},method = RequestMethod.GET)
+    Result<List<ScheduleWarning>> getWarningByDatestamp(@PathVariable("dateStamp")String dateStamp);
 
 }

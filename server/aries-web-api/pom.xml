@@ -51,6 +51,13 @@
             <artifactId>aries-data-delivery-api</artifactId>
         </dependency>
         <!-- aries end -->
+
+        <!-- excel poi -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.15</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>aries-web-api</finalName>
