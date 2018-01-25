@@ -38,6 +38,6 @@ public interface DeliveryServiceClient {
     public Result getContext(@PathVariable("uuid")Long uuid);
 
     @RequestMapping(value={"/data/delivery/schedule/warning/getWarnningByDatestamp/{dateStamp}"},method = RequestMethod.GET)
-    public Result getWarnning(@PathVariable("dateStamp")String dateStamp);
+    public Result<List<ScheduleWarning>> getWarnning(@PathVariable("dateStamp")String dateStamp);
 
 }
