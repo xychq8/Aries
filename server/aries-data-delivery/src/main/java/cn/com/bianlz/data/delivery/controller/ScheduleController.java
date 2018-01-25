@@ -56,7 +56,7 @@ public class ScheduleController {
         return result;
     }
 
-    @GetMapping(value={"/schedule/warning/getByDatestamp/{dateStamp}"})
+    @GetMapping(value={"/schedule/warning/getWarnningByDatestamp/{dateStamp}"})
     public Result getWarnning(@PathVariable("dateStamp")String dateStamp){
         Result<List<ScheduleWarning>> result = new Result<List<ScheduleWarning>>();
         result.setCode(DataDeliveryApiProtocolCode.SUCCESS.getCode());
