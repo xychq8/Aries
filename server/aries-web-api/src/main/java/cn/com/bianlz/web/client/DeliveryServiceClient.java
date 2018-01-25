@@ -37,7 +37,7 @@ public interface DeliveryServiceClient {
     @RequestMapping(value={"/data/delivery/context/all/{uuid}"},method = RequestMethod.GET)
     public Result getContext(@PathVariable("uuid")Long uuid);
 
-    @RequestMapping(value={"/schedule/warning/getWarnningByDatestamp/{dateStamp}"},method = RequestMethod.GET)
+    @RequestMapping(value={"/data/delivery/schedule/warning/getWarnningByDatestamp/{dateStamp}"},method = RequestMethod.GET)
     public Result getWarnning(@PathVariable("dateStamp")String dateStamp);
 
 }
