@@ -80,7 +80,7 @@ export default {
  	margin-left: -20px;
  }
  .index_card_container .detail{
- 	padding-left: 180px;
+ 	padding-left: 70%;
  	color:#A5DEE4;
  }
  .index_card_container .detail a:hover{
