@@ -58,7 +58,7 @@ public class ScheduleServiceImpl implements ScheduleService{
             hssfRow.createCell(3).setCellValue(scheduleWarning.getCpm()==null?0:scheduleWarning.getCpm());
             hssfRow.createCell(4).setCellValue(scheduleWarning.getActualConsume()==null?0:scheduleWarning.getActualConsume());
             hssfRow.createCell(5).setCellValue(scheduleWarning.getPercent()==null?0:scheduleWarning.getPercent());
-            hssfRow.createCell(2).setCellValue(StringUtils.defaultIfEmpty(scheduleWarning.getReason(),""));
+            hssfRow.createCell(6).setCellValue(StringUtils.defaultIfEmpty(scheduleWarning.getReason(),""));
         }
         return workbook;
     }
