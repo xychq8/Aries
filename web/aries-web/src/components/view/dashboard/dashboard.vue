@@ -23,7 +23,9 @@
       </aside>
       <section class="content-container">
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item :to="{ path: '/dashboard' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item  :to="{ path: '/dashboard' }" >
+            <a @click="handleBread" >首页</a>
+          </el-breadcrumb-item>
           <template v-for="bread in breadcrumb">
             <el-breadcrumb-item :to="{path:bread.path}">{{bread.name}}</el-breadcrumb-item>
           </template>
@@ -105,6 +107,8 @@ export default {
               this.$router.push({path:this.menuMap[key].path})
             }
           }
+      },handleBread:function(){
+        this.breadcrumb = []
       }
   },
   components:{mheader,smenu,mcontainer}
