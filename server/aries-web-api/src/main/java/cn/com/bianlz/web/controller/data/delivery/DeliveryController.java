@@ -66,7 +66,7 @@ public class DeliveryController {
         return deliveryServiceClient.getContext(uuid);
     }
 
-    @GetMapping(value={"/data/warning/excel/getByDatestamp"})
+    @GetMapping(value={"/data/warning/excel"})
     public void getWarningByDatestamp(HttpServletResponse response){
         response.setContentType("application/binary;charset=UTF-8");
         response.setHeader("Content-disposition", "attachment; filename=warning.xls");
