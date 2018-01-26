@@ -69,18 +69,18 @@ export default {
  	height: 110px
  }
  .index_card_container{
- 	padding-top: 15px;
+ 	padding-top: 14px;
  	padding-left: 20px;
  }
  .index_card_container i{
 	padding-top: 10px
  }
  .index_card_container .content{
- 	line-height:8px;
+ 	line-height:6px;
  	margin-left: -20px;
  }
  .index_card_container .detail{
- 	padding-left: 120px;
+ 	padding-left: 180px;
  	color:#A5DEE4;
  }
  .index_card_container .detail a:hover{
