@@ -68,7 +68,7 @@ public class DeliveryController {
 
     @GetMapping(value={"/data/warning/excel"})
     public void getWarningByDatestamp(HttpServletResponse response){
-        response.setContentType("application/binary;charset=UTF-8");
+        response.setContentType("application/octet-stream");
         response.setHeader("Content-disposition", "attachment; filename=warning.xls");
         ServletOutputStream out = null;
         try {
