@@ -29,10 +29,17 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         UserServiceClient userServiceClient = App.getBean(UserServiceClient.class,"cn.com.bianlz.web.client.UserServiceClient");
         if (handler instanceof HandlerMethod){
             try {
-                HandlerMethod handlerMethod = (HandlerMethod) handler;
-                Authorizition auth = handlerMethod.getBeanType().getAnnotation(Authorizition.class);
+                String token = null;
                 User user = null;
-                String token = request.getHeader("token");
+                HandlerMethod handlerMethod = (HandlerMethod) handler;
+                Download download = handlerMethod.getMethod().getAnnotation(Download.class);
+                if(download!=null){
+                    token = request.getParameter("token");
+                }
+                Authorizition auth = handlerMethod.getBeanType().getAnnotation(Authorizition.class);
+                if(request.getHeader("token")!=null){
+                    token = request.getHeader("token");
+                }
                 if(token!=null){
                     Result<User> result = userServiceClient.getUserByToken(token);
                     user = result.getData();

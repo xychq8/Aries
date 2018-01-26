@@ -6,6 +6,7 @@ import cn.com.bianlz.common.vo.Result;
 import cn.com.bianlz.data.delivery.api.vo.ScheduleWarning;
 import cn.com.bianlz.web.client.DeliveryServiceClient;
 import cn.com.bianlz.web.common.Authorizition;
+import cn.com.bianlz.web.common.Download;
 import cn.com.bianlz.web.service.ScheduleService;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ import java.util.Map;
  * Description
  */
 @RestController
-//@Authorizition
+@Authorizition
 public class DeliveryController {
     @Autowired
     private DeliveryServiceClient deliveryServiceClient;
@@ -66,7 +67,8 @@ public class DeliveryController {
         return deliveryServiceClient.getContext(uuid);
     }
 
-    @GetMapping(value={"/data/warning/excel"})
+    @GetMapping(value={"/download/warning/excel"})
+    @Download
     public void getWarningByDatestamp(HttpServletResponse response){
         response.setContentType("application/octet-stream");
         response.setHeader("Content-disposition", "attachment; filename=warning.xls");
