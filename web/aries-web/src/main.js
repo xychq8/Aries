@@ -18,12 +18,10 @@ router.beforeEach((to, from, next) => {
       if(store.state.token){
         next();
       }else{
-        next(
-        {
+        next({
             path: '/',
             query: { redirect: to.fullPath }
-        }
-        )
+        })
       }
     }else{
       next();

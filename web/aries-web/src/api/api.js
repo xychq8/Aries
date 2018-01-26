@@ -30,3 +30,8 @@ export let getPosition = (uuid) => { return axios.get(host_addr + `/data/positio
 export let getPositionInfo = (param) => { return axios.post(host_addr + `/data/position/info`,param).then(res => res.data).catch(function(thrown){});};
 
 export let getContext = (uuid) => { return axios.get(host_addr + `/data/context/all/`+ uuid ).then(res => res.data).catch(function(thrown){});};
+
+export let getIndex = () => { return axios.get(host_addr + `/data/warning/indexes` ).then(res => res.data).catch(function(thrown){});};
+
+export let getToken = () => { return host_addr }
+
