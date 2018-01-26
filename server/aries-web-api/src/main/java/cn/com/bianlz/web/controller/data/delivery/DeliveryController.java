@@ -25,7 +25,7 @@ import java.util.Map;
  * Description
  */
 @RestController
-@Authorizition
+//@Authorizition
 public class DeliveryController {
     @Autowired
     private DeliveryServiceClient deliveryServiceClient;
